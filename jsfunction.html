@@ -1,0 +1,2144 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="JSFunction是对Javascript常用函数的整理总结,它依赖于jQuery,其中包含了我们经常用到,但是jQuery又没有提供的方法。">
+    <meta name="keywords" content="javascript常用函数库,JSFunction,$.cookie,$.browser,date扩展,string扩展,JS,JavaScript,bootstrap,frontend,web development">
+    <meta name="author" content="北北(baby)">
+
+    <title>JSFunction | ITbbb.com</title>
+    <!--<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">-->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="doc/docs.min.css" rel="stylesheet" />
+    <link href="highlight/highlight.min.css" rel="stylesheet" />
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="http://itbbb.com/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://itbbb.com/favicon.ico" />
+    <link rel="Bookmark" type="image/x-icon" href="http://itbbb.com/favicon.ico" />
+</head>
+<body>
+    <!-- Docs master nav -->
+    <header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="http://www.itbbb.com/jsfunction/jsfunction.html" class="navbar-brand">JSFunction</a>
+            </div>
+            <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="http://www.itbbb.com" target="_blank">ITbbb.com</a>
+                    </li>
+                    <li>
+                        <a href="http://www.itbbb.com/jsfunction/jsfunction.html" target="_blank">API</a>
+                    </li>
+                    <li>
+                        <a href="http://www.itbbb.com/index.php/jsfunction" target="_blank">建议</a>
+                    </li>
+                    <li>
+                        <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="http://www.itbbb.com/index.php/about-me/" target="_blank">About Me</a></li>
+                    <li><a href="http://www.itbbb.com" target="_blank">Blog</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Docs page layout -->
+    <div class="bs-docs-header" id="content">
+        <div class="container">
+            <h1>JSFunction</h1>
+            <p>这是一个Javascript常用函数库,我正在努力完善它</p>
+            <p>希望它对你能有所帮助</p>
+            <p>相信代码是优雅的舞者--北北</p>
+            <div id="carbonads-container">
+                <div class="carbonad">
+                    <a data-type="3" data-tmpl="220x150" data-tmplid="28" data-rd="2" data-style="2" data-border="1" href="#"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container bs-docs-container">
+
+        <div class="row">
+            <div class="col-md-9" role="main">
+                <!-- Global JSFunction settings
+================================================== -->
+                <div class="bs-docs-section">
+                    <h1 id="overview" class="page-header">开始征程</h1>
+
+                    <p class="lead">JSFunction是对Javascript常用函数的整理总结,它依赖于jQuery,其中包含了我们经常用到,但是jQuery又没有提供的方法。</p>
+                    <h3 id="overview-download">下载</h3>
+                    <p>
+                        <a href="http://www.itbbb.com/jsfunction/jsfunction.js" target="_blank">源码</a>:http://www.itbbb.com/jsfunction/jsfunction.js
+                    </p>
+                    <p>
+                        <a href="http://www.itbbb.com/jsfunction/jsfunction.min.js" target="_blank">压缩</a>:http://www.itbbb.com/jsfunction/jsfunction.min.js
+                    </p>
+                    <h3 id="overview-Reference">引用方法</h3>
+                    <p>只需要在您的网页中引用jQuery和jsfunction.js即可使用其中所有函数~~！</p>
+                    <div class="highlight">
+                        <pre><code>&lt;script src="http://code.jquery.com/jquery.min.js"&gt;&lt;/script&gt;
+&lt;!--开发版--&gt;
+&lt;!--&lt;script src="http://www.itbbb.com/jsfunction/jsfunction.js"&gt;&lt;/script&gt;--&gt;
+&lt;!--推荐:压缩版--&gt;
+&lt;script src="http://www.itbbb.com/jsfunction/jsfunction.min.js"&gt;&lt;/script&gt;</code></pre>
+                    </div>
+                    <h3 id="overview-Focus">关注更新</h3>
+                    <p>可以收藏此页或者关注我的官方微信,来了解更新动态</p>
+                    <p>
+                        <img src="http://www.itbbb.com/wp-content/uploads/2014/02/qrcode.jpg" width="150">
+                    </p>
+                    <p>
+                        <!-- JiaThis Button BEGIN -->
+                        <div class="jiathis_style_32x32">
+                            <a class="jiathis_button_qzone"></a>
+                            <a class="jiathis_button_tsina"></a>
+                            <a class="jiathis_button_tqq"></a>
+                            <a class="jiathis_button_weixin"></a>
+                            <a class="jiathis_button_renren"></a>
+                            <a href="http://www.jiathis.com/share?uid=1590067" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+                        </div>
+                        <!-- JiaThis Button END -->
+                    </p>
+                </div>
+
+
+
+                <!-- Cookie
+================================================== -->
+                <div class="bs-docs-section">
+                    <h1 id="cookie" class="page-header">Cookie</h1>
+                    <p class="lead">对浏览器Cookie的相关方法</p>
+
+                    <h3 id="cookie-set">set</h3>
+                    <p>设置cookie</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>$.cookie.set(name, value[, time, timetype, domain])</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <!--<thead>
+                                <tr>
+                                    <th>名称</th>
+                                    <th>类型</th>
+                                    <th>描述</th>
+                                </tr>
+                            </thead>-->
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>name</code>
+                                    </td>
+                                    <td>String</td>
+                                    <td>Cookie的名称</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>value</code>
+                                    </td>
+                                    <td>String</td>
+                                    <td>Cookie的值</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>time</code>
+                                    </td>
+                                    <td>Float</td>
+                                    <td>可选参数,Cookie的过期时间,默认为关闭页面过期,即session</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>timetype</code>
+                                    </td>
+                                    <td>String</td>
+                                    <td>可选参数,时间单位:day: 天, hour: 小时, minute: 分, seconds:秒,默认为hour</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>domain</code>
+                                    </td>
+                                    <td>String</td>
+                                    <td>可选参数,设置Cookie所在域</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>1.设置键为itbbb,值为www.itbbb.com的Cookie.</p>
+                        <p>2.设置键为itbbb.com,值为itbbb.com的Cookie,过期时间为1天.</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>$.cookie.set("itbbb", "www.itbbb.com");
+$.cookie.set("itbbb.com", "itbbb.com", "1", "day");</code></pre>
+                    </div>
+
+                    <h3 id="cookie-get">get</h3>
+                    <p>获取cookie</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>$.cookie.get(name)</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>name</code>
+                                    </td>
+                                    <td>String</td>
+                                    <td>要获取的Cookie名称</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>获取名为itbbb的Cookie.</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>$.cookie.get("itbbb");</code></pre>
+                    </div>
+
+                    <h3 id="cookie-remove">remove</h3>
+                    <p>移除cookie</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>$.cookie.remove(name)</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>name</code>
+                                    </td>
+                                    <td>String</td>
+                                    <td>待删除的Cookie名称</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>删除名为itbbb的Cookie.</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>$.cookie.remove("itbbb");</code></pre>
+                    </div>
+                </div>
+
+
+
+                <!-- browser
+================================================== -->
+                <div class="bs-docs-section">
+                    <h1 id="browser" class="page-header">Browser</h1>
+                    <p class="lead">浏览器版本检测相关方法</p>
+
+                    <!-- Headings -->
+                    <h2 id="browser-browser">browser</h2>
+                    <p>返回浏览器对象，包含属性如下表</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>$.browser</h4>
+                    </div>
+                    <p>属性</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>webkit</code>
+                                    </td>
+                                    <td>Bool</td>
+                                    <td>是否是webkit内核,Chrome,Safari,新版的Opera</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>msie</code>
+                                    </td>
+                                    <td>Bool</td>
+                                    <td>是否是IE内核</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>mozilla</code>
+                                    </td>
+                                    <td>Bool</td>
+                                    <td>是否是mozilla内核,Firefox</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>ie6</code>
+                                    </td>
+                                    <td>Bool</td>
+                                    <td>特别加入ie6,用于判断是否是万恶的IE6</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>1.判断是否为webkit内核.</p>
+                        <p>2.判断是否为msie内核.</p>
+                        <p>3.判断是否为mozilla内核.</p>
+                        <p>4.判断是否为万恶的ie6.</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>$.browser.webkit;
+$.browser.msie;
+$.browser.mozilla;
+$.browser.ie6;</code></pre>
+                    </div>
+                    <h2 id="browser-version">version</h2>
+                    <p>返回浏览器版本号</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>$.browser.version</h4>
+                    </div>
+                    <div class="bs-example">
+                        <p>返回浏览器版本号.</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>$.browser.version;</code></pre>
+                    </div>
+                    <h2 id="browser-mobile">mobile</h2>
+                    <p>返回是否是移动端访问,返回值为true|false</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>$.browser.mobile</h4>
+                    </div>
+                    <div class="bs-example">
+                        <p>判断是否是手机浏览器,是返回true,否则返回false.</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>$.browser.mobile;</code></pre>
+                    </div>
+                </div>
+                <!-- Date
+================================================== -->
+                <div class="bs-docs-section">
+                    <h1 id="date" class="page-header">Date</h1>
+                    <p class="lead">Date类型相关扩展和方法</p>
+                    <p>
+                        以下Date相关add方法均支持连写,如:
+                        <code>$.date("2012-1-1").addMinutes(10).addHours(1).addYears(-11);</code>
+                    </p>
+                    <h2 id="date-now">date</h2>
+                    <p>初始化Date对象,返回Date本身</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>$.date([time])</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>time</code>
+                                    </td>
+                                    <td>String</td>
+                                    <td>可选参数,设置特定时间,可以传2014-1-1或2014/1/1,默认为当前时间</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>返回当前时间.</p>
+                        <p>
+                            <label>结果：</label>
+                        </p>
+                        <p><span id="demo-date"></span></p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>$.date();
+$.date("2014-1-1");</code></pre>
+                    </div>
+
+                    <h2 id="date-format">format</h2>
+                    <p>格式化Date对象,返回字符串</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Date.format(format)</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>format</code>
+                                    </td>
+                                    <td>String</td>
+                                    <td>设置时间格式,如"yyyy-MM-dd hh:mm:ss"</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>格式化时间.</p>
+                        <p>
+                            <label>结果：</label>
+                        </p>
+                        <p><span id="demo-date-format"></span></p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>$.date().format("yyyy-MM-dd hh:mm:ss");
+$.date("2014-1-1").format("yyyy-MM-dd");</code></pre>
+                    </div>
+
+                    <h2 id="date-addMseconds">addMseconds</h2>
+                    <p>添加/减少N毫秒,返回Date本身</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Date.addMseconds(num)</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>num</code>
+                                    </td>
+                                    <td>Int</td>
+                                    <td>增/减毫秒,正数为增,负数为减</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>增加10毫秒.</p>
+                        <p>减少30毫秒.</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>$.date().addMseconds(10);
+$.date().addMseconds(-30);</code></pre>
+                    </div>
+
+                    <h2 id="date-addSeconds">addSeconds</h2>
+                    <p>添加/减少N秒,返回Date本身</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Date.addSeconds(num)</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>num</code>
+                                    </td>
+                                    <td>Int</td>
+                                    <td>增/减秒,正数为增,负数为减</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>增加10秒.</p>
+                        <p>减少30秒.</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>$.date().addSeconds(10);
+$.date().addSeconds(-30);</code></pre>
+                    </div>
+
+                    <h2 id="date-addMinutes">addMinutes</h2>
+                    <p>添加/减少N分钟,返回Date本身</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Date.addMinutes(num)</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>num</code>
+                                    </td>
+                                    <td>Int</td>
+                                    <td>增/减分钟,正数为增,负数为减</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>增加10分钟.</p>
+                        <p>减少30分钟.</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>$.date().addMinutes(10);
+$.date().addMinutes(-30);</code></pre>
+                    </div>
+
+                    <h2 id="date-addHours">addHours</h2>
+                    <p>添加/减少N小时,返回Date本身</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Date.addHours(num)</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>num</code>
+                                    </td>
+                                    <td>Int</td>
+                                    <td>增/减分钟,正数为增,负数为减</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>增加10小时.</p>
+                        <p>减少3小时.</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>$.date().addHours(10);
+$.date().addHours(-3);</code></pre>
+                    </div>
+
+                    <h2 id="date-addDays">addDays</h2>
+                    <p>添加/减少N天,返回Date本身</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Date.addDays(num)</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>num</code>
+                                    </td>
+                                    <td>Int</td>
+                                    <td>增/减天,正数为增,负数为减</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>增加1天.</p>
+                        <p>减少3天.</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>$.date().addDays(1);
+$.date().addDays(-3);</code></pre>
+                    </div>
+
+                    <h2 id="date-addWeeks">addWeeks</h2>
+                    <p>添加/减少N周,返回Date本身</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Date.addWeeks(num)</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>num</code>
+                                    </td>
+                                    <td>Int</td>
+                                    <td>增/减周,正数为增,负数为减</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>增加1周.</p>
+                        <p>减少3周.</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>$.date().addWeeks(1);
+$.date().addWeeks(-3);</code></pre>
+                    </div>
+
+                    <h2 id="date-addMonths">addMonths</h2>
+                    <p>添加/减少N月,返回Date本身</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Date.addMonths(num)</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>num</code>
+                                    </td>
+                                    <td>Int</td>
+                                    <td>增/减月,正数为增,负数为减</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>增加1月.</p>
+                        <p>减少3月.</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>$.date().addMonths(1);
+$.date().addMonths(-3);</code></pre>
+                    </div>
+
+                    <h2 id="date-addYears">addYears</h2>
+                    <p>添加/减少N年,返回Date本身</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Date.addYears(num)</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>num</code>
+                                    </td>
+                                    <td>Int</td>
+                                    <td>增/减年,正数为增,负数为减</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>增加1年.</p>
+                        <p>减少1年.</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>$.date().addYears(1);
+$.date().addYears(-1);</code></pre>
+                    </div>
+
+
+                    <h2 id="date-getWeek">getWeek</h2>
+                    <p>返回星期几</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Date.getWeek([type])</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>type</code>
+                                    </td>
+                                    <td>String</td>
+                                    <td>枚举：周、星期、En、Short,默认为周</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>获取传入时间是周几.</p>
+                        <p>返回周几.</p>
+                        <p>返回星期几.</p>
+                        <p>返回英文:<code>"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"</code></p>
+                        <p>返回英文简写:<code>"Sun.", "Mon.", "Tues.", "Wed.", "Thurs.", "Fri.", "Sat."</code></p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>$.date().getWeek();
+$.date().getWeek("星期")
+$.date().getWeek("En")
+$.date().getWeek("Short");</code></pre>
+                    </div>
+
+                    <h2 id="date-getAge">getAge</h2>
+                    <p>返回年龄</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>$.date(brithday).getAge()</h4>
+                    </div>
+                    <div class="bs-example">
+                        <p>获取2001年1月4日出生人的年龄</p>
+                        <p>
+                            <label>结果：</label>
+                        </p>
+                        <p><span id="demo-getAge"></span></p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>$.date("2001-1-4").getAge();</code></pre>
+                    </div>
+
+                    <h2 id="date-isLeapYear">isLeapYear</h2>
+                    <p>判断是否是闰年,返回true|false</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Date.isLeapYear()</h4>
+                    </div>
+                    <div class="bs-example">
+                        <p>①、普通年能整除4且不能整除100的为闰年。如:2004年就是闰年(返回true),1901年不是闰年(返回false）</p>
+                        <p>②、世纪年能整除400的是闰年。如:2000年是闰年(返回true),1900年不是闰年(返回false）</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>$.date("2004-1-1").isLeapYear();
+$.date("1901-1-1").isLeapYear();
+$.date("2000-1-1").isLeapYear();
+$.date("1900-1-1").isLeapYear();</code></pre>
+                    </div>
+
+                    <h2 id="date-daysInMonth">daysInMonth</h2>
+                    <p>返回该月有多少天</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Date.daysInMonth()</h4>
+                    </div>
+                    <div class="bs-example">
+                        <p>获取某月有多少天,返回天数</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>$.date("2000-1-1").daysInMonth();</code></pre>
+                    </div>
+
+
+                    <h2 id="date-diffDate">diffDate</h2>
+                    <p>返回时间差</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>$.diffDate(startTime, endTime[, diffType])</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>startTime</code>
+                                    </td>
+                                    <td>Date|String</td>
+                                    <td>开始时间,如"2011-1-1"或$.date("2011-1-1")</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>endTime</code>
+                                    </td>
+                                    <td>Date|String</td>
+                                    <td>结束时间,如"2012-1-1"或$.date("2012-1-1")</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>diffType</code>
+                                    </td>
+                                    <td>String</td>
+                                    <td>枚举：day, hour, minute, seconds,默认为day</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>返回时间差.</p>
+                        <p>返回当前时间与2013-1-1的天数差.</p>
+                        <p>返回2013-1-2与2013-1-3的小时差.</p>
+                        <p>
+                            <label>结果：</label>
+                        </p>
+                        <p><span id="demo-diffDate"></span></p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>$.diffDate($.date(), $.date("2013-1-1"));
+$.diffDate("2013-1-2", "2013-1-3","hour");</code></pre>
+                    </div>
+                </div>
+
+                <!-- String
+================================================== -->
+                <div class="bs-docs-section">
+                    <h1 id="string" class="page-header">String</h1>
+                    <p class="lead">String类型相关扩展和方法</p>
+                    <p>
+                        以下String相关方法均支持连写,如:
+                        <code>"  abcdefg,higklmn  ".replaceAll(" ", "_").left(5).right(3);</code>
+                    </p>
+
+                    <h3 id="string-replaceAll">replaceAll</h3>
+                    <p>根据参数替换所有字符串，返回新字符串</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>String.replaceAll(old, new)</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>old</code>
+                                    </td>
+                                    <td>String</td>
+                                    <td>待替换的原字符串</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>new</code>
+                                    </td>
+                                    <td>String</td>
+                                    <td>要替换为的新字符串</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>替换字符串中所有空格为下划线</p>
+                        <p>
+                            <label>结果：</label>
+                        </p>
+                        <p><span>__abcdefg,higklmn__</span></p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>"  abcdefg,higklmn  ".replaceAll(" ", "_");</code></pre>
+                    </div>
+
+                    <h3 id="string-trim">trim</h3>
+                    <p>去除字符串前后空格，返回新字符串</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>String.trim()</h4>
+                    </div>
+                    <div class="bs-example">
+                        <p>去除字符串两端空格</p>
+                        <p>
+                            <label>结果：</label>
+                        </p>
+                        <p><span>abcdefg,higklmn</span></p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>"  abcdefg,higklmn  ".trim();</code></pre>
+                    </div>
+
+                    <h3 id="string-left">left</h3>
+                    <p>截取左侧字符串，返回新字符串</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>String.left(num)</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>num</code>
+                                    </td>
+                                    <td>Int</td>
+                                    <td>从左开始截取的字符个数</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>截取左侧5个字符</p>
+                        <p>
+                            <label>结果：</label>
+                        </p>
+                        <p><span>abcde</span></p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>"abcdefg,higklmn".left(5);</code></pre>
+                    </div>
+
+                    <h3 id="string-right">right</h3>
+                    <p>截取右侧字符串，返回新字符串</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>String.right(num)</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>num</code>
+                                    </td>
+                                    <td>Int</td>
+                                    <td>从右开始截取的字符个数</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>截取右侧5个字符</p>
+                        <p>
+                            <label>结果：</label>
+                        </p>
+                        <p><span>gklmn</span></p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>"abcdefg,higklmn".right(5);</code></pre>
+                    </div>
+
+
+                    <h3 id="string-toDate">toDate</h3>
+                    <p>将字符串转换为时间,返回Date类型</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>String.toDate([format])</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>format</code>
+                                    </td>
+                                    <td>String</td>
+                                    <td>可选参数,可以传入时间格式,如"yyyy-MM-dd",默认为标准时间</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>将字符串转换成时间类型</p>
+                        <p>
+                            <label>结果：</label>
+                        </p>
+                        <p><span>2011年01月03日</span></p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>"2011-1-3".toDate("yyyy年MM月dd日");</code></pre>
+                    </div>
+                </div>
+
+                <!-- Array
+================================================== -->
+                <div class="bs-docs-section">
+                    <h1 id="array" class="page-header">Array</h1>
+                    <p class="lead">Array类型相关扩展和方法</p>
+                    <p>以下Array大部分方法均支持连写.<i>forEach、dequeue、isEmpty、contains、indexOf不支持连写,因为它们并不返回数组本身</i></p>
+                    <p>
+                        如:
+                        <code>arr.add(item).add(item).addRange(range).insert(0, { Name: "itbbb.com" });</code>
+                    </p>
+                    <h3 id="array-add">add</h3>
+                    <p>给数组添加一个元素，返回添加后的数组</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Array.add(item)</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>item</code>
+                                    </td>
+                                    <td>String|Object</td>
+                                    <td>可以传入一个值,如:"ZhangSan",也可以传入一个对象,如:{ Code: "CN", Name: "中国" }</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>给数组添加ZhangSan和LiSi</p>
+                        <p>给数组添加一个名中国,代码为CN的对象</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>[].add("ZhangSan").add("LiSi");
+[].add({ Code: "CN", Name: "中国" });</code></pre>
+                    </div>
+                    <h3 id="array-addRange">addRange</h3>
+                    <p>给数组添加一组元素，返回添加后的数组</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Array.addRange(items)</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>items</code>
+                                    </td>
+                                    <td>Object</td>
+                                    <td>传入一个对象集合,如:["ZhangSan","LiSi"]或[{ Code: "CN", Name: "中国" },{ Code: "EN", Name: "英国" }]</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>给数组添加ZhangSan和LiSi</p>
+                        <p>给数组添加一个名中国,代码为CN和名为英国,代码为En的对象</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>[].addRange(["ZhangSan","LiSi"]);
+[].addRange([{ Code: "CN", Name: "中国" },{ Code: "EN", Name: "英国" }]);</code></pre>
+                    </div>
+                    <h3 id="array-forEach">forEach</h3>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Array.forEach(callbackfn[, thisArg])</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>callbackfn</code>
+                                    </td>
+                                    <td>Function(value,index,array)</td>
+                                    <td>一个接受最多三个参数的函数, 对于数组中的每个元素,forEach都会调用callbackfn函数一次</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>thisArg</code>
+                                    </td>
+                                    <td>Object</td>
+                                    <td>可选,可在callbackfn函数中为其引用this关键字的对象.如果省略thisArg,则undefined将用作this值</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>回调参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>value</code>
+                                    </td>
+                                    <td>String|Object</td>
+                                    <td>数组元素的值</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>index</code>
+                                    </td>
+                                    <td>Int</td>
+                                    <td>数组元素的数字索引</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>array</code>
+                                    </td>
+                                    <td>Object</td>
+                                    <td>包含该元素的数组对象,数组本身</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>1.循环一个数组</p>
+                        <p>2.循环一个数组,并用this替换传入的obj对象</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>/***********1************/
+function ShowResults(value, index, ar) {
+    document.write("value: " + value);
+    document.write(" index: " + index);
+    document.write("<br />");
+}
+
+var letters = ['ab', 'cd', 'ef'];
+
+letters.forEach(ShowResults);
+
+// Output:
+//  value: ab index: 0 
+//  value: cd index: 1 
+//  value: ef index: 2 
+/***********2************/
+var obj = {
+    showResults: function(value, index) {
+        var squared = this.calcSquare(value);
+        document.write("value: " + value);
+        document.write(" index: " + index);
+        document.write(" squared: " + squared);
+        document.write("<br />");
+    },
+    calcSquare: function(x) { return x * x }
+};
+
+var numbers = [5, 6];
+//调用方法1
+numbers.forEach(obj.showResults, obj);
+//调用方法2,用this替换obj
+numbers.forEach(function(value, index) { this.showResults(value, index) }, obj);
+
+// Output:
+//  value: 5 index: 0 squared: 25
+//  value: 6 index: 1 squared: 36
+//  value: 5 index: 0 squared: 25
+//  value: 6 index: 1 squared: 36</code></pre>
+                    </div>
+
+
+                    <h3 id="array-clear">clear</h3>
+                    <p>清空数组,返回空数组</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Array.clear()</h4>
+                    </div>
+                    <div class="bs-example">
+                        <p>清空数组</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>var arr=["ZhangSan","LiSi"];
+arr.clear();</code></pre>
+                    </div>
+                    <h3 id="array-isEmpty">isEmpty</h3>
+                    <p>判断数组是否为空,返回true|false</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Array.isEmpty()</h4>
+                    </div>
+                    <div class="bs-example">
+                        <p>判断数组是否为空,返回true或false</p>
+                        <p>
+                            <label>结果：</label>false
+                        </p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>var arr=["ZhangSan","LiSi"];
+arr.isEmpty();</code></pre>
+                    </div>
+
+                    <h3 id="array-contains">contains</h3>
+                    <p>判断数组是否包含某个元素,返回true|false</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Array.contains(item)</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>item</code>
+                                    </td>
+                                    <td>String|Object</td>
+                                    <td>传入一个对象,如:"ZhangSan"或{ Code: "CN", Name: "中国" }</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>检测数组是否包含ZhangSan</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>var arr=["ZhangSan","LiSi"];
+var item="ZhangSan";
+arr.contains(item);</code></pre>
+                    </div>
+
+                    <h3 id="array-indexOf">indexOf</h3>
+                    <p>返回元素在数组中的索引,从0开始</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Array.indexOf(item)</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>item</code>
+                                    </td>
+                                    <td>String|Object</td>
+                                    <td>传入一个对象,如:"ZhangSan"或{ Code: "CN", Name: "中国" }</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>获得元素"ZhangSan"在数组中的位置</p>
+                        <p>
+                            <label>结果：</label>0
+                        </p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>var arr=["ZhangSan","LiSi"];
+var item="ZhangSan";
+arr.indexOf(item);</code></pre>
+                    </div>
+
+                    <h3 id="array-insert">insert</h3>
+                    <p>插入一个元素到数组某个位置,返回插入后的数组</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Array.insert(index, item)</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>index</code>
+                                    </td>
+                                    <td>Index</td>
+                                    <td>要把元素插入到哪个位置,从0开始</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>item</code>
+                                    </td>
+                                    <td>String|Object</td>
+                                    <td>传入一个对象,如:"ZhangSan"或{ Code: "CN", Name: "中国" }</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>插入元素"WangWu"到数组第二个位置</p>
+                        <p>
+                            <label>结果：</label>0
+                        </p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>var arr=["ZhangSan","LiSi"];
+var item="WangWu";
+arr.insert(1,item);</code></pre>
+                    </div>
+
+                    <h3 id="array-dequeue">dequeue</h3>
+                    <p>将数组第一个元素出队,并返回该元素</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Array.dequeue()</h4>
+                    </div>
+                    <div class="bs-example">
+                        <p>将数组中第一个元素出队</p>
+                        <p>
+                            <label>结果：</label>temp为"ZhangSan"
+                        </p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>var arr=["ZhangSan","LiSi"];
+var temp=arr.dequeue();</code></pre>
+                    </div>
+
+                    <h3 id="array-remove">remove</h3>
+                    <p>删除数组中某个元素,返回删除后的数组</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Array.remove(item)</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>item</code>
+                                    </td>
+                                    <td>String|Object</td>
+                                    <td>传入一个待删除对象,如:"ZhangSan"或{ Code: "CN", Name: "中国" }</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>从数组中删除元素"ZhangSan"</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>var arr=["ZhangSan","LiSi"];
+var item="ZhangSan";
+arr.remove(item);</code></pre>
+                    </div>
+
+                    <h3 id="array-removeAt">removeAt</h3>
+                    <p>按索引删除数组中某个元素,返回删除后的数组</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Array.removeAt(index)</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>index</code>
+                                    </td>
+                                    <td>Int</td>
+                                    <td>待删除元素的索引值,从0开始</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>删除数组的第二个元素</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>arr.removeAt(1);</code></pre>
+                    </div>
+
+                    <h3 id="array-reverse">reverse</h3>
+                    <p>数组元素顺序反转</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Array.reverse()</h4>
+                    </div>
+                    <div class="bs-example">
+                        <p>反转数组所有元素</p>
+                        <p>
+                            <label>结果:</label>5,4,3,2,1
+                        </p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>var arr=[1,2,3,4,5];
+arr.reverse().join(",");</code></pre>
+                    </div>
+
+                    <h3 id="array-skip">skip</h3>
+                    <p>跳过序列中指定数量的元素，然后返回剩余的元素,与take配合做分页</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Array.skip(count)</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>count</code>
+                                    </td>
+                                    <td>Int</td>
+                                    <td>要跳过的元素数量,需为正数</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>跳过前5个元素</p>
+                        <p>以10个元素做分页,选择第2页</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>arr.skip(5);
+arr.skip(10).take(10);</code></pre>
+                    </div>
+
+                    <h3 id="array-take">take</h3>
+                    <p>从序列的开头返回指定数量的连续元素,返回新数组,与skip配合做分页</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Array.take(count)</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>count</code>
+                                    </td>
+                                    <td>Int</td>
+                                    <td>要返回的元素数量,需为正数</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>返回5个元素</p>
+                        <p>以10个元素做分页,选择第2页</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>arr.take(5);
+arr.skip(10).take(10);</code></pre>
+                    </div>
+                </div>
+                <!-- ArrayLinq
+================================================== -->
+                <div class="bs-docs-section">
+                    <h1 id="arrayLinq" class="page-header">ArrayLinq</h1>
+                    <p class="lead">Array结构化查询方法</p>
+                    <p>类似Linq的结构化查询方法,支持连写,方法包含一个clause函数作为参数,clause包含item、index两个回调参数.</p>
+                    <p>当查询时函数需返回一个bool值,如:where、first、last、any、all、count函数clause要返回bool值.</p>
+                    <p>当排序、计算时返回要处理的字段,如:orderBy、orderByDescending、max、min、sum函数clause要返回字段.</p>
+                    <h3 id="arrayLinq-clause">clause</h3>
+                    <p><b>clause是整个结构化查询的核心</b>,类似于Lambda表达式,只不过把<code>Array.method(item=>item.属性)</code>语法替换为<code>Array.method(function(item){return item.属性})</code></p>
+                    <p>连写举例:<code>arr.where(function(item){return item.ID>3;}).orderBy(function(item){return item.Age;}).skip(10).take(10);</code></p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>clause回调函数</h4>
+                    </div>
+                    <p>每一个clause作为一个条件传入查询语句,不同情况下返回相应的的值.</p>
+                    <p>clause回调函数参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>item</code>
+                                    </td>
+                                    <td>Object</td>
+                                    <td>当前回调返回的数组第index个元素</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>index</code>
+                                    </td>
+                                    <td>Int</td>
+                                    <td>可选参数,当前回调返的数组的索引</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>//字符串数组查询、排序示例
+var arr=["ZhangSan","LiSi"];
+var clause1=function(item,index){
+    return item=="ZhangSan";//需要返回bool值
+}
+arr.where(clause1);
+var clause2=function(item,index){
+    return item;//需要返回字段
+}
+arr.orderBy(clause2);
+//Json数组查询、排序示例
+var arr=[{ Code: "CN", Name: "中国" },{ Code: "EN", Name: "英国" }];
+var clause1=function(item,index){
+    return item.Name=="中国";//需要返回bool值
+}
+arr.where(clause1);
+var clause2=function(item,index){
+    return item.Name;//需要返回字段
+}
+arr.orderBy(clause2);</code></pre>
+                    </div>
+
+                    <h3 id="arrayLinq-where">where</h3>
+                    <p>基于clause筛选值序列,返回数组序列中满足条件的元素</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Array.where(<a href="#arrayLinq-clause">clause</a>)</h4>
+                    </div>
+                    <div class="bs-example">
+                        <p>查询所有名为"ZhangSan"的元素,并返回新的数组集合</p>
+                        <p>查询所有Name值为"中国"的元素,并返回新的数组集合</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>//字符串where查询
+var arr=["ZhangSan","LiSi"];
+arr.where(function(item,index){
+    return item=="ZhangSan";//需要返回bool值
+});
+//Json数组where查询
+var arr=[{ Code: "CN", Name: "中国" },{ Code: "EN", Name: "英国" }];
+arr.where(function(item,index){
+    return item.Name=="中国";//需要返回bool值
+});</code></pre>
+                    </div>
+
+                    <h3 id="arrayLinq-first">first</h3>
+                    <p>返回序列中的第一个元素</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Array.first(<a href="#arrayLinq-clause">clause</a>)</h4>
+                    </div>
+                    <div class="bs-example">
+                        <p>查询第一个名为"ZhangSan"的元素,并返回该元素</p>
+                        <p>查询第一个Name值为"中国"的元素,并返回该元素</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>//字符串
+var arr=["ZhangSan","LiSi"];
+//返回ZhangSan
+arr.first(function(item,index){
+    return item=="ZhangSan";//需要返回bool值
+});
+//Json
+var arr=[{ Code: "CN", Name: "中国" },{ Code: "EN", Name: "英国" }];
+//返回{ Code: "CN", Name: "中国"}
+arr.first(function(item,index){
+    return item.Name=="中国";//需要返回bool值
+});</code></pre>
+                    </div>
+
+                    <h3 id="arrayLinq-last">last</h3>
+                    <p>返回序列中的最后一个元素</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Array.last(<a href="#arrayLinq-clause">clause</a>)</h4>
+                    </div>
+                    <div class="bs-example">
+                        <p>查询最后一个名为"ZhangSan"的元素,并返回该元素</p>
+                        <p>查询最后一个Name值为"中国"的元素,并返回该元素</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>//字符串
+var arr=["ZhangSan","LiSi"];
+//返回ZhangSan
+arr.last(function(item,index){
+    return item=="ZhangSan";//需要返回bool值
+});
+//Json
+var arr=[{ Code: "CN", Name: "中国" },{ Code: "EN", Name: "英国" }];
+//返回{ Code: "CN", Name: "中国"}
+arr.last(function(item,index){
+    return item.Name=="中国";//需要返回bool值
+});</code></pre>
+                    </div>
+
+                    <h3 id="arrayLinq-any">any</h3>
+                    <p>确定序列是否包含某一元素,返回true|false</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Array.any(<a href="#arrayLinq-clause">clause</a>)</h4>
+                    </div>
+                    <div class="bs-example">
+                        <p>确认数组中是否有一个名为"WangWu"的元素</p>
+                        <p>确认数组中是否有Name值为"中国"的元素</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>//字符串
+var arr=["ZhangSan","LiSi"];
+//返回false
+arr.any(function(item,index){
+    return item=="WangWu";
+});
+//Json
+var arr=[{ Code: "CN", Name: "中国" },{ Code: "EN", Name: "英国" }];
+//返回true
+arr.any(function(item,index){
+    return item.Name=="中国";
+});</code></pre>
+                    </div>
+
+                    <h3 id="arrayLinq-all">all</h3>
+                    <p>确定序列是否包含某一元素,返回true|false</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Array.all(<a href="#arrayLinq-clause">clause</a>)</h4>
+                    </div>
+                    <div class="bs-example">
+                        <p>确认数组中是否所有元素的Age都大于18岁</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>//Json
+var arr=[{ Age: 20, Name: "ZhangSan" },{ Age: 19, Name: "WangWu" }];
+//返回true
+arr.all(function(item,index){
+    return item.Age>18;
+});</code></pre>
+                    </div>
+
+                    <h3 id="arrayLinq-count">count</h3>
+                    <p>返回序列中的元素数量</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Array.count(<a href="#arrayLinq-clause">clause</a>)</h4>
+                    </div>
+                    <div class="bs-example">
+                        <p>返回序列中的元素数量</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>//Json
+var arr=[{ Age: 20, Name: "ZhangSan" },{ Age: 24, Name: "LiSi" },{ Age: 19, Name: "WangWu" }];
+//返回3
+arr.count();
+//返回1
+arr.count(function(item,index){
+    return item.Age>22;
+});</code></pre>
+                    </div>
+
+                    <h3 id="arrayLinq-orderBy">orderBy</h3>
+                    <p>根据键按升序对序列的元素排序</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Array.orderBy(<a href="#arrayLinq-clause">clause</a>)</h4>
+                    </div>
+                    <div class="bs-example">
+                        <p>根据姓名按升序对数组元素排序,并返回新的数组集合</p>
+                        <p>按照元素的Age值升序排列,并返回新的数组集合</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>//字符串where查询
+var arr=["ZhangSan","LiSi"];
+arr.orderBy(function(item,index){
+    return item;//返回待排序的字段
+});
+//Json
+var arr=[{ Age: 20, Name: "ZhangSan" },{ Age: 24, Name: "LiSi" },{ Age: 19, Name: "WangWu" }];
+arr.orderBy(function(item,index){
+    return item.Age;//按照Age从小到大排列
+});</code></pre>
+                    </div>
+
+                    <h3 id="arrayLinq-orderByDescending">orderByDescending</h3>
+                    <p>根据键按降序对序列的元素排序</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Array.orderByDescending(<a href="#arrayLinq-clause">clause</a>)</h4>
+                    </div>
+                    <div class="bs-example">
+                        <p>根据姓名按降序对数组元素排序,并返回新的数组集合</p>
+                        <p>按照元素的Age值降序排列,并返回新的数组集合</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>//字符串where查询
+var arr=["ZhangSan","LiSi"];
+arr.orderByDescending(function(item,index){
+    return item;//返回待排序的字段
+});
+//Json
+var arr=[{ Age: 20, Name: "ZhangSan" },{ Age: 24, Name: "LiSi" },{ Age: 19, Name: "WangWu" }];
+arr.orderByDescending(function(item,index){
+    return item.Age;//按照Age从大到小排列
+});</code></pre>
+                    </div>
+
+                    <h3 id="arrayLinq-max">max</h3>
+                    <p>返回最大结果值的元素</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Array.max(<a href="#arrayLinq-clause">clause</a>)</h4>
+                    </div>
+                    <div class="bs-example">
+                        <p>获取Age值最大的元素</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>//Json
+var arr=[{ Age: 20, Name: "ZhangSan" },{ Age: 24, Name: "LiSi" },{ Age: 19, Name: "WangWu" }];
+//得到{ Age: 24, Name: "LiSi" }
+arr.max(function(item,index){
+    return item.Age;
+});</code></pre>
+                    </div>
+
+                    <h3 id="arrayLinq-min">min</h3>
+                    <p>返回最小结果值的元素</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Array.min(<a href="#arrayLinq-clause">clause</a>)</h4>
+                    </div>
+                    <div class="bs-example">
+                        <p>获取Age值最小的元素</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>//Json
+var arr=[{ Age: 20, Name: "ZhangSan" },{ Age: 24, Name: "LiSi" },{ Age: 19, Name: "WangWu" }];
+//得到{ Age: 19, Name: "WangWu" }
+arr.min(function(item,index){
+    return item.Age;
+});</code></pre>
+                    </div>
+                    <h3 id="arrayLinq-sum">sum</h3>
+                    <p>返回字段值之和</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Array.sum(<a href="#arrayLinq-clause">clause</a>)</h4>
+                    </div>
+                    <div class="bs-example">
+                        <p>获取Age之和</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>//Json
+var arr=[{ Age: 20, Name: "ZhangSan" },{ Age: 24, Name: "LiSi" },{ Age: 19, Name: "WangWu" }];
+//结果63
+arr.sum(function(item,index){
+    return item.Age;
+});</code></pre>
+                    </div>
+                </div>
+                <!-- URL
+================================================== -->
+                <div class="bs-docs-section">
+                    <h1 id="url" class="page-header">Url</h1>
+                    <p class="lead">Url操作相关方法</p>
+                    <h3 id="url-getArgs">getArgs</h3>
+                    <p>获取url参数,并返回一个对象</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>$.url.getArgs()</h4>
+                    </div>
+                    <div class="bs-example">
+                        <p>获取 <a>http://itbbb.com?a=1&b=2&c=test</a> 的参数</p>
+                        <p>当存在a值为1的时候,执行callback</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>var args=$.url.getArgs();
+/*
+args: Object
+a: "1",
+b: "2",
+c: "test"
+*/
+if(args.a && args.a==1){
+    callback();
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- $.fn
+================================================== -->
+                <div class="bs-docs-section">
+                    <h1 id="fn" class="page-header">$.fn</h1>
+                    <p class="lead">常用的Jquery扩展函数</p>
+                    <p>$(selector).fn()即jQuery.fn.extend(object),它是扩展 jQuery 元素集来提供新的方法（通常用来制作插件）</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>selector</code>
+                                    </td>
+                                    <td>Expression</td>
+                                    <td>jQuery选择器</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>fn</code>
+                                    </td>
+                                    <td>Function</td>
+                                    <td>待执行的方法,如:$(selector).fn()</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <h3 id="fn-getFormData">getFormData</h3>
+                    <p>把表单转换为data字符串对象,用于AJAX提交</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>$.fn.getFormData()</h4>
+                    </div>
+                    <div class="bs-example">
+                        <p>获取以下表单值</p>
+                        <form id="myform" role="form">
+                            <div class="form-group">
+                                <label>文本框</label>
+                                <input class="form-control" type="text" name="name" value="JSFunction" />
+                            </div>
+                            <div class="form-group">
+                                <label>下拉菜单</label>
+                                <select name="count" class="form-control">
+                                    <option value="0">不要保险</option>
+                                    <option value="1" selected="selected">一份保险</option>
+                                    <option value="2">两份保险</option>
+                                </select>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="domain" value="itbbb.com" checked="checked" />
+                                    itbbb.com
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="site" value="www.itbbb.com" checked="checked" />
+                                    www.itbbb.com
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>hidden值为ITbbb</label>
+                                <input type="hidden" name="othername" value="ITbbb" class="form-control">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>&lt;form  id="myform" role="form"&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label&gt;文本框&lt;/label&gt;
+        &lt;input class="form-control" type="text" name="name" value="JSFunction" /&gt;
+    &lt;/div&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label&gt;下拉菜单&lt;/label&gt;
+        &lt;select name="count" class="form-control"&gt;
+            &lt;option value="0"&gt;不要保险&lt;/option&gt;
+            &lt;option value="1" selected="selected"&gt;一份保险&lt;/option&gt;
+            &lt;option value="2"&gt;两份保险&lt;/option&gt;
+        &lt;/select&gt;
+    &lt;/div&gt;
+    &lt;div class="checkbox"&gt;
+        &lt;label&gt;
+            &lt;input type="checkbox" name="domain" value="itbbb.com" checked="checked" /&gt;
+            itbbb.com
+        &lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class="radio"&gt;
+        &lt;label&gt;
+            &lt;input type="radio" name="site" value="www.itbbb.com" checked="checked" /&gt;
+            www.itbbb.com
+        &lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label&gt;hidden值为ITbbb&lt;/label&gt;
+        &lt;input type="hidden" name="othername" value="ITbbb" class="form-control"&gt;
+    &lt;/div&gt;
+&lt;/form&gt;</code></pre>
+                    </div>
+                    <p>Javascript代码</p>
+                    <div>
+                        <pre><code>/*获取方法*/
+var formdata = $("#myform").getFormData();
+
+/*结果*/
+"name=JSFunction&count=1&domain=itbbb.com&site=www.itbbb.com&othername=ITbbb"</code></pre>
+                    </div>
+
+                    <h3 id="fn-placeholder">placeholder</h3>
+                    <p>让IE支持placeholder,placeholder是text的水印文字,但是IE9以下的浏览器不支持这个属性</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>$.fn.placeholder(options)</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>options</code>
+                                    </td>
+                                    <td>Css</td>
+                                    <td>传入要自定义的Css,如{ "font-size": "18px", "color": "#ccc" }</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="bs-example">
+                        <p>给text加入水印文字</p>
+                        <div class="form-group">
+                            <label>文本框</label>
+                            <input id="jsf_placeholder" class="form-control" type="text" value="" placeholder="这是一个水印文字，输入时候会消失" />
+                        </div>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>&lt;div class="form-group"&gt;
+    &lt;label&gt;文本框&lt;/label&gt;
+    &lt;input class="form-control" type="text" value="" placeholder="这是一个水印文字，输入时候会消失" /&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                    <p>Javascript代码</p>
+                    <div>
+                        <pre><code>/*默认方法*/
+$("input").placeholder();
+
+/*需要自定义一些Css样式*/
+$("input").placeholder({ "font-size": "18px", "color": "#ccc" });</code></pre>
+                    </div>
+                </div>
+
+                <!-- next待添加
+================================================== -->
+                <div class="bs-docs-section">
+                    <h1 id="next" class="page-header">Next</h1>
+                    <p>下一个在哪里,我将陆续完善这个函数库,未来可能还包括Image预加载,jQuery.fn方法扩展等等常用函数</p>
+                    <p>可以收藏此页或者关注下方我的官方微信,来了解更新动态</p>
+                    <p>如果您发现任何问题,请留言给我,以便尽快修复代码.</p>
+                    <p></p>
+                    <p>
+                        <!-- JiaThis Button BEGIN -->
+                        <div class="jiathis_style_32x32">
+                            <a class="jiathis_button_qzone"></a>
+                            <a class="jiathis_button_tsina"></a>
+                            <a class="jiathis_button_tqq"></a>
+                            <a class="jiathis_button_weixin"></a>
+                            <a class="jiathis_button_renren"></a>
+                            <a href="http://www.jiathis.com/share?uid=1590067" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+                        </div>
+                        <!-- JiaThis Button END -->
+                    </p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="bs-docs-sidebar hidden-print" role="complementary">
+                    <ul class="nav bs-docs-sidenav">
+                        <li>
+                            <a href="#overview">开始征程</a>
+                            <ul class="nav">
+                                <li><a href="#overview-download">下载</a></li>
+                                <li><a href="#overview-Reference">引用方法</a></li>
+                                <li><a href="#overview-Focus">关注更新</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#cookie">Cookie</a>
+                            <ul class="nav">
+                                <li><a href="#cookie-set">set</a></li>
+                                <li><a href="#cookie-get">get</a></li>
+                                <li><a href="#cookie-remove">remove</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#browser">Browser</a>
+                            <ul class="nav">
+                                <li><a href="#browser-browser">browser</a></li>
+                                <li><a href="#browser-version">version</a></li>
+                                <li><a href="#browser-mobile">mobile</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#date">Date</a>
+                            <ul class="nav">
+                                <li><a href="#date-now">date</a></li>
+                                <li><a href="#date-format">format</a></li>
+                                <li><a href="#date-addMseconds">addMseconds</a></li>
+                                <li><a href="#date-addSeconds">addSeconds</a></li>
+                                <li><a href="#date-addMinutes">addMinutes</a></li>
+                                <li><a href="#date-addHours">addHours</a></li>
+                                <li><a href="#date-addDays">addDays</a></li>
+                                <li><a href="#date-addWeeks">addWeeks</a></li>
+                                <li><a href="#date-addMonths">addMonths</a></li>
+                                <li><a href="#date-addYears">addYears</a></li>
+                                <li><a href="#date-getWeek">getWeek</a></li>
+                                <li><a href="#date-getAge">getAge</a></li>
+                                <li><a href="#date-isLeapYear">isLeapYear</a></li>
+                                <li><a href="#date-daysInMonth">daysInMonth</a></li>
+                                <li><a href="#date-diffDate">diffDate</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#string">String</a>
+                            <ul class="nav">
+                                <li><a href="#string-replaceAll">replaceAll</a></li>
+                                <li><a href="#string-trim">trim</a></li>
+                                <li><a href="#string-left">left</a></li>
+                                <li><a href="#string-right">right</a></li>
+                                <li><a href="#string-toDate">toDate</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#array">Array</a>
+                            <ul class="nav">
+                                <li><a href="#array-add">add</a></li>
+                                <li><a href="#array-addRange">addRange</a></li>
+                                <li><a href="#array-forEach">forEach</a></li>
+                                <li><a href="#array-clear">clear</a></li>
+                                <li><a href="#array-isEmpty">isEmpty</a></li>
+                                <li><a href="#array-contains">contains</a></li>
+                                <li><a href="#array-indexOf">indexOf</a></li>
+                                <li><a href="#array-insert">insert</a></li>
+                                <li><a href="#array-dequeue">dequeue</a></li>
+                                <li><a href="#array-remove">remove</a></li>
+                                <li><a href="#array-removeAt">removeAt</a></li>
+                                <li><a href="#array-reverse">reverse</a></li>
+                                <li><a href="#array-skip">skip</a></li>
+                                <li><a href="#array-take">take</a></li>
+
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#arrayLinq">ArrayLinq</a>
+                            <ul class="nav">
+                                <li><a href="#arrayLinq-clause">clause</a></li>
+                                <li><a href="#arrayLinq-where">where</a></li>
+                                <li><a href="#arrayLinq-first">first</a></li>
+                                <li><a href="#arrayLinq-last">last</a></li>
+                                <li><a href="#arrayLinq-any">any</a></li>
+                                <li><a href="#arrayLinq-all">all</a></li>
+                                <li><a href="#arrayLinq-count">count</a></li>
+                                <li><a href="#arrayLinq-orderBy">orderBy</a></li>
+                                <li><a href="#arrayLinq-orderByDescending">orderByDescending</a></li>
+                                <li><a href="#arrayLinq-max">max</a></li>
+                                <li><a href="#arrayLinq-min">min</a></li>
+                                <li><a href="#arrayLinq-sum">sum</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#url">Url</a>
+                            <ul class="nav">
+                                <li><a href="#url-getArgs">getArgs</a></li>
+                                <!--<li><a href="#url-open">open</a></li>-->
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#fn">$.fn</a>
+                            <ul class="nav">
+                                <li><a href="#fn-getFormData">getFormData</a></li>
+                                <li><a href="#fn-placeholder">placeholder</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#next">Next</a>
+                            <ul class="nav">
+                                <li><a href="#top"></a></li>
+                            </ul>
+                        </li>
+                        <!-- next待添加
+================================================== -->
+                    </ul>
+                    <a class="back-to-top" href="#top">Back to top</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer
+================================================== -->
+    <footer class="bs-docs-footer" role="contentinfo">
+        <div class="container">
+            <p>本代码由<a href="http://www.itbbb.com" target="_blank">北北</a>整理,其中可能包含借鉴引用,如有冒犯,敬请谅解。</p>
+            <ul class="bs-docs-footer-links muted">
+                <li>Version beta 1.0</li>
+                <li>·</li>
+                <li><a href="http://www.itbbb.com/index.php/about-me/">About</a></li>
+                <li>·</li>
+                <li><a href="http://www.itbbb.com/" target="_blank">Blog</a></li>
+                <li>·</li>
+                <li><a href="http://www.itbbb.com/jsfunction/jsfunction.js" target="_blank">下载源码</a></li>
+            </ul>
+            <div>
+                <img src="http://www.itbbb.com/wp-content/uploads/2014/02/qrcode.jpg" width="150">
+            </div>
+        </div>
+    </footer>
+    <!--<script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>-->
+    <script src="script/jquery.min.js"></script>
+    <script src="jsfunction.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="highlight/highlight.pack.js"></script>
+    <script src="doc/docs.min.js"></script>
+    <script src="script/itbaby.js"></script>
+
+    <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1590067" charset="utf-8"></script>
+    <div style="display: none;">
+        <script type="text/javascript">
+            var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+            document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F665ed821ce0c947e5ccb95d1dbed69a8' type='text/javascript'%3E%3C/script%3E"));
+        </script>
+        <script src="http://s23.cnzz.com/stat.php?id=5816290&web_id=5816290" language="JavaScript"></script>
+        <script type="text/javascript"> (function (win, doc) { var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0]; if (!win.alimamatk_show) { s.charset = "gbk"; s.async = true; s.src = "http://a.alimama.cn/tkapi.js"; h.insertBefore(s, h.firstChild); }; var o = { pid: "mm_41996866_5614231_21104132",/*推广单元ID,用于区分不同的推广渠道*/ appkey: "",/*通过TOP平台申请的appkey,设置后引导成交会关联appkey*/ unid: ""/*自定义统计字段*/ }; win.alimamatk_onload = win.alimamatk_onload || []; win.alimamatk_onload.push(o); })(window, document);</script>
+    </div>
+</body>
+</html>
