@@ -8,8 +8,9 @@
             color: #ccc;
             font-size: 14px;
         }
+
         input {
-        padding:10px;
+            padding: 10px;
         }
     </style>
     <!--<script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>-->
@@ -157,15 +158,24 @@
         $("#array").html("length:" + arr.length +
             "<br>" + html +
             "|" + arr.isEmpty() +
-            "|" + arr.contains(item) +
+            "|" + arr.contains(item) + "|" + a.contains("lisi") +
             "|indexof:" + arr.indexOf(item) +
             "|" + a
             );
 
         var demoarr = [{ Age: 20, Name: "ZhangSan" }, { Age: 24, Name: "LiSi" }, { Age: 19, Name: "WangWu" }];
         var tarr = demoarr.orderByDescending(function (item, index) { return item.Name; });
-        var farr = [1, 2, 3, 4, 5];
-        $("#arrayLinq").html(farr.reverse().join("、"));
+        var farr = [1, 2, 3, 4, 5, 3, 2];
+        var disarr = [{ x: "1", y: "a" }, { x: "2", y: "b" }, { x: "1", y: "a" }];
+
+        var t = disarr.distinct(function (item) { return item });
+        $("#arrayLinq").html(farr//.reverse()
+            .distinct(function (item) {
+                return item;
+            }).join("、") +
+            "|" + disarr.distinct(function (item) {
+                return item;
+            }).join("、"));
 
         var form = $("#myform").getFormData();
         $("#test").html(form);

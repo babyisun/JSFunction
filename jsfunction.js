@@ -580,15 +580,24 @@ window.JSF = $.JSFunction;
 
     //有问题
     Array.prototype.distinct = function (clause) {
-        var item, dict = new Object(), retVal = new Array(), len = this.length;
+        var item,
+            //dict = new Object(),
+            retVal = new Array(), len = this.length;
+        if (!clause)
+            clause = function (item) { return item; };
         for (var i = 0; i < len; i++) {
-            item = clause(this[i]);
-            if (dict[item] == null) {
-                dict[item] = true;
+            //item = clause(this[i]);
+            item = this[i];
+            if (!retVal.contains(item)) {
                 retVal[retVal.length] = item;
             }
+
+            //if (dict[item] == null) {
+                //dict[item] = true;
+                //retVal[retVal.length] = item;
+            //}
         }
-        dict = null;
+        //dict = null;
         return retVal;
     };
     //复制新数组
