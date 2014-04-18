@@ -166,16 +166,13 @@
         var demoarr = [{ Age: 20, Name: "ZhangSan" }, { Age: 24, Name: "LiSi" }, { Age: 19, Name: "WangWu" }];
         var tarr = demoarr.orderByDescending(function (item, index) { return item.Name; });
         var farr = [1, 2, 3, 4, 5, 3, 2];
-        var disarr = [{ x: "1", y: "a" }, { x: "2", y: "b" }, { x: "1", y: "a" }];
+        var disarr = [{ x: "1", y: { m: 1, n: 2 } }, { x: "2", y: "b" }, { x: "1", y: { m: 1, n: 2 } }];
 
-        var t = disarr.distinct(function (item) { return item });
+        var t = disarr.distinct(function (item) { return item});
+
         $("#arrayLinq").html(farr//.reverse()
-            .distinct(function (item) {
-                return item;
-            }).join("、") +
-            "|" + disarr.distinct(function (item) {
-                return item;
-            }).join("、"));
+            .distinct().join("、") +
+            "|" + disarr.distinct().join("、"));
 
         var form = $("#myform").getFormData();
         $("#test").html(form);

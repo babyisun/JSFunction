@@ -578,28 +578,38 @@ window.JSF = $.JSFunction;
 
 
 
-    //有问题
+    //复杂数组对象去重
     Array.prototype.distinct = function (clause) {
-        var item,
-            //dict = new Object(),
-            retVal = new Array(), len = this.length;
-        if (!clause)
-            clause = function (item) { return item; };
-        for (var i = 0; i < len; i++) {
-            //item = clause(this[i]);
-            item = this[i];
-            if (!retVal.contains(item)) {
-                retVal[retVal.length] = item;
+        var len = this.length;
+        if (len < 2) return this;
+        var dict = new Object(), retVal = new Array();
+        //递归鸭子检测
+        var _duckCheckObj = function (obj) {
+            var names = "";
+            if (typeof obj == "object") {
+                for (var name in obj) {
+                    if (typeof obj[name] == "object") {
+                        names += _duckCheckObj(obj[name]);
+                    }
+                    else { names += name + obj[name]; }
+                }
             }
-
-            //if (dict[item] == null) {
-                //dict[item] = true;
-                //retVal[retVal.length] = item;
-            //}
+            else
+                names = obj;
+            return names;
         }
-        //dict = null;
+        if (!clause) clause = function (item) { return item; };
+        for (var i = 0; i < len; i++) {
+            var arrobj = this[i], arrkey = clause(arrobj), key = _duckCheckObj(arrkey);
+            if (dict[key] == null) {
+                dict[key] = true;
+                retVal[retVal.length] = arrobj;
+            }
+        }
+        dict = null;
         return retVal;
     };
+
     //复制新数组
     //Array.prototype.clone = function () {
     //    var clonedArray = [];
@@ -609,19 +619,7 @@ window.JSF = $.JSFunction;
     //    }
     //    return clonedArray;
     //};
-    //去除重复项
-    //Array.prototype.distinct = function () {
-    //    var arr = [],
-    //    obj = {};
-    //    for (var n, i = 0, result; result = this[i++];) {
-    //        n = 0 + result;
-    //        if (!obj[n]) {
-    //            arr.push(result);
-    //            obj[n] = i + 1;
-    //        }
-    //    }
-    //    return arr;
-    //};
+
 
 }(jQuery);
 
