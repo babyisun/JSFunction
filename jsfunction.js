@@ -585,18 +585,18 @@ window.JSF = $.JSFunction;
         var dict = new Object(), retVal = new Array();
         //递归鸭子检测
         var _duckCheckObj = function (obj) {
-            var names = "";
+            var v = "";
             if (typeof obj == "object") {
-                for (var name in obj) {
-                    if (typeof obj[name] == "object") {
-                        names += _duckCheckObj(obj[name]);
+                for (var o in obj) {
+                    if (typeof obj[o] == "object") {
+                        v += _duckCheckObj(obj[o]);
                     }
-                    else { names += name + obj[name]; }
+                    else { v += name + obj[o]; }
                 }
             }
             else
-                names = obj;
-            return names;
+                v = obj;
+            return v;
         }
         if (!clause) clause = function (item) { return item; };
         for (var i = 0; i < len; i++) {
