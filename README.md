@@ -5,7 +5,7 @@ JSFunction
 希望它对你能有所帮助
 相信代码是优雅的舞者--北北
 
-/*
+
  * source   : jsfunction.js
  * Version  : beta 1.0
  * depends  : Jquery 1.4+
@@ -18,4 +18,4 @@ JSFunction
  *
  *
  * message  : 如果发现任何bug、需要完善的代码，请发邮件或通过微信联系我，我很高兴与大家一起整理优雅的代码.
-**/
+
