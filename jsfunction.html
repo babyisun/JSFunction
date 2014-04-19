@@ -1412,6 +1412,27 @@ arr.remove(item);</code></pre>
 arr.reverse().join(",");</code></pre>
                     </div>
 
+                    <h3 id="array-clone">clone</h3>
+                    <p>数组深度克隆,修改新数组不会影响原数组</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Array.clone()</h4>
+                    </div>
+                    <div class="bs-example">
+                        <p>深度克隆所给出的数组元素</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>//值类型
+var arr = [1,2,3,4,5];
+var newarr = arr.clone();
+//Object类型
+var arr = [{ Age: 12, Name: "ZhangSan" }, { Age: 24, Name: "LiSi" }, { Age: 19, Name: "WangWu" }];
+var newarr = arr.clone();
+newarr[0].Name="ZhaoLiu";
+//结果:arr[0].Name依然为"ZhangSan",只有newarr[0].Name的变为"ZhaoLiu"
+
+                             </code></pre>
+                    </div>
+
                     <h3 id="array-skip">skip</h3>
                     <p>跳过序列中指定数量的元素，然后返回剩余的元素,与take配合做分页</p>
                     <div class="bs-callout bs-callout-info">
@@ -1765,6 +1786,44 @@ arr.sum(function(item,index){
     return item.Age;
 });</code></pre>
                     </div>
+
+                    <h3 id="arrayLinq-distinct">distinct</h3>
+                    <p>数组去除重复,返回新数组</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Array.distinct([<a href="#arrayLinq-clause">clause</a>])</h4>
+                    </div>
+                    <p>注:此函数的clause为可选参数,不填即数组本身元素去重,如果传递则按照传值的字段去重</p>
+                    <div class="bs-example">
+                        <p>[1, 2, 3, 4, 5, 3, 2]去除重复</p>
+                        <p>["zhangsan","lisi","wangwu","lisi"]去除重复</p>
+                        <p>[{ x: "1", y: "a" } }, { x: "2", y: "b" }, { x: "1", y: "a" }]去除重复,按字段y去重</p>
+                        <p>[{ x: "1", y: { m: 1, n: 2 } }, { x: "2", y: "b" }, { x: "1", y: { m: 1, n: 2 } }]去除重复,按字段x去重</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>//数值数组去重
+var intarr = [1, 2, 3, 4, 5, 3, 2];
+intarr.distinct();
+//结果:[1,2,3,4,5]
+
+//字符串数组去重
+var strarr=["zhangsan","lisi","wangwu","lisi"];
+strarr.distinct();
+//结果:["zhangsan","lisi","wangwu"]
+
+//Object数组去重
+var objarr=[{ x: "1", y: "a" } }, { x: "2", y: "b" }, { x: "1", y: "a" }];
+objarr.distinct();
+//结果:[{ x: "1", y: "a" } }, { x: "2", y: "b" }]
+objarr.distinct(function(item){ return item.y; });
+//结果:[{ x: "1", y: "a" } }, { x: "2", y: "b" }]
+
+//Object复合数组去重
+var objarr=[{ x: "1", y: { m: 1, n: 2 } }, { x: "2", y: "b" }, { x: "1", y: { m: 1, n: 2 } }];
+objarr.distinct();
+//结果:[{ x: "1", y: { m: 1, n: 2 } }, { x: "2", y: "b" }];
+objarr.distinct(function(item){ return item.x; });//按照字段x是否重复进行筛选
+//结果:[{ x: "1", y: { m: 1, n: 2 } }, { x: "2", y: "b" }];</code></pre>
+                    </div>
                 </div>
                 <!-- URL
 ================================================== -->
@@ -2051,6 +2110,7 @@ $("input").placeholder({ "font-size": "18px", "color": "#ccc" });</code></pre>
                                 <li><a href="#array-remove">remove</a></li>
                                 <li><a href="#array-removeAt">removeAt</a></li>
                                 <li><a href="#array-reverse">reverse</a></li>
+                                <li><a href="#array-clone">clone</a></li>
                                 <li><a href="#array-skip">skip</a></li>
                                 <li><a href="#array-take">take</a></li>
 
@@ -2071,6 +2131,7 @@ $("input").placeholder({ "font-size": "18px", "color": "#ccc" });</code></pre>
                                 <li><a href="#arrayLinq-max">max</a></li>
                                 <li><a href="#arrayLinq-min">min</a></li>
                                 <li><a href="#arrayLinq-sum">sum</a></li>
+                                <li><a href="#arrayLinq-distinct">distinct</a></li>
                             </ul>
                         </li>
                         <li>

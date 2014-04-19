@@ -591,13 +591,13 @@ window.JSF = $.JSFunction;
                     if (typeof obj[o] == "object") {
                         v += _duckCheckObj(obj[o]);
                     }
-                    else { v += name + obj[o]; }
+                    else { v += o + obj[o]; }
                 }
             }
             else
                 v = obj;
             return v;
-        }
+        };
         if (!clause) clause = function (item) { return item; };
         for (var i = 0; i < len; i++) {
             var arrobj = this[i], arrkey = clause(arrobj), key = _duckCheckObj(arrkey);
@@ -610,15 +610,34 @@ window.JSF = $.JSFunction;
         return retVal;
     };
 
-    //复制新数组
-    //Array.prototype.clone = function () {
-    //    var clonedArray = [];
-    //    var length = this.length;
-    //    for (var index = 0; index < length; index++) {
-    //        clonedArray[index] = this[index];
-    //    }
-    //    return clonedArray;
-    //};
+    //深度克隆
+    Array.prototype.clone = function () {
+        var _duckclone = function (obj) {
+            var v = new Object();
+            if (typeof obj == "object") {
+                for (var o in obj) {
+                    if (typeof obj[o] == "object" && obj[o] != null) {
+                        v[o] = _duckclone(obj[o]);
+                    }
+                    else { v[o] = obj[o]; }
+                }
+            }
+            else
+                v = obj;
+            return v;
+        };
+        var clonearr = new Array(), len = this.length;
+        for (var i = 0; i < len; i++) {
+            var item = this[i];
+            if (typeof item == "object") {
+                item = _duckclone(item);
+                clonearr.push(item);
+            }
+            else
+                clonearr.push(item);
+        }
+        return clonearr;
+    };
 
 
 }(jQuery);
