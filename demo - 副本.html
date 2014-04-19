@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>JSFunction Demo</title>
+    <style>
+        .jsf_placeholder {
+            color: #ccc;
+            font-size: 14px;
+        }
+
+        input {
+            padding: 10px;
+        }
+    </style>
+    <!--<script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>-->
+    <script src="script/jquery.min.js"></script>
+    <script src="jsfunction.min.js"></script>
+    <!--<script src="jsfunction.min.js"></script>-->
+</head>
+<body>
+    <div id="llq"></div>
+    <div id="date"></div>
+    <button id="getTime">Time</button>
+    <div id="string"></div>
+    <input type="text" id="HTMLEncode" />
+    <input type="text" id="HTMLDecode" />
+    <div id="array"></div>
+    <div id="arrayLinq"></div>
+
+    <form role="form" id="myform">
+        <div class="form-group">
+            <label>文本框</label>
+            <input class="form-control" type="text" name="name" value="JSFunction" />
+        </div>
+        <div class="form-group">
+            <label>1</label>
+            <input class="form-control" type="text" name="name" value="" placeholder="测试" />
+        </div>
+        <div class="form-group">
+            <label>2</label>
+            <input class="form-control" type="text" name="name" value="" placeholder="yingwen" />
+        </div>
+        <div class="form-group">
+            <label>下拉菜单</label>
+            <select name="count" class="form-control">
+                <option value="0">不要保险</option>
+                <option value="1" selected="selected">一份保险</option>
+                <option value="2">两份保险</option>
+            </select>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" name="domain" value="itbbb.com" checked="checked" />
+                itbbb.com
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                <input type="radio" name="site" value="www.itbbb.com" checked="checked" />
+                www.itbbb.com
+            </label>
+        </div>
+        <div class="form-group">
+            <label>hidden值为ITbbb</label>
+            <input type="hidden" name="othername" value="ITbbb" class="form-control">
+        </div>
+    </form>
+    <div id="test"></div>
+    <script>
+        $(function () {
+            $("input").placeholder({ "font-size": "18px", "color": "#000" });
+            //alert($.JSFunction.version);
+            //alert(JSF.author);
+            //document.domain = "itbbb.com";
+            JSF.cookie.set("baby", 1, 1);
+            //alert($.cookie);
+            $.cookie.set("itbbb", "www.itbbb.com");
+            $.cookie.set("itbbb.com", "itbbb.com", "1", "day");
+            $.cookie.set("itbbb", 1, 1, "", "itbbb.com");
+            var t = $.cookie.get("test");
+            //setTimeout(function () {
+            //    $.cookie.remove("test");
+            //}, 5000);
+
+
+            $("#llq").html("ie:" + $.browser.msie + "(ie6:" + $.browser.ie6 + ")|mozilla:" + $.browser.mozilla
+                + "|webkit:" + $.browser.webkit + "|opera:" + $.browser.opera + "|mobile:"
+                + $.browser.mobile + "|version:" + $.browser.version + "|<br>" + navigator.userAgent);
+
+            $("#getTime").click(function () {
+                var time = $.date("2012-1-1").addMinutes(10).addHours(1).addYears(-11);
+                $("#date").html(time);
+            });
+            $("#date").html(
+            $.date("2004-1-1").isLeapYear().toString() +
+            $.date("1901-1-1").isLeapYear().toString() +
+            $.date("2000-1-1").isLeapYear().toString() +
+            $.date("1900-1-1").isLeapYear().toString() +
+            $.date().getWeek() +
+            $.date().getWeek("Short") +
+            $.date("2001/1/4").getAge() +
+            "|" + $.diffDate($.date(), $.date("2013-1-1")) +
+            "|" + $.diffDate("2013-1-2", "2013-2-2"));
+
+
+        });
+        var str = "  abcdefg,higklmn  ";
+        $("#string").html("|" + str.left(5) +
+            "|" + str.right(7) +
+            "|" + str.trim() +
+            "|" + "2011-1-3".toDate("yyyy年MM月dd日") +
+            "|" + str.replaceAll(" ", "_").left(5).right(3) +
+            "|" + "");
+
+        //$("#HTMLEncode").val("&<>".htmlEncode());
+        //$("#HTMLDecode").val("&amp;&lt;&gt;".htmlDecode());
+
+        var arr = [{ Code: "CN", Name: "中国", NameEn: "China", FullPin: "Zhongguo", ShortPin: "ZG" },
+            { Code: "GB", Name: "英国", NameEn: "United Kingdom", FullPin: "Yingguo", ShortPin: "YG" }];
+
+        var item = { Code: "BO", Name: "玻利维亚", NameEn: "Bolivia", FullPin: "Boliweiya", ShortPin: "BLWY" };
+        //arr.add(item);
+
+        var range = [{ Code: "BM", Name: "百慕大", NameEn: "Bermuda", FullPin: "Baimuda", ShortPin: "BMD" },
+            { Code: "BN", Name: "汶莱", NameEn: "Brunei", FullPin: "Wenlai", ShortPin: "WL" }];
+
+        arr.add(item).add(item).addRange(range).insert(1, { Name: "test" });
+        //arr.addRange(range);
+        var html = '';
+
+        //var newarr = arr.clone();
+        //newarr[0].Name = "baby";
+
+        arr.insert(3, { Name: "mm" });
+
+        //arr.remove(item);
+        //arr.removeAt(1);
+        //arr = arr.distinct();
+
+        arr.forEach(function (item, i, self) {
+            html += i + item.Name;
+        });
+
+        var newarr = arr.where(
+            //function (item) {
+            //return item.Name == "中国" || item.Name == "英国";
+            //}
+        ).skip(3).take(3);
+        newarr = newarr.orderBy(function (item) { return item.Code; });
+
+        html += "出队" + arr.dequeue().Name;
+
+        //arr.clear();
+        //item.Name = "1";
+        var a = [].add("zhangsan").add("lisi");
+
+        $("#array").html("length:" + arr.length +
+            "<br>" + html +
+            "|" + arr.isEmpty() +
+            "|" + arr.contains(item) + "|" + a.contains("lisi") +
+            "|indexof:" + arr.indexOf(item) +
+            "|" + a
+            );
+
+        var demoarr = [{ Age: null, Name: "ZhangSan" }, { Age: 24, Name: "LiSi" }, { Age: 19, Name: "WangWu" }];
+        var clonearr = demoarr.clone();
+        clonearr[0].Age = 12;
+        //clonearr.shift();
+
+        var tarr = demoarr.orderByDescending(function (item, index) { return item.Name; });
+        var farr = [1, 2, 3, 4, 5, 3, 2];
+        var clfa = farr.slice(0);
+        clfa[0] = 100;
+        var disarr = [{ x: "1", y: { m: 1, n: null } }, { x: "2", y: "b" }, { x: "1", y: { m: 1, n: null } }];
+        var clc = disarr.clone();
+        clc[0].y.n = "nice";
+        var t = disarr.distinct();
+
+        $("#arrayLinq").html(farr//.reverse()
+            .distinct().join("、") +
+            "|" + disarr.distinct().join("、"));
+
+        var form = $("#myform").getFormData();
+        $("#test").html(form);
+        var args = $.url.getArgs();
+        var hash = $.url.parse();
+
+
+        //$.url.open("http://www.baidu.com");
+
+    </script>
+
+</body>
+</html>
