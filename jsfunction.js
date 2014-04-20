@@ -10,7 +10,7 @@
  * Email    : babyisun@qq.com
  *
  * create   : 2014/03/29
- * update   : 2014/04/19
+ * update   : 2014/04/21
  *
  * message  : 如果发现任何bug、需要完善的代码，请发邮件或通过微信联系我，我很高兴与大家一起整理优雅的代码.
 **/
@@ -20,7 +20,7 @@ window.JSF = $.JSFunction;
 
 /*Cookie*/
 +function ($) {
-    'use strict';//严格模式
+    'use strict';
 
     var cookie = {
         get: function (name) {
@@ -109,7 +109,7 @@ window.JSF = $.JSFunction;
 
 /*Date*/
 +function ($) {
-    'use strict';//严格模式
+    'use strict';
 
     //初始化时间
     $.date = function (date) {
@@ -700,8 +700,8 @@ window.JSF = $.JSFunction;
     'use strict';
 
     /**
-     * 格式化form表单
-     * $(formid).getFormData()
+     * 抓取form表单数据
+     * $(form).getFormData()
      */
     $.fn.getFormData = function () {
         var inputs = $(this).find("input,select,textarea");
@@ -793,4 +793,5 @@ window.JSF = $.JSFunction;
             });
         }
     };
+
 }(jQuery);
