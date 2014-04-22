@@ -17,7 +17,15 @@
 if (typeof jQuery === 'undefined') { throw new Error('JSFunction requires jQuery 1.4+') }
 $.extend({ JSFunction: { version: 1.0, author: "baby" } });
 window.JSF = $.JSFunction;
-
+/*Base*/
++function ($) {
+    Function.prototype.fn = function (name, fun) {
+        if (!this.prototype[name]) {
+            this.prototype[name] = fun;
+        }
+        return this;
+    }
+}(jQuery);
 /*Cookie*/
 +function ($) {
     'use strict';
@@ -117,7 +125,8 @@ window.JSF = $.JSFunction;
     };
     //格式化日期
     //$.date.Format("yyyy-MM-dd")
-    Date.prototype.format = function (fmt) {
+    //Date.prototype.format = function (fmt) {
+    Date.fn("format", function (fmt) {
         var o =
         {
             "M+": this.getMonth() + 1, //月份 
@@ -134,55 +143,56 @@ window.JSF = $.JSFunction;
             if (new RegExp("(" + k + ")").test(fmt))
                 fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
         return fmt;
-    }
+    });
 
-    Date.prototype.addMseconds = function (milliseconds) {
+    Date.fn("addMseconds", function (milliseconds) {
         var m = this.getTime() + milliseconds;
         return new Date(m);
-    };
-    Date.prototype.addSeconds = function (second) {
-        return this.addMseconds(second * 1000);
-    };
-    Date.prototype.addMinutes = function (minute) {
-        return this.addSeconds(minute * 60);
-    };
+    });
 
-    Date.prototype.addHours = function (hour) {
+    Date.fn("addSeconds", function (second) {
+        return this.addMseconds(second * 1000);
+    });
+
+    Date.fn("addMinutes", function (minute) {
+        return this.addSeconds(minute * 60);
+    });
+
+    Date.fn("addHours", function (hour) {
         return this.addMinutes(60 * hour);
-    };
+    });
 
     //加天数
-    Date.prototype.addDays = function (d) {
+    Date.fn("addDays", function (d) {
         return this.setDate(this.getDate() + d);
-    };
+    });
 
     //加周数
-    Date.prototype.addWeeks = function (w) {
+    Date.fn("addWeeks", function (w) {
         return this.addDays(w * 7);
-
-    };
+    });
 
     //加月数
-    Date.prototype.addMonths = function (m) {
+    Date.fn("addMonths", function (m) {
         var d = this.getDate();
         this.setMonth(this.getMonth() + m);
         if (this.getDate() < d)
             this.setDate(0);
         return this;
-    };
+    });
 
     //加年数
-    Date.prototype.addYears = function (y) {
+    Date.fn("addYears", function (y) {
         var m = this.getMonth();
         this.setFullYear(this.getFullYear() + y);
         if (m < this.getMonth()) {
             this.setDate(0);
         }
         return this;
-    };
+    });
 
     //星期几
-    Date.prototype.getWeek = function (type) {
+    Date.fn("getWeek", function (type) {
         var i = this.getDay();
         if (!type || type == "周" || type == "星期") {
             var nums = ["日", "一", "二", "三", "四", "五", "六"];
@@ -197,10 +207,10 @@ window.JSF = $.JSFunction;
             var enshortname = ["Sun.", "Mon.", "Tues.", "Wed.", "Thurs.", "Fri.", "Sat."];
             return enshortname[i];
         }
-    }
+    });
 
     //获取周岁
-    Date.prototype.getAge = function () {
+    Date.fn("getAge", function () {
         var Age = 0,
         now = $.date(),
         birthYear = this.getFullYear(),
@@ -234,20 +244,20 @@ window.JSF = $.JSFunction;
             }
         }
         return Age;//返回周岁年龄
-    }
+    });
 
     //是否是闰年
-    Date.prototype.isLeapYear = function () {
+    Date.fn("isLeapYear", function () {
         var year = this.getFullYear();
         return (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0))
-    };
+    });
     //该月有多少天
-    Date.prototype.daysInMonth = function () {
+    Date.fn("daysInMonth", function () {
         var month = this.getMonth() + 1;
         if (month != 2)
             return ((month <= 7 && month % 2 == 1) || (month > 7 && month % 2 == 0)) ? 31 : 30;
         else return this.isLeapYear() ? 29 : 28;
-    };
+    });
 
     //获取日期差
     $.diffDate = function (startTime, endTime, diffType) {
@@ -266,48 +276,48 @@ window.JSF = $.JSFunction;
     'use strict';
 
     //替换所有
-    String.prototype.replaceAll = function (s1, s2) {
+    String.fn("replaceAll", function (s1, s2) {
         return this.replace(new RegExp(s1, "gm"), s2);
-    };
+    });
 
     //去除前后空格
-    String.prototype.trim = function () {
+    String.fn("trim", function () {
         return this.replace(/(^\s*)|(\s*$)/g, "");
-    };
+    });
 
     // 从左截取指定长度的字串 
-    String.prototype.left = function (n) {
+    String.fn("left", function (n) {
         return this.slice(0, n);
-    }
+    });
     // 从右截取指定长度的字串 
-    String.prototype.right = function (n) {
+    String.fn("right", function (n) {
         return this.slice(this.length - n);
-    }
+    });
 
     //字符串转换时间 &依赖于Date扩展
-    String.prototype.toDate = function (v) {
+    String.fn("toDate", function (v) {
         var d = $.date(this);
         if (v)
             return d.format(v);
         return d;
-    };
+    });
 
     // HTML编码 
-    String.prototype.htmlEncode = function () {
+    String.fn("htmlEncode", function () {
         var t = document.createElement("div");
         (t.textContent != null) ? (t.textContent = this) : (t.innerText = this);
         var o = t.innerHTML;
         t = null;
         return o;
-    }
+    });
     // HTML反编码
-    String.prototype.htmlDecode = function () {
+    String.fn("htmlDecode", function () {
         var t = document.createElement("div");
         t.innerHTML = this;
         var o = t.innerText || t.textContent;
         t = null;
         return o;
-    }
+    });
 
 }(jQuery);
 
@@ -316,13 +326,13 @@ window.JSF = $.JSFunction;
     'use strict';
 
     //Add方法
-    Array.prototype.add = function (item) {
+    Array.fn("add", function (item) {
         this.push(item);
         return this;
-    };
+    });
 
     //Add集合
-    Array.prototype.addRange = function (items) {
+    Array.fn("addRange", function (items) {
         var length = items.length;
         if (length) {
             for (var index = 0; index < length; index++) {
@@ -330,103 +340,100 @@ window.JSF = $.JSFunction;
             }
         }
         return this;
-    };
+    });
 
-    //ie6没有forEach
-    if (!Array.prototype.forEach) {
-        Array.prototype.forEach = function (callback, thisArg) {
-            var T, k;
-            if (this == null) {
-                throw new TypeError(" this is null or not defined");
+
+    Array.fn("forEach", function (callback, thisArg) {
+        var T, k;
+        if (this == null) {
+            throw new TypeError(" this is null or not defined");
+        }
+        var O = Object(this);
+        var len = O.length >>> 0;
+        if ({}.toString.call(callback) != "[object Function]") {
+            throw new TypeError(callback + " is not a function");
+        }
+        if (thisArg) {
+            T = thisArg;
+        }
+        k = 0;
+        while (k < len) {
+            var kValue;
+            if (k in O) {
+                kValue = O[k];
+                callback.call(T, kValue, k, O);
             }
-            var O = Object(this);
-            var len = O.length >>> 0;
-            if ({}.toString.call(callback) != "[object Function]") {
-                throw new TypeError(callback + " is not a function");
-            }
-            if (thisArg) {
-                T = thisArg;
-            }
-            k = 0;
-            while (k < len) {
-                var kValue;
-                if (k in O) {
-                    kValue = O[k];
-                    callback.call(T, kValue, k, O);
-                }
-                k++;
-            }
-        };
-    }
+            k++;
+        }
+    });
+
 
     //清空
-    Array.prototype.clear = function () {
+    Array.fn("clear", function () {
         if (this.length > 0) {
             this.splice(0, this.length);
         }
         return this;
-    };
+    });
 
     //判断是否为空
-    Array.prototype.isEmpty = function () {
+    Array.fn("isEmpty", function () {
         return this.length == 0;
-    };
+    });
 
-    //ie6没有数组的indexOf
-    if (!Array.prototype.indexOf) {
-        //获取项目索引
-        Array.prototype.indexOf = function (item) {
-            var length = this.length;
-            if (length != 0) {
-                for (var index = 0; index < length; index++) {
-                    if (this[index] == item) {
-                        return index;
-                    }
+    //获取项目索引
+    Array.fn("indexOf", function (item) {
+        var length = this.length;
+        if (length != 0) {
+            for (var index = 0; index < length; index++) {
+                if (this[index] == item) {
+                    return index;
                 }
             }
-            return -1;
-        };
-    }
+        }
+        return -1;
+    });
 
     //判断项是否在数组中
-    Array.prototype.contains = function (item) {
+    Array.fn("contains", function (item) {
         var index = this.indexOf(item);
         return (index >= 0);
-    };
+    });
 
 
     //插入项
-    Array.prototype.insert = function (index, item) {
+    Array.fn("insert", function (index, item) {
         return this.splice(index, 0, item);
-    };
+    });
 
     //出队
-    Array.prototype.dequeue = function () {
+    Array.fn("dequeue", function () {
         return this.shift();
-    };
+    });
 
     //通过项目删除某项
-    Array.prototype.remove = function (item) {
+    Array.fn("remove", function (item) {
         var index = this.indexOf(item);
         if (index >= 0) {
             this.splice(index, 1);
         }
         return this;
-    };
+    });
 
     //通过索引删除某项
-    Array.prototype.removeAt = function (index) {
+    Array.fn("removeAt", function (index) {
         this.splice(index, 1);
         return this;
-    };
+    });
 
-    Array.prototype.reverse = function () {
+    Array.fn("reverse", function () {
         var retVal = new Array(), len = this.length;
         for (var i = len - 1; i > -1; i--)
             retVal[retVal.length] = this[i];
         return retVal;
-    }
-    Array.prototype.skip = function (count) {
+    });
+
+    Array.fn("skip", function (count) {
         var len = this.length, newArray = new Array();
         for (var i = count; i < len; i++) {
             if (i < len) {
@@ -434,9 +441,9 @@ window.JSF = $.JSFunction;
             }
         }
         return newArray;
-    };
+    });
 
-    Array.prototype.take = function (count) {
+    Array.fn("take", function (count) {
         var len = this.length, newArray = new Array();
         for (var i = 0; i < count; i++) {
             if (i < len) {
@@ -444,10 +451,10 @@ window.JSF = $.JSFunction;
             }
         }
         return newArray;
-    };
+    });
     //Linq
     //条件查询
-    Array.prototype.where = function (clause) {
+    Array.fn("where", function (clause) {
         if (!clause)
             return this;
         var len = this.length, newArray = new Array();
@@ -457,9 +464,9 @@ window.JSF = $.JSFunction;
             }
         }
         return newArray;
-    };
+    });
 
-    Array.prototype.first = function (clause) {
+    Array.fn("first", function (clause) {
         var len = this.length;
         if (clause != null) {
             return this.where(clause).first();
@@ -470,8 +477,9 @@ window.JSF = $.JSFunction;
             else
                 return null;
         }
-    };
-    Array.prototype.last = function (clause) {
+    });
+
+    Array.fn("last", function (clause) {
         var len = this.length;
         if (clause != null) {
             return this.where(clause).last();
@@ -482,31 +490,32 @@ window.JSF = $.JSFunction;
             else
                 return null;
         }
-    };
+    });
 
-    Array.prototype.any = function (clause) {
+    Array.fn("any", function (clause) {
         var len = this.length;
         for (var i = 0; i < len; i++) {
             if (clause(this[i], i)) { return true; }
         }
         return false;
-    };
-    Array.prototype.all = function (clause) {
+    });
+
+    Array.fn("all", function (clause) {
         var len = this.length;
         for (var i = 0; i < len; i++) {
             if (!clause(this[i], i)) { return false; }
         }
         return true;
-    };
+    });
 
-    Array.prototype.count = function (clause) {
+    Array.fn("count", function (clause) {
         if (clause == null)
             return this.length;
         else
             return this.where(clause).length;
-    };
+    });
 
-    Array.prototype.orderBy = function (clause) {
+    Array.fn("orderBy", function (clause) {
         var len = this.length, tempArray = new Array();
         for (var i = 0; i < len; i++) {
             tempArray[tempArray.length] = this[i];
@@ -517,8 +526,9 @@ window.JSF = $.JSFunction;
             return ((x < y) ? -1 : ((x > y) ? 1 : 0));
         });
         return tempArray;
-    };
-    Array.prototype.orderByDescending = function (clause) {
+    });
+
+    Array.fn("orderByDescending", function (clause) {
         var len = this.length, tempArray = new Array();
         for (var i = 0; i < len; i++) {
             tempArray[tempArray.length] = this[i];
@@ -529,8 +539,9 @@ window.JSF = $.JSFunction;
             return ((x < y) ? -1 : ((x > y) ? 1 : 0));
         });
         return tempArray;
-    };
-    Array.prototype.max = function (clause) {
+    });
+
+    Array.fn("max", function (clause) {
         var maxValue, len = this.length, item = this[0];
         if (len == 0)
             return null;
@@ -545,8 +556,8 @@ window.JSF = $.JSFunction;
             }
         }
         return item;
-    };
-    Array.prototype.min = function (clause) {
+    });
+    Array.fn("min", function (clause) {
         var minValue, len = this.length, item = this[0];
         if (len == 0)
             return null;
@@ -561,8 +572,9 @@ window.JSF = $.JSFunction;
             }
         }
         return item;
-    };
-    Array.prototype.sum = function (clause) {
+    });
+
+    Array.fn("sum", function (clause) {
         var sumValue = 0, len = this.length, item = this[0];
         for (var i = 0; i < len; i++) {
             var temp = clause(this[i], i);
@@ -573,13 +585,10 @@ window.JSF = $.JSFunction;
             sumValue += temp;
         }
         return sumValue;
-    };
-
-
-
+    });
 
     //复杂数组对象去重
-    Array.prototype.distinct = function (clause) {
+    Array.fn("distinct", function (clause) {
         var len = this.length;
         if (len < 2) return this;
         var dict = new Object(), retVal = new Array();
@@ -608,10 +617,10 @@ window.JSF = $.JSFunction;
         }
         dict = null;
         return retVal;
-    };
+    });
 
     //深度克隆
-    Array.prototype.clone = function () {
+    Array.fn("clone", function () {
         var _duckclone = function (obj) {
             var v = new Object();
             if (typeof obj == "object") {
@@ -637,7 +646,7 @@ window.JSF = $.JSFunction;
                 clonearr.push(item);
         }
         return clonearr;
-    };
+    });
 
 
 }(jQuery);

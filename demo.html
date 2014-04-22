@@ -89,7 +89,7 @@
                 + $.browser.mobile + "|version:" + $.browser.version + "|<br>" + navigator.userAgent);
 
             $("#getTime").click(function () {
-                var time = $.date("2012-1-1").addMinutes(10).addHours(1).addYears(-11);
+                var time = $.date("2012-1-1").addMinutes(10).addHours(1).addYears(-11).format("yyyy-MM-dd hh:mm:ss");
                 $("#date").html(time);
             });
             $("#date").html(
