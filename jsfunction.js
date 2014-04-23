@@ -10,7 +10,7 @@
  * Email    : babyisun@qq.com
  *
  * create   : 2014/03/29
- * update   : 2014/04/21
+ * update   : 2014/04/24
  *
  * message  : 如果发现任何bug、需要完善的代码，请发邮件或通过微信联系我，我很高兴与大家一起整理优雅的代码.
 **/
@@ -71,30 +71,36 @@ window.JSF = $.JSFunction;
 +function ($) {
     'use strict';
 
-    var browser = { webkit: false, /*opera: false,*/ msie: false, mozilla: false },
+    var browser = { webkit: false, /*opera: false,*/ msie: false, firefox: false },
         ua = window.navigator.userAgent.toLowerCase();
     if (!$.browser) {
         // Useragent RegExp
         var rwebkit = /(webkit)[ \/]([\w.]+)/,
         /*ropera = /(opera)(?:.*version)?[ \/]([\w.]+)/,*/
         rmsie = /(msie) ([\w.]+)/,
-        rmozilla = /(mozilla)(?:.*? rv:([\w.]+))?/,
+        rfirefox = /(firefox)\/([\d.]+)/,
+        //rmozilla = /(mozilla)(?:.*? rv:([\w.]+))?/,
+        ie11 = /(trident)(?:.*? rv:([\w.]+))?/,
         uaMatch = function () {
             var match = rwebkit.exec(ua) ||
                 /*ropera.exec(ua) ||*/
                 rmsie.exec(ua) ||
-                ua.indexOf("compatible") < 0 && rmozilla.exec(ua) ||
+                rfirefox.exec(ua) ||
+                //ua.indexOf("compatible") < 0 && rmozilla.exec(ua) ||
+                ie11.exec(ua) ||
                 [];
             return { browser: match[1] || "", version: match[2] || "0" };
         },
         browserMatch = uaMatch();
         if (browserMatch.browser) {
             //对ie11做出的修正
-            if (browserMatch.browser == "mozilla" && (!!window.ActiveXObject || "ActiveXObject" in window)) {
-                browser["msie"] = true;
-            }
-            else
-                browser[browserMatch.browser] = true;
+            if (browserMatch.browser == "trident")
+                browserMatch.browser = "msie";
+            //if (browserMatch.browser == "mozilla" && (!!window.ActiveXObject || "ActiveXObject" in window)) {
+            //    browser["msie"] = true;
+            //}
+            //else
+            browser[browserMatch.browser] = true;
             browser.version = browserMatch.version;
         }
     }
