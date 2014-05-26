@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>bootstrap常用组件-北北整理</title>
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="doc/docs.min.css" rel="stylesheet" />
+    <link href="highlight/highlight.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="bs-docs-section">
+            <div class="page-header">
+                <h1>标准化组件</h1>
+            </div>
+            <p class="lead">关于bootstrap网站中对css有了比较详尽的文档，但是有一些常用组件却没有给出demo，在这里做出补充</p>
+
+            <h4>按钮和文本框</h4>
+            <p>常见组合</p>
+            <div class="bs-example">
+                <p class="input-group input-group-sm col-sm-2">
+                    <span class="input-group-addon">&yen;</span>
+                    <input type="text" class="form-control" />
+                </p>
+                <p class="input-group col-sm-2">
+                    <span class="input-group-addon">
+                        <input type="checkbox" /></span>
+                    <input type="text" class="form-control" />
+                </p>
+                <p class="input-group input-group-sm col-sm-2">
+                    <input type="text" class="form-control" value="2014-04-28" /><span class="input-group-addon">周一</span>
+                </p>
+                <p class="input-group input-group-sm col-sm-3">
+                    <input type="text" class="form-control" /><span class="input-group-btn">
+                        <button class="btn btn-default"><i class="glyphicon glyphicon-search"></i>搜索</button></span>
+                </p>
+                <div class="input-group input-group-sm col-sm-3">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" data-toggle="dropdown">请选择 <span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown">
+                            <li><a>身份证</a></li>
+                            <li><a>护照</a></li>
+                            <li><a>军官证</a></li>
+                            <li class="divider"></li>
+                            <li><a>其它</a></li>
+                        </ul>
+                    </div>
+                    <input type="text" class="form-control" />
+                </div>
+            </div>
+            <div class="highlight">
+                <pre><code>&lt;p class="input-group input-group-sm col-sm-2"&gt;
+    &lt;span class="input-group-addon"&gt;&amp;yen;&lt;/span&gt;
+    &lt;input type="text" class="form-control" /&gt;
+&lt;/p&gt;
+&lt;p class="input-group col-sm-2"&gt;
+    &lt;span class="input-group-addon"&gt;
+        &lt;input type="checkbox" /&gt;&lt;/span&gt;
+    &lt;input type="text" class="form-control" /&gt;
+&lt;/p&gt;
+&lt;p class="input-group input-group-sm col-sm-2"&gt;
+    &lt;input type="text" class="form-control" value="2014-04-28" /&gt;&lt;span class="input-group-addon"&gt;周一&lt;/span&gt;
+&lt;/p&gt;
+&lt;p class="input-group input-group-sm col-sm-3"&gt;
+    &lt;input type="text" class="form-control" /&gt;&lt;span class="input-group-btn"&gt;
+        &lt;button class="btn btn-default"&gt;&lt;i class="glyphicon glyphicon-search"&gt;&lt;/i&gt;搜索&lt;/button&gt;&lt;/span&gt;
+&lt;/p&gt;
+&lt;div class="input-group input-group-sm col-sm-3"&gt;
+    &lt;div class="input-group-btn"&gt;
+        &lt;button class="btn btn-default" data-toggle="dropdown"&gt;请选择 &lt;span class="caret"&gt;&lt;/span&gt;&lt;/button&gt;
+        &lt;ul class="dropdown-menu dropdown"&gt;
+            &lt;li&gt;&lt;a&gt;身份证&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a&gt;护照&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a&gt;军官证&lt;/a&gt;&lt;/li&gt;
+            &lt;li class="divider"&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a&gt;其它&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;input type="text" class="form-control" /&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+        </div>
+        <script src="script/jquery.min.js"></script>
+        <script src="bootstrap/js/bootstrap.js"></script>
+        <script src="highlight/highlight.pack.js"></script>
+        <script>
+            $(function () {
+                try {
+                    hljs.initHighlightingOnLoad();
+                }
+                catch (e) {
+                    //throw new TypeError("hljs need ie8+");
+                }
+            });
+        </script>
+</body>
+</html>

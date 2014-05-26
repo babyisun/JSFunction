@@ -10,7 +10,7 @@
  * Email    : babyisun@qq.com
  *
  * create   : 2014/03/29
- * update   : 2014/04/24
+ * update   : 2014/05/27
  *
  * message  : 如果发现任何bug、需要完善的代码，请发邮件或通过微信联系我，我很高兴与大家一起整理优雅的代码.
 **/
@@ -275,6 +275,45 @@ window.JSF = $.JSFunction;
         diffType = diffType || "day";
         return parseInt((endTime.getTime() - startTime.getTime()) / parseInt(timet[diffType]));
     };
+    //倒计时
+    $.countDown = function (opt) { //# 倒计时
+        var option = {
+            second: 0                       //倒计时的秒数
+            , startTime: $.date()	        //当前时间, ，2013/02/01 18:30:30
+			, endTime: 0			        //截止时间 ，2013/02/01 18:30:30
+			, interval: 1			        //间隔回调时间，秒
+            , started: function () { }      //开始回调
+			, timed: function (times) { }   //每次回调
+			, finaled: function () { }      //完成后回调
+        }, opts = {}
+		, timer = null;
+        opts = $.extend(option, opt);
+        if (opts.second) {
+            opts.startTime = $.date();
+            opts.endTime = $.date().addSeconds(opts.second);
+        }
+        timer = setInterval(loop, opts.interval * 1e3);
+        //if (opts.started)
+        opts.started();
+        // 循环
+        function loop() {
+            var ts = opts.endTime - opts.startTime //计算剩余的毫秒数
+				, dd = parseInt(ts / 8.64e7)	//计算剩余的天数
+				, hh = parseInt(ts / 3.6e7 % 24)//计算剩余的小时数
+				, mm = parseInt(ts / 6e4 % 60)//计算剩余的分钟数
+				, ss = parseInt(ts / 1e3 % 60)//计算剩余的秒数
+            , times = { day: dd, hours: hh, minutes: mm, seconds: ss };
+            //当前时间递减
+            opts.startTime = opts.startTime.addSeconds(opts.interval);
+            //if (opt.timed)
+            opts.timed(times);
+            if (ts <= 0) {
+                clearInterval(timer);
+                //if (opts.finaled)
+                opts.finaled();
+            }
+        }
+    }
 }(jQuery);
 
 /*String*/
@@ -657,6 +696,123 @@ window.JSF = $.JSFunction;
 
 }(jQuery);
 
+/*Valid*/
++function ($) {
+    'use strict';
+
+    var valid = {
+        test: function (rule, obj) {
+            var _valid = { v: true, tip: "" }, _r = regExp[rule];
+            if (_r) {
+                var _regex = _r.regex,
+                    _fn = _r.fn;
+                if (_fn) {
+                    var type = (typeof obj === "object" ? "jqfn" : "fn");
+                    _valid.v = _fn[type](obj);
+                }
+                if (_valid.v && _regex) {
+                    _valid.v = _regex.test(obj);
+                }
+                _valid.tip = _r.tip;
+            }
+            return _valid;
+        },
+        form: function () {
+
+        }
+
+    }
+
+    var regExp = {
+        required: {
+            fn: {
+                fn: function (o) {
+                    return !!o;
+                },
+                jqfn: function () {
+
+                }
+            },
+            regex: "",
+            tip: "不能为空"
+        },
+        size: {
+            fn: function (o) {
+
+            },
+            regex: "",
+            tip: "请输入{0}到{1}个字符"
+        },
+        pwd: {
+            regex: "",
+            tip: "请设置登录密码"
+        },
+        reset: {
+            regex: "",
+            tip: "两次输入不一致，请重新输入"
+        },
+        tel: {
+            regex: /^(0[0-9]{2,3}\-)?([2-9][0-9]{6,7})+(\-[0-9]{1,4})?$/,
+            tip: "请输入有效的电话号码，如：010-59862221"
+        },
+        mobile: {
+            regex: /(^0?[1][3458][0-9]{9}$)/,
+            tip: "请输入有效的手机号码"
+        },
+        email: {
+            regex: /^[a-zA-Z0-9_\.\-]+\@([a-zA-Z0-9\-]+\.)+[a-zA-Z0-9]{2,4}$/,
+            tip: "请输入有效的邮件地址"
+        },
+        mobileemail: {
+            regex: /(^0?[1][3458][0-9]{9}$)|(^[a-zA-Z0-9_\.\-]+\@([a-zA-Z0-9\-]+\.)+[a-zA-Z0-9]{2,4}$)/,
+            tip: "请输入有效的手机或邮箱"
+        },
+        date: {
+            regex: /^((([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0?[13578]|1[02])-(0?[1-9]|[12][0-9]|3[01]))|((0?[469]|11)-(0?[1-9]|[12][0-9]|30))|(0?2-(0?[1-9]|[1][0-9]|2[0-8]))))|((([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00))-0?2-29))$/,
+            tip: "请输入一个有效日期，如：2008-08-08"
+        },
+        ip: {
+            regex: /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/,
+            tip: "请输入有效的IP"
+        },
+        chinese: {
+            regex: /^[\u4e00-\u9fa5]+$/,
+            tip: "请输入中文"
+        },
+        url: {
+            regex: "/^[a-zA-z]:\\/\\/[^s]$/",
+            tip: "请输入有效的网址"
+        },
+        zipcode: {
+            regex: /^\d{6}$/,
+            tip: "请输入有效的邮政编码"
+        },
+        qq: {
+            regex: /^[1-9]\d{4,11}$/,
+            tip: "请输入有效的QQ号码"
+        },
+        idcard: {
+            regex: /^(\d{18,18}|\d{15,15}|\d{17,17}x)$/,
+            tip: "请输入有效身份证"
+        },
+        number: {
+            regex: /^[0-9]+$/,
+            tip: "请输入数字"
+        },
+        letter: {
+            regex: /^[a-zA-Z]+$/,
+            tip: "请输入英文字母"
+        },
+        word: {
+            regex: /^[0-9a-zA-Z]+$/,
+            tip: "请输入英文字母和数字"
+        }
+    }
+
+    window.JSF.valid = $.valid = valid;
+}(jQuery);
+
+
 /*Url*/
 +function ($) {
     'use strict';
@@ -676,6 +832,22 @@ window.JSF = $.JSFunction;
                 args[argname] = value;
             }
             return args;
+        },
+        addFav: function (url, title, error) { //#加入收藏夹
+            if (!url)
+                url = window.location.href;
+            if (!title)
+                title = document.title;
+            try {
+                window.external.addFavorite(url, title);
+            } catch (e) {
+                try {
+                    window.sidebar.addPanel(title, url, '');
+                } catch (e) {
+                    if (error)
+                        error(e);
+                }
+            }
         },
         parse: function (url) { //# 解析URL
             var a = document.createElement('a');
@@ -697,13 +869,13 @@ window.JSF = $.JSFunction;
         open: function (url) {
             var linkObj = $("#open_instead_Link");
             if (!linkObj.length) {
-                //linkObj = $("<a id='open_instead_Link' href='javascript:;' target='_blank' onClick='window.open(this.href); return false;' ></a> ").appendTo("body");
-                linkObj = $("<form id='open_instead_Link' action='this.href' target='_blank'></form> ").appendTo("body");
+                linkObj = $("<a id='open_instead_Link' href='javascript:;' target='_blank' onClick='window.open(this.href); return false;' ></a> ").appendTo("body");
+                //linkObj = $("<form id='open_instead_Link' action='this.href' target='_blank'></form> ").appendTo("body");
             }
-            //linkObj.attr("href", url).trigger('click');
-            $("body").one("mouseover", function () {
-                linkObj.attr("action", url).submit();
-            });
+            linkObj.attr("href", url).trigger('click');
+            //$("body").one("mouseover", function () {
+            //    linkObj.attr("action", url).submit();
+            //});
         }
     }
 

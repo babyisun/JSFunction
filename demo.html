@@ -15,13 +15,14 @@
     </style>
     <!--<script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>-->
     <script src="script/jquery.min.js"></script>
-    <script src="jsfunction.min.js"></script>
+    <script src="jsfunction.js"></script>
     <!--<script src="jsfunction.min.js"></script>-->
 </head>
 <body>
     <div id="llq"></div>
     <div id="date"></div>
     <button id="getTime">Time</button>
+    <button id="daojishi">发送</button>
     <div id="string"></div>
     <input type="text" id="HTMLEncode" />
     <input type="text" id="HTMLDecode" />
@@ -67,9 +68,20 @@
         </div>
     </form>
     <div id="test"></div>
+    <input id="regexp" type="text" /><span id="regextip"></span>
     <script>
         $(function () {
             $("input").placeholder({ "font-size": "18px", "color": "#000" });
+
+            //$.valid.constructor();
+
+            $("#regexp").keyup(function () {
+                var v = $.valid.test("required", this.value);
+                if (!v.v)
+                    $("#regextip").html(v.tip);
+                else
+                    $("#regextip").html("");
+            });
             //alert($.JSFunction.version);
             //alert(JSF.author);
             //document.domain = "itbbb.com";
@@ -89,7 +101,7 @@
                 + $.browser.mobile + "|version:" + $.browser.version + "|<br>" + navigator.userAgent);
 
             $("#getTime").click(function () {
-                var time = $.date("2012-1-1").addMinutes(10).addHours(1).addYears(-11).format("yyyy-MM-dd hh:mm:ss");
+                var time = $.date("2012-1-1").addMinutes(10).addHours(1).addYears(-11).addSeconds(10).format("yyyy-MM-dd hh:mm:ss");
                 $("#date").html(time);
             });
             $("#date").html(
@@ -186,6 +198,26 @@
         var args = $.url.getArgs();
         var hash = $.url.parse();
 
+        var djs = $("#daojishi");
+        var _fdjs = function () {
+            $.countDown({
+                //second: 3,
+                nowTime: $.date("2014-6-1 10:00:00"),
+                endTime: $.date("2014-6-1 10:00:05"),
+                started: function () {
+                    djs.attr("disabled", "disabled");
+                },
+                timed: function (times) {
+                    djs.html("重新发送(" + times.seconds + ")");
+                },
+                finaled: function () {
+                    djs.html("重新发送").removeAttr("disabled");
+                }
+            });
+        }
+        djs.click(function () {
+            _fdjs();
+        });
 
         //$.url.open("http://www.baidu.com");
 
