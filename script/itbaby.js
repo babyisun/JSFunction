@@ -24,7 +24,7 @@ $(function () {
                         djs.html("重新发送(" + times.seconds + ")");
                     },
                     finaled: function () {
-                        djs.removeAttr("disabled");
+                        djs.html("重新发送").removeAttr("disabled");
                     }
                 });
             };
