@@ -45,6 +45,29 @@ $(function () {
         //    });
         //}
     };
+    var Event = function () {
+        //调用hljs
+        try {
+            hljs.initHighlightingOnLoad();
+        }
+        catch (e) {
+            //throw new TypeError("hljs need ie8+");
+        }
+
+        //返回顶部
+        var gotop = $("#gotop");
+        
+        $(window).bind("scroll", function () {
+            var _this = $(this), st = _this.scrollTop();
+            if (st > 500)
+                gotop.show();
+            else
+                gotop.hide();
+        });
+        gotop.click(function () {
+            $('html,body').animate({ scrollTop: 0 }, 500);
+        });
+    };
 
     //执行哪些Demo
     var DemoInit = function () {
@@ -55,11 +78,5 @@ $(function () {
 
     DemoInit();
 
-    //调用hljs
-    try {
-        hljs.initHighlightingOnLoad();
-    }
-    catch (e) {
-        //throw new TypeError("hljs need ie8+");
-    }
+    Event();
 });
