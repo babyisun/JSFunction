@@ -700,56 +700,38 @@ window.JSF = $.JSFunction;
 +function ($) {
     'use strict';
 
-    var valid = {
-        test: function (rule, obj) {
-            var _valid = { v: true, tip: "" }, _r = regExp[rule];
-            if (_r) {
-                var _regex = _r.regex,
-                    _fn = _r.fn;
-                if (_fn) {
-                    var type = (typeof obj === "object" ? "jqfn" : "fn");
-                    _valid.v = _fn[type](obj);
-                }
-                if (_valid.v && _regex) {
-                    _valid.v = _regex.test(obj);
-                }
-                _valid.tip = _r.tip;
-            }
-            return _valid;
-        },
-        form: function () {
-
-        }
-
-    }
+    //var valid = {
+    //    test: function (rule, obj) {
+    //        var _valid = { v: true, tip: "" }, _r = regExp[rule];
+    //        if (_r) {
+    //            var _regex = _r.regex,
+    //                _fn = _r.fn;
+    //            if (_fn) {
+    //                var type = (typeof obj === "object" ? "jqfn" : "fn");
+    //                _valid.v = _fn[type](obj);
+    //            }
+    //            if (_valid.v && _regex) {
+    //                _valid.v = _regex.test(obj);
+    //            }
+    //            _valid.tip = _r.tip;
+    //        }
+    //        return _valid;
+    //    }
+    //}
 
     var regExp = {
-        required: {
-            fn: {
-                fn: function (o) {
-                    return !!o;
-                },
-                jqfn: function () {
-
+        init: function () {
+            for (var o in this) {
+                if (o == "init") continue;
+                var _this = this[o];
+                _this.test = function (content) {
+                    return _this.regex.test(content);
                 }
-            },
-            regex: "",
-            tip: "不能为空"
+            }
         },
-        size: {
-            fn: function (o) {
-
-            },
-            regex: "",
-            tip: "请输入{0}到{1}个字符"
-        },
-        pwd: {
-            regex: "",
-            tip: "请设置登录密码"
-        },
-        reset: {
-            regex: "",
-            tip: "两次输入不一致，请重新输入"
+        required: {
+            regex: /^[ ]+$/,
+            tip: "请输入内容"
         },
         tel: {
             regex: /^(0[0-9]{2,3}\-)?([2-9][0-9]{6,7})+(\-[0-9]{1,4})?$/,
@@ -808,8 +790,8 @@ window.JSF = $.JSFunction;
             tip: "请输入英文字母和数字"
         }
     }
-
-    window.JSF.valid = $.valid = valid;
+    regExp.init();
+    window.JSF.regExp = $.regExp = regExp;
 }(jQuery);
 
 

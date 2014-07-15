@@ -76,11 +76,12 @@
             //$.valid.constructor();
 
             $("#regexp").keyup(function () {
-                var v = $.valid.test("required", this.value);
-                if (!v.v)
-                    $("#regextip").html(v.tip);
-                else
-                    $("#regextip").html("");
+                $("#regextip").html($.regExp.required.test(this.value));
+                //var v = $.valid.test("required", this.value);
+                //if (!v.v)
+                //    $("#regextip").html(v.tip);
+                //else
+                //    $("#regextip").html("");
             });
             //alert($.JSFunction.version);
             //alert(JSF.author);

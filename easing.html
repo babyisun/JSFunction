@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>jQuery easing动画演示|IT-北北报|www.itbbb.com</title>
+    <style>
+        #btns {
+            border: 2px dotted #ccc;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 10px;
+        }
+
+        .easing {
+            width: 150px;
+            height: 30px;
+            line-height: 30px;
+            padding: 5px 0;
+            margin: 0;
+            background: red;
+            color: white;
+            text-align: center;
+            display: block;
+        }
+
+        .close {
+            float: right;
+            font-size: 12px;
+            line-height: 1;
+            color: #000;
+            text-shadow: 0 1px 0 #fff;
+            cursor: pointer;
+        }
+
+        .btn {
+            color: #fff;
+            background-color: #ed9c28;
+            border-color: #d58512;
+            display: inline-block;
+            margin-bottom: 0;
+            font-weight: 400;
+            text-align: center;
+            vertical-align: middle;
+            cursor: pointer;
+            background-image: none;
+            border: 1px solid transparent;
+            white-space: nowrap;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            border-radius: 4px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <a href="http://www.itbbb.com/" target="_blank">本Demo由北北制作，点击学习更多内容</a>
+        <a href="script/jquery.easing.1.3.js" target="_blank">jQuery easing下载</a>
+        <a href="http://www.itbbb.com/jsfunction/jsfunction.html#easing" target="_blank">Javascript常用函数库</a>
+    </div>
+    <h3>jQuery easing效果演示</h3>
+    <div id="btns"></div>
+    <div class="center">
+        <button class="btn" id="go">走你</button>
+        <button class="btn" id="reset">清空</button>
+    </div>
+    <div id="divs"></div>
+    <script src="script/jquery.min.js"></script>
+    <script src="script/jquery.easing.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var arr = ['swing', 'easeInQuad', 'easeOutQuad', 'easeInOutQuad', 'easeInCubic', 'easeOutCubic', 'easeInOutCubic', 'easeInQuart', 'easeOutQuart', 'easeInOutQuart', 'easeInQuint', 'easeOutQuint', 'easeInOutQuint', 'easeInSine', 'easeOutSine', 'easeInOutSine', 'easeInExpo', 'easeOutExpo', 'easeInOutExpo', 'easeInCirc', 'easeOutCirc', 'easeInOutCirc', 'easeInElastic', 'easeOutElastic', 'easeInOutElastic', 'easeInBack', 'easeOutBack', 'easeInOutBack', 'easeInBounce', 'easeOutBounce', 'easeInOutBounce'],
+            div = '<div class="easing" easing="{1}">{0}<span class="close">×</span></div>', btn = '<button class="easing-btn">{0}</button>'
+            len = arr.length,
+            _btns = '', _divs = '',
+            domdivs = $("#divs");
+
+            for (var i = 0; i < len; i++) {
+                _btns += btn.replace("{0}", arr[i]);
+            }
+            $("#btns").append(_btns);
+
+            $(".easing-btn").click(function () {
+                var _this = $(this),xg=_this.html(),
+                    _jqdiv = $(div.replace("{0}", xg).replace("{1}", xg));
+                domdivs.append(_jqdiv);
+                _jqdiv.click(function () {
+
+                });
+            });
+
+            domdivs.on("click", ".close", function () {
+                var _this = $(this), _div = _this.parent();
+                _div.remove();
+            });
+
+            $("#go").click(function () {
+                if (!domdivs.html().length)
+                    alert("先选择要执行的效果");
+                var _top = 190;
+                $('.easing').each(function () {
+                    var _this = $(this), _easing = _this.attr("easing");
+                    _this.css({ position: "absolute", margin: 0, top: _top += 50 });
+                    _this.animate({ 'left': 1000 }, { queue: false, duration: 2000, easing: _easing });
+                });
+
+            });
+
+            $("#reset").click(function () {
+                domdivs.html("");
+            });
+        });
+    </script>
+    <div style="display: none;">
+        <script type="text/javascript">
+            var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+            document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F665ed821ce0c947e5ccb95d1dbed69a8' type='text/javascript'%3E%3C/script%3E"));
+        </script>
+        <script src="http://s23.cnzz.com/stat.php?id=5816290&web_id=5816290" language="JavaScript"></script>
+        <script type="text/javascript"> (function (win, doc) { var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0]; if (!win.alimamatk_show) { s.charset = "gbk"; s.async = true; s.src = "http://a.alimama.cn/tkapi.js"; h.insertBefore(s, h.firstChild); }; var o = { pid: "mm_41996866_5614231_21104132",/*推广单元ID,用于区分不同的推广渠道*/ appkey: "",/*通过TOP平台申请的appkey,设置后引导成交会关联appkey*/ unid: ""/*自定义统计字段*/ }; win.alimamatk_onload = win.alimamatk_onload || []; win.alimamatk_onload.push(o); })(window, document);</script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1 @@
+﻿API文档请参见：http://www.itbbb.com/jsfunction/jsfunction.html#api
