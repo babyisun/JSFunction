@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -250,7 +250,129 @@ $.cookie.set("itbbb.com", "itbbb.com", "1", "day");</code></pre>
                     </div>
                 </div>
 
+                <!-- LocalData
+================================================== -->
+                <div class="bs-docs-section">
+                    <h1 id="localData" class="page-header">LocalData</h1>
+                    <p class="lead">本地化存储的相关方法，涉及到HTML5相关知识.</p>
+                    <p>localStorage与cookie的区别，cookie数据还有路径（path）的概念，可以限制cookie只属于某个路径下。存储大小限制也不同，cookie数据不能超过4k，同时因为每次http请求都会携带cookie，所以cookie只适合保存很小的数据，如会话标识。sessionStorage和localStorage 虽然也有存储大小的限制，但比cookie大得多，至少可以达到2.6M或更大。数据有效期不同，sessionStorage：仅在当前浏览器窗口关闭前有效，自然也就不可能持久保持；localStorage：始终有效，窗口或浏览器关闭也一直保存，因此用作持久数据；cookie只在设置的cookie过期时间之前一直有效，即使窗口或浏览器关闭。作用域不同，sessionStorage不在不同的浏览器窗口中共享，即使是同一个页面；localStorage 在所有同源窗口中都是共享的；cookie也是在所有同源窗口中都是共享的。Web Storage 支持事件通知机制，可以将数据更新的通知发送给监听者。</p>
+                    <h3 id="localData-set">set</h3>
+                    <p>设置localData</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>$.localData.set(name, value)</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>name</code>
+                                    </td>
+                                    <td>String</td>
+                                    <td>localData的名称</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>value</code>
+                                    </td>
+                                    <td>String</td>
+                                    <td>localData的值</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>1.设置键为itbbb,值为www.itbbb.com的localData.<br />
+                           2.输入你想存储的值,尝试刷新页面输入值依然存在:
+                            <input id="demo-setlocaldata" type="text">
+                            <input type="button" id="demo-clearlocaldata" value="清除">
+                        </p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>$.localData.set("itbbb", "www.itbbb.com");</code></pre>
+                    </div>
 
+                    <h3 id="localData-get">get</h3>
+                    <p>获取localData</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>$.localData.get(name)</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>name</code>
+                                    </td>
+                                    <td>String</td>
+                                    <td>要获取的localData名称</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>获取名为itbbb的localData.
+                        </p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>$.localData.get("itbbb");</code></pre>
+                    </div>
+
+                    <h3 id="localData-remove">remove</h3>
+                    <p>移除localData</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>$.localData.remove(name)</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>name</code>
+                                    </td>
+                                    <td>String</td>
+                                    <td>待删除的localData名称</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>删除名为itbbb的localData.</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>$.localData.remove("itbbb");</code></pre>
+                    </div>
+                    <h3 id="localData-removeAll">removeAll</h3>
+                    <p>删除所有localData</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>$.localData.removeAll(name)</h4>
+                    </div>
+                    
+                    <div class="bs-example">
+                        <p>删除所有localData.</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>$.localData.removeAll();</code></pre>
+                    </div>
+                </div>
 
                 <!-- browser
 ================================================== -->
@@ -1991,6 +2113,82 @@ if(args.a && args.a==1){
     callback();
 }</code></pre>
                     </div>
+
+                    <h3 id="url-addCss">addCss</h3>
+                    <p>在head中添加css</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>$.url.addCss(path)</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <!--<thead>
+                                <tr>
+                                    <th>名称</th>
+                                    <th>类型</th>
+                                    <th>描述</th>
+                                </tr>
+                            </thead>-->
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>path</code>
+                                    </td>
+                                    <td>String</td>
+                                    <td>待加载css文件的路径</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>加载itbbb.css</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>$.addCss("itbbb.css")</code></pre>
+                    </div>
+
+                    <h3 id="url-addJs">addJs</h3>
+                    <p>在head中添加js</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>$.url.addJs(path)</h4>
+                    </div>
+                    <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <!--<thead>
+                                <tr>
+                                    <th>名称</th>
+                                    <th>类型</th>
+                                    <th>描述</th>
+                                </tr>
+                            </thead>-->
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>path</code>
+                                    </td>
+                                    <td>String</td>
+                                    <td>待加载js文件的路径</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>加载itbbb.js</p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>$.addCss("itbbb.js")</code></pre>
+                    </div>
                     <!--<h3 id="url-addFav">addFav</h3>
                     <p>将网页添加到收藏夹</p>
                     <div class="bs-callout bs-callout-info">
@@ -2246,6 +2444,15 @@ $("input").placeholder({ "font-size": "18px", "color": "#ccc" });</code></pre>
                             </ul>
                         </li>
                         <li>
+                            <a href="#localData">LocalData</a>
+                            <ul class="nav">
+                                <li><a href="#localData-set">set</a></li>
+                                <li><a href="#localData-get">get</a></li>
+                                <li><a href="#localData-remove">remove</a></li>
+                                <li><a href="#localData-removeAll">removeAll</a></li>
+                            </ul>
+                        </li>
+                        <li>
                             <a href="#browser">Browser</a>
                             <ul class="nav">
                                 <li><a href="#browser-browser">browser</a></li>
@@ -2327,6 +2534,8 @@ $("input").placeholder({ "font-size": "18px", "color": "#ccc" });</code></pre>
                             <a href="#url">Url</a>
                             <ul class="nav">
                                 <li><a href="#url-getArgs">getArgs</a></li>
+                                <li><a href="#url-addCss">addCss</a></li>
+                                <li><a href="#url-addJs">addJs</a></li>
                                 <!--<li><a href="#url-addFav">addFav</a></li>
                                 <li><a href="#url-open">open</a></li>-->
                             </ul>
