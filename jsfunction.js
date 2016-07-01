@@ -1,21 +1,28 @@
-﻿/*
+/*
  * source   : jsfunction.js
  * Version  : beta 1.0
  * depends  : Jquery 1.4+
  * Download : http://www.itbbb.com/jsfunction/jsfunction.js
  *
- * Author   : baby
+ * Author   : North
  * Blog     : http://www.itbbb.com
  * Wechat   : ITbeibei
  * Email    : babyisun@qq.com
  *
  * create   : 2014/03/29
- * update   : 2014/05/27
+ * update   : 2016/05/08
  *
  * message  : 如果发现任何bug、需要完善的代码，请发邮件或通过微信联系我，我很高兴与大家一起整理优雅的代码.
-**/
-if (typeof jQuery === 'undefined') { throw new Error('JSFunction requires jQuery 1.4+') }
-$.extend({ JSFunction: { version: 1.0, author: "baby" } });
+ **/
+if (typeof jQuery === 'undefined') {
+    throw new Error('JSFunction requires jQuery 1.4+');
+}
+$.extend({
+    JSFunction: {
+        version: 1.0,
+        author: "baby"
+    }
+});
 window.JSF = $.JSFunction;
 /*Base*/
 +function ($) {
@@ -35,7 +42,8 @@ window.JSF = $.JSFunction;
             var cookieValue = "";
             var search = name + "=";
             if (document.cookie.length > 0) {
-                var offset = document.cookie.indexOf(search), end;
+                var offset = document.cookie.indexOf(search),
+                    end;
                 if (offset != -1) {
                     offset += search.length;
                     end = document.cookie.indexOf(";", offset);
@@ -47,7 +55,14 @@ window.JSF = $.JSFunction;
             return cookieValue;
         },
         set: function (name, value, time, timetype, domain) {
-            var expire = "", dm = "", timet = { day: 86400000, hour: 3600000, minute: 60000, seconds: 1000 };
+            var expire = "",
+                dm = "",
+                timet = {
+                    day: 86400000,
+                    hour: 3600000,
+                    minute: 60000,
+                    seconds: 1000
+                };
             if (time) {
                 if (!timetype) timetype = "hour";
                 expire = new Date((new Date()).getTime() + time * timet[timetype]);
@@ -66,32 +81,109 @@ window.JSF = $.JSFunction;
     window.JSF.cookie = $.cookie = cookie;
 
 }(jQuery);
+/*LocalData*/
++function ($) {
+    'use strict';
 
+    var localData = {
+        dataDom: null,
+        dataName: location.hostname ? location.hostname : 'localUserData',
+        Init: function () {
+            if (!this.dataDom) {
+                try {
+                    this.dataDom = document.createElement('input');
+                    this.dataDom.type = 'hidden';
+                    this.dataDom.style.display = "none";
+                    this.dataDom.addBehavior('#default#userData'); //userData的语法
+                    document.body.appendChild(this.dataDom);
+                    this.dataDom.expires = new Date($.date().addDays(365)).toUTCString(); //设定过期时间
+
+                    //加载userdata
+                    this.dataDom.load(this.dataName);
+                } catch (e) {
+                    console.log("当前环境无法使用,The system cannot be used.");
+                    return false;
+                }
+            }
+            return true;
+        },
+        get: function (name) {
+            if (window.localStorage) {
+                return window.localStorage.getItem(name);
+            } else {
+                if (this.Init()) {
+                    //this.dataDom.load(this.dataName);
+                    return this.dataDom.getAttribute(name);
+                }
+            }
+        },
+        set: function (name, value) {
+            if (window.localStorage) {
+                window.localStorage.setItem(name, value);
+            } else {
+                if (this.Init()) {
+                    //this.dataDom.load(this.dataName);
+                    this.dataDom.setAttribute(name, value);
+                    this.dataDom.save(this.dataName);
+                }
+            }
+        },
+        remove: function (name) {
+            if (window.localStorage) {
+                localStorage.removeItem(name);
+            } else {
+                if (this.Init()) {
+                    //this.dataDom.load(this.dataName);
+                    this.dataDom.removeAttribute(key);
+                    this.dataDom.save(this.dataName);
+                }
+            }
+        },
+        removeAll: function () {
+            if (window.localStorage) {
+                localStorage.clear();
+            } else {
+                if (this.dataDom) {
+                    $(this.dataDom).remove();
+                }
+            }
+        }
+    };
+
+    window.JSF.localData = $.localData = localData;
+}(jQuery);
 /*Browser*/
 +function ($) {
     'use strict';
 
-    var browser = { webkit: false, /*opera: false,*/ msie: false, firefox: false },
+    var browser = {
+            webkit: false,
+            /*opera: false,*/ msie: false,
+            firefox: false
+        },
         ua = window.navigator.userAgent.toLowerCase();
     if (!$.browser) {
         // Useragent RegExp
         var rwebkit = /(webkit)[ \/]([\w.]+)/,
         /*ropera = /(opera)(?:.*version)?[ \/]([\w.]+)/,*/
-        rmsie = /(msie) ([\w.]+)/,
-        rfirefox = /(firefox)\/([\d.]+)/,
+            rmsie = /(msie) ([\w.]+)/,
+            rfirefox = /(firefox)\/([\d.]+)/,
         //rmozilla = /(mozilla)(?:.*? rv:([\w.]+))?/,
-        ie11 = /(trident)(?:.*? rv:([\w.]+))?/,
-        uaMatch = function () {
-            var match = rwebkit.exec(ua) ||
-                /*ropera.exec(ua) ||*/
-                rmsie.exec(ua) ||
-                rfirefox.exec(ua) ||
-                //ua.indexOf("compatible") < 0 && rmozilla.exec(ua) ||
-                ie11.exec(ua) ||
-                [];
-            return { browser: match[1] || "", version: match[2] || "0" };
-        },
-        browserMatch = uaMatch();
+            ie11 = /(trident)(?:.*? rv:([\w.]+))?/,
+            uaMatch = function () {
+                var match = rwebkit.exec(ua) ||
+                    /*ropera.exec(ua) ||*/
+                    rmsie.exec(ua) ||
+                    rfirefox.exec(ua) ||
+                    //ua.indexOf("compatible") < 0 && rmozilla.exec(ua) ||
+                    ie11.exec(ua) ||
+                    [];
+                return {
+                    browser: match[1] || "",
+                    version: match[2] || "0"
+                };
+            },
+            browserMatch = uaMatch();
         if (browserMatch.browser) {
             //对ie11做出的修正
             if (browserMatch.browser == "trident")
@@ -103,38 +195,28 @@ window.JSF = $.JSFunction;
             browser[browserMatch.browser] = true;
             browser.version = browserMatch.version;
         }
-    }
-    else {
+    } else {
         browser = $.browser;
     }
 
     browser.ie6 = browser.msie && (browser.version == "6.0");
-    browser.mobile = ua.match(/ipad/i) == "ipad"
-         || ua.match(/iphone os/i) == "iphone os"
-         || ua.match(/midp/i) == "midp"
-         || ua.match(/rv:1.2.3.4/i) == "rv:1.2.3.4"
-         || ua.match(/ucweb/i) == "ucweb"
-         || ua.match(/android/i) == "android"
-         || ua.match(/windows ce/i) == "windows ce"
-         || ua.match(/windows mobile/i) == "windows mobile";
+    browser.mobile = ua.match(/ipad/i) == "ipad" || ua.match(/iphone os/i) == "iphone os" || ua.match(/midp/i) == "midp" || ua.match(/rv:1.2.3.4/i) == "rv:1.2.3.4" || ua.match(/ucweb/i) == "ucweb" || ua.match(/android/i) == "android" || ua.match(/windows ce/i) == "windows ce" || ua.match(/windows mobile/i) == "windows mobile";
 
     window.JSF.browser = $.browser = browser;
 }(jQuery);
-
 /*Date*/
 +function ($) {
     'use strict';
 
     //初始化时间
     $.date = function (date) {
-        return !date ? new Date() : new Date(date.replace(/-/g, "\/"));
+        return !date ? new Date() : typeof date == "string" ? new Date(date.replace(/-/g, "\/")) : new Date(date);
     };
     //格式化日期
     //$.date.Format("yyyy-MM-dd")
     //Date.prototype.format = function (fmt) {
     Date.fn("format", function (fmt) {
-        var o =
-        {
+        var o = {
             "M+": this.getMonth() + 1, //月份 
             "d+": this.getDate(), //日 
             "h+": this.getHours(), //小时 
@@ -170,7 +252,8 @@ window.JSF = $.JSFunction;
 
     //加天数
     Date.fn("addDays", function (d) {
-        return this.setDate(this.getDate() + d);
+        this.setDate(this.getDate() + d);
+        return this;
     });
 
     //加周数
@@ -204,12 +287,10 @@ window.JSF = $.JSFunction;
             var nums = ["日", "一", "二", "三", "四", "五", "六"];
             type = type || "周";
             return type + nums[i];
-        }
-        else if (type == "En") {
+        } else if (type == "En") {
             var ennmae = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
             return ennmae[i];
-        }
-        else if (type == "Short") {
+        } else if (type == "Short") {
             var enshortname = ["Sun.", "Mon.", "Tues.", "Wed.", "Thurs.", "Fri.", "Sat."];
             return enshortname[i];
         }
@@ -218,19 +299,18 @@ window.JSF = $.JSFunction;
     //获取周岁
     Date.fn("getAge", function () {
         var Age = 0,
-        now = $.date(),
-        birthYear = this.getFullYear(),
-        birthMonth = this.getMonth(),
-        birthDay = this.getDate(),
-        nowYear = now.getFullYear(),
-        nowMonth = now.getMonth(),
-        nowDay = now.getDate();
+            now = $.date(),
+            birthYear = this.getFullYear(),
+            birthMonth = this.getMonth(),
+            birthDay = this.getDate(),
+            nowYear = now.getFullYear(),
+            nowMonth = now.getMonth(),
+            nowDay = now.getDate();
 
         var ageDiff = nowYear - birthYear;
         if (ageDiff == 0) {
-            Age = 0;//同年 则为0岁
-        }
-        else {
+            Age = 0; //同年 则为0岁
+        } else {
             if (ageDiff > 0) {
                 var monthDiff = nowMonth - birthMonth;
                 if (monthDiff == 0) {
@@ -244,12 +324,11 @@ window.JSF = $.JSFunction;
                     else
                         Age = ageDiff;
                 }
-            }
-            else {
-                Age = "未出生";//返回-1 表示出生日期输入错误 晚于今天
+            } else {
+                Age = "未出生"; //返回-1 表示出生日期输入错误 晚于今天
             }
         }
-        return Age;//返回周岁年龄
+        return Age; //返回周岁年龄
     });
 
     //是否是闰年
@@ -267,7 +346,12 @@ window.JSF = $.JSFunction;
 
     //获取日期差
     $.diffDate = function (startTime, endTime, diffType) {
-        var timet = { day: 86400000, hour: 3600000, minute: 60000, seconds: 1000 };
+        var timet = {
+            day: 86400000,
+            hour: 3600000,
+            minute: 60000,
+            seconds: 1000
+        };
         if (typeof startTime == "string")
             startTime = $.date(startTime);
         if (typeof endTime == "string")
@@ -278,15 +362,25 @@ window.JSF = $.JSFunction;
     //倒计时
     $.countDown = function (opt) { //# 倒计时
         var option = {
-            second: 0                       //倒计时的秒数
-            , startTime: $.date()	        //当前时间, ，2013/02/01 18:30:30
-			, endTime: 0			        //截止时间 ，2013/02/01 18:30:30
-			, interval: 1			        //间隔回调时间，秒
-            , started: function () { }      //开始回调
-			, timed: function (times) { }   //每次回调
-			, finaled: function () { }      //完成后回调
-        }, opts = {}
-		, timer = null;
+                second: 0 //倒计时的秒数
+                ,
+                startTime: $.date() //当前时间, ，2013/02/01 18:30:30
+                ,
+                endTime: 0 //截止时间 ，2013/02/01 18:30:30
+                ,
+                interval: 1 //间隔回调时间，秒
+                ,
+                started: function () {
+                } //开始回调
+                ,
+                timed: function (times) {
+                } //每次回调
+                ,
+                finaled: function () {
+                } //完成后回调
+            },
+            opts = {},
+            timer = null;
         opts = $.extend(option, opt);
         if (opts.second) {
             opts.startTime = $.date();
@@ -298,11 +392,21 @@ window.JSF = $.JSFunction;
         // 循环
         function loop() {
             var ts = opts.endTime - opts.startTime //计算剩余的毫秒数
-				, dd = parseInt(ts / 8.64e7)	//计算剩余的天数
-				, hh = parseInt(ts / 3.6e7 % 24)//计算剩余的小时数
-				, mm = parseInt(ts / 6e4 % 60)//计算剩余的分钟数
-				, ss = parseInt(ts / 1e3 % 60)//计算剩余的秒数
-            , times = { day: dd, hours: hh, minutes: mm, seconds: ss };
+                ,
+                dd = parseInt(ts / 8.64e7) //计算剩余的天数
+                ,
+                hh = parseInt(ts / 3.6e7 % 24) //计算剩余的小时数
+                ,
+                mm = parseInt(ts / 6e4 % 60) //计算剩余的分钟数
+                ,
+                ss = parseInt(ts / 1e3 % 60) //计算剩余的秒数
+                ,
+                times = {
+                    day: dd,
+                    hours: hh,
+                    minutes: mm,
+                    seconds: ss
+                };
             //当前时间递减
             opts.startTime = opts.startTime.addSeconds(opts.interval);
             //if (opt.timed)
@@ -315,7 +419,6 @@ window.JSF = $.JSFunction;
         }
     }
 }(jQuery);
-
 /*String*/
 +function ($) {
     'use strict';
@@ -347,6 +450,23 @@ window.JSF = $.JSFunction;
         return d;
     });
 
+    //判断字符串是否是日期
+    String.fn("isDate", function () {
+        var r = this.match(/^(\d{1,4})(-|\/)(\d{1,2})\2(\d{1,2})$/);
+        if (r == null)
+            return false;
+        var d = new Date(r[1], r[3] - 1, r[4]);
+        return (d.getFullYear() == r[1] && (d.getMonth() + 1) == r[3] && d.getDate() == r[4]);
+    });
+    //日期比较
+    String.fn("compareDate", function (v2) {
+        if (!this.isDate() || !v2.isDate())
+            return false;
+        var d1 = new Date(this.replace(/-/g, "\/")),
+            d2 = new Date(v2.replace(/-/g, "\/"));
+        return (d1 > d2);
+    });
+
     // HTML编码 
     String.fn("htmlEncode", function () {
         var t = document.createElement("div");
@@ -365,7 +485,6 @@ window.JSF = $.JSFunction;
     });
 
 }(jQuery);
-
 /*Array*/
 +function ($) {
     'use strict';
@@ -472,14 +591,16 @@ window.JSF = $.JSFunction;
     });
 
     Array.fn("reverse", function () {
-        var retVal = new Array(), len = this.length;
+        var retVal = new Array(),
+            len = this.length;
         for (var i = len - 1; i > -1; i--)
             retVal[retVal.length] = this[i];
         return retVal;
     });
 
     Array.fn("skip", function (count) {
-        var len = this.length, newArray = new Array();
+        var len = this.length,
+            newArray = new Array();
         for (var i = count; i < len; i++) {
             if (i < len) {
                 newArray[newArray.length] = this[i];
@@ -489,7 +610,8 @@ window.JSF = $.JSFunction;
     });
 
     Array.fn("take", function (count) {
-        var len = this.length, newArray = new Array();
+        var len = this.length,
+            newArray = new Array();
         for (var i = 0; i < count; i++) {
             if (i < len) {
                 newArray[newArray.length] = this[i];
@@ -502,7 +624,8 @@ window.JSF = $.JSFunction;
     Array.fn("where", function (clause) {
         if (!clause)
             return this;
-        var len = this.length, newArray = new Array();
+        var len = this.length,
+            newArray = new Array();
         for (var i = 0; i < len; i++) {
             if (clause(this[i], i)) {
                 newArray[newArray.length] = this[i];
@@ -511,12 +634,34 @@ window.JSF = $.JSFunction;
         return newArray;
     });
 
+    Array.fn("joinKey", function (key) {
+        var len = this.length,
+            newArray = new Array();
+        if (key) {
+            for (var i = 0; i < len; i++) {
+                var item = this[i][key];
+                if (item) {
+                    newArray[newArray.length] = item;
+                }
+            }
+        }
+        return newArray;
+    });
+
+    Array.fn("removeByKey", function (key, arr) {
+        if (key && arr && arr.length) {
+            return this.where(function (item, index) {
+                return !arr.contains(item[key]);
+            });
+        }
+        return this;
+    });
+
     Array.fn("first", function (clause) {
         var len = this.length;
         if (clause != null) {
             return this.where(clause).first();
-        }
-        else {
+        } else {
             if (len > 0)
                 return this[0];
             else
@@ -528,8 +673,7 @@ window.JSF = $.JSFunction;
         var len = this.length;
         if (clause != null) {
             return this.where(clause).last();
-        }
-        else {
+        } else {
             if (len > 0)
                 return this[len - 1];
             else
@@ -540,7 +684,9 @@ window.JSF = $.JSFunction;
     Array.fn("any", function (clause) {
         var len = this.length;
         for (var i = 0; i < len; i++) {
-            if (clause(this[i], i)) { return true; }
+            if (clause(this[i], i)) {
+                return true;
+            }
         }
         return false;
     });
@@ -548,7 +694,9 @@ window.JSF = $.JSFunction;
     Array.fn("all", function (clause) {
         var len = this.length;
         for (var i = 0; i < len; i++) {
-            if (!clause(this[i], i)) { return false; }
+            if (!clause(this[i], i)) {
+                return false;
+            }
         }
         return true;
     });
@@ -561,7 +709,8 @@ window.JSF = $.JSFunction;
     });
 
     Array.fn("orderBy", function (clause) {
-        var len = this.length, tempArray = new Array();
+        var len = this.length,
+            tempArray = new Array();
         for (var i = 0; i < len; i++) {
             tempArray[tempArray.length] = this[i];
         }
@@ -574,7 +723,8 @@ window.JSF = $.JSFunction;
     });
 
     Array.fn("orderByDescending", function (clause) {
-        var len = this.length, tempArray = new Array();
+        var len = this.length,
+            tempArray = new Array();
         for (var i = 0; i < len; i++) {
             tempArray[tempArray.length] = this[i];
         }
@@ -587,7 +737,8 @@ window.JSF = $.JSFunction;
     });
 
     Array.fn("max", function (clause) {
-        var maxValue, len = this.length, item = this[0];
+        var maxValue, len = this.length,
+            item = this[0];
         if (len == 0)
             return null;
         if (len == 1)
@@ -603,7 +754,8 @@ window.JSF = $.JSFunction;
         return item;
     });
     Array.fn("min", function (clause) {
-        var minValue, len = this.length, item = this[0];
+        var minValue, len = this.length,
+            item = this[0];
         if (len == 0)
             return null;
         if (len == 1)
@@ -620,7 +772,9 @@ window.JSF = $.JSFunction;
     });
 
     Array.fn("sum", function (clause) {
-        var sumValue = 0, len = this.length, item = this[0];
+        var sumValue = 0,
+            len = this.length,
+            item = this[0];
         for (var i = 0; i < len; i++) {
             var temp = clause(this[i], i);
             if (/[^\d]/.test(temp)) {
@@ -636,7 +790,8 @@ window.JSF = $.JSFunction;
     Array.fn("distinct", function (clause) {
         var len = this.length;
         if (len < 2) return this;
-        var dict = new Object(), retVal = new Array();
+        var dict = new Object(),
+            retVal = new Array();
         //递归鸭子检测
         var _duckCheckObj = function (obj) {
             var v = "";
@@ -644,17 +799,21 @@ window.JSF = $.JSFunction;
                 for (var o in obj) {
                     if (typeof obj[o] == "object") {
                         v += _duckCheckObj(obj[o]);
+                    } else {
+                        v += o + obj[o];
                     }
-                    else { v += o + obj[o]; }
                 }
-            }
-            else
+            } else
                 v = obj;
             return v;
         };
-        if (!clause) clause = function (item) { return item; };
+        if (!clause) clause = function (item) {
+            return item;
+        };
         for (var i = 0; i < len; i++) {
-            var arrobj = this[i], arrkey = clause(arrobj), key = _duckCheckObj(arrkey);
+            var arrobj = this[i],
+                arrkey = clause(arrobj),
+                key = _duckCheckObj(arrkey);
             if (dict[key] == null) {
                 dict[key] = true;
                 retVal[retVal.length] = arrobj;
@@ -672,22 +831,22 @@ window.JSF = $.JSFunction;
                 for (var o in obj) {
                     if (typeof obj[o] == "object" && obj[o] != null) {
                         v[o] = _duckclone(obj[o]);
+                    } else {
+                        v[o] = obj[o];
                     }
-                    else { v[o] = obj[o]; }
                 }
-            }
-            else
+            } else
                 v = obj;
             return v;
         };
-        var clonearr = new Array(), len = this.length;
+        var clonearr = new Array(),
+            len = this.length;
         for (var i = 0; i < len; i++) {
             var item = this[i];
             if (typeof item == "object") {
                 item = _duckclone(item);
                 clonearr.push(item);
-            }
-            else
+            } else
                 clonearr.push(item);
         }
         return clonearr;
@@ -696,102 +855,107 @@ window.JSF = $.JSFunction;
 
 }(jQuery);
 
-/*Valid*/
+
+//Valid
 +function ($) {
     'use strict';
 
-    //var valid = {
-    //    test: function (rule, obj) {
-    //        var _valid = { v: true, tip: "" }, _r = regExp[rule];
-    //        if (_r) {
-    //            var _regex = _r.regex,
-    //                _fn = _r.fn;
-    //            if (_fn) {
-    //                var type = (typeof obj === "object" ? "jqfn" : "fn");
-    //                _valid.v = _fn[type](obj);
-    //            }
-    //            if (_valid.v && _regex) {
-    //                _valid.v = _regex.test(obj);
-    //            }
-    //            _valid.tip = _r.tip;
-    //        }
-    //        return _valid;
-    //    }
-    //}
-
     var regExp = {
+        //that: [],
         init: function () {
-            for (var o in this) {
-                if (o == "init") continue;
-                var _this = this[o];
-                _this.test = function (content) {
-                    return _this.regex.test(content);
-                }
+            this.addData({
+                key: "tel",
+                regex: /^(0[0-9]{2,3}\-)?([2-9][0-9]{6,7})+(\-[0-9]{1,4})?$/,
+                tip: "请输入有效的电话号码，如：010-59862221"
+            }, {
+                key: "mobile",
+                regex: /(^0?[1][34578][0-9]{9}$)/,
+                tip: "请输入有效的手机号码"
+            }, {
+                key: "email",
+                regex: /^[a-zA-Z0-9_\.\-]+\@([a-zA-Z0-9\-]+\.)+[a-zA-Z0-9]{2,4}$/,
+                tip: "请输入有效的邮件地址"
+            }, {
+                key: "mobileemail",
+                regex: /(^0?[1][3458][0-9]{9}$)|(^[a-zA-Z0-9_\.\-]+\@([a-zA-Z0-9\-]+\.)+[a-zA-Z0-9]{2,4}$)/,
+                tip: "请输入有效的手机或邮箱"
+            }, {
+                key: "date",
+                regex: /^((([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0?[13578]|1[02])-(0?[1-9]|[12][0-9]|3[01]))|((0?[469]|11)-(0?[1-9]|[12][0-9]|30))|(0?2-(0?[1-9]|[1][0-9]|2[0-8]))))|((([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00))-0?2-29))$/,
+                tip: "请输入一个有效日期，如：2008-08-08"
+            }, {
+                key: "ip",
+                regex: /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/,
+                tip: "请输入有效的IP"
+            }, {
+                key: "chinese",
+                regex: /^[\u4e00-\u9fa5]+$/,
+                tip: "请输入中文"
+            }, {
+                key: "url",
+                regex: "/^[a-zA-z]:\\/\\/[^s]$/",
+                tip: "请输入有效的网址"
+            }, {
+                key: "zipcode",
+                regex: /^\d{6}$/,
+                tip: "请输入有效的邮政编码"
+            }, {
+                key: "qq",
+                regex: /^[1-9]\d{4,11}$/,
+                tip: "请输入有效的QQ号码"
+            }, {
+                key: "idcard",
+                regex: /^(\d{18,18}|\d{15,15}|\d{17,17}x)$/,
+                tip: "请输入有效身份证"
+            }, {
+                key: "number",
+                regex: /^[0-9]+$/,
+                tip: "请输入数字"
+            }, {
+                key: "letter",
+                regex: /^[a-zA-Z]+$/,
+                tip: "请输入英文字母"
+            }, {
+                key: "word",
+                regex: /^[0-9a-zA-Z]+$/,
+                tip: "请输入英文字母和数字"
+            }, {
+                key: "required",
+                regex: {
+                    test: function (content, min, max) {
+                        if (content.length) {
+                            if (min)
+                                if (content.length < min)
+                                    return false;
+                            if (max)
+                                if (content.length > max)
+                                    return false;
+                        } else
+                            return false;
+                        return true;
+                    }
+                },
+                tip: "请输入内容"
+            });
+        },
+        _base: function (_args) {
+            this.reg = _args.regex;
+            this.tip = _args.tip;
+            this.test = _args.key != "required" ? function (val) {
+                return _args.regex.test(val);
+            } : function (val, min, max) {
+                return _args.regex.test(val, min, max);
+            };
+            return this;
+        },
+        addData: function () {
+            for (var i in arguments) {
+                this[arguments[i].key] = new this._base(arguments[i]);
             }
-        },
-        required: {
-            regex: /^[ ]+$/,
-            tip: "请输入内容"
-        },
-        tel: {
-            regex: /^(0[0-9]{2,3}\-)?([2-9][0-9]{6,7})+(\-[0-9]{1,4})?$/,
-            tip: "请输入有效的电话号码，如：010-59862221"
-        },
-        mobile: {
-            regex: /(^0?[1][3458][0-9]{9}$)/,
-            tip: "请输入有效的手机号码"
-        },
-        email: {
-            regex: /^[a-zA-Z0-9_\.\-]+\@([a-zA-Z0-9\-]+\.)+[a-zA-Z0-9]{2,4}$/,
-            tip: "请输入有效的邮件地址"
-        },
-        mobileemail: {
-            regex: /(^0?[1][3458][0-9]{9}$)|(^[a-zA-Z0-9_\.\-]+\@([a-zA-Z0-9\-]+\.)+[a-zA-Z0-9]{2,4}$)/,
-            tip: "请输入有效的手机或邮箱"
-        },
-        date: {
-            regex: /^((([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0?[13578]|1[02])-(0?[1-9]|[12][0-9]|3[01]))|((0?[469]|11)-(0?[1-9]|[12][0-9]|30))|(0?2-(0?[1-9]|[1][0-9]|2[0-8]))))|((([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00))-0?2-29))$/,
-            tip: "请输入一个有效日期，如：2008-08-08"
-        },
-        ip: {
-            regex: /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/,
-            tip: "请输入有效的IP"
-        },
-        chinese: {
-            regex: /^[\u4e00-\u9fa5]+$/,
-            tip: "请输入中文"
-        },
-        url: {
-            regex: "/^[a-zA-z]:\\/\\/[^s]$/",
-            tip: "请输入有效的网址"
-        },
-        zipcode: {
-            regex: /^\d{6}$/,
-            tip: "请输入有效的邮政编码"
-        },
-        qq: {
-            regex: /^[1-9]\d{4,11}$/,
-            tip: "请输入有效的QQ号码"
-        },
-        idcard: {
-            regex: /^(\d{18,18}|\d{15,15}|\d{17,17}x)$/,
-            tip: "请输入有效身份证"
-        },
-        number: {
-            regex: /^[0-9]+$/,
-            tip: "请输入数字"
-        },
-        letter: {
-            regex: /^[a-zA-Z]+$/,
-            tip: "请输入英文字母"
-        },
-        word: {
-            regex: /^[0-9a-zA-Z]+$/,
-            tip: "请输入英文字母和数字"
         }
     }
     regExp.init();
-    window.JSF.regExp = $.regExp = regExp;
+    $.regExp = regExp;
 }(jQuery);
 
 
@@ -802,14 +966,14 @@ window.JSF = $.JSFunction;
     var url = {
         getArgs: function () {
             var args = new Object(),
-            query = location.search.substring(1),
-            pairs = query.split("&"),
-            plength = pairs.length;
+                query = location.search.substring(1),
+                pairs = query.split("&"),
+                plength = pairs.length;
             for (var i = 0; i < plength; i++) {
                 var pos = pairs[i].indexOf('=');
                 if (pos == -1) continue;
                 var argname = pairs[i].substring(0, pos),
-                value = pairs[i].substring(pos + 1);
+                    value = pairs[i].substring(pos + 1);
                 value = decodeURIComponent(value);
                 args[argname] = value;
             }
@@ -836,17 +1000,38 @@ window.JSF = $.JSFunction;
             url = url || document.location.href;
             a.href = url;
             return {
-                source: url
-                , protocol: a.protocol.replace(':', '')
-                , host: a.hostname
-                , port: a.port
-                , query: a.search
-                , file: (a.pathname.match(/([^\/?#]+)$/i) || [, ''])[1]
-                , hash: a.hash.replace('#', '')
-                , path: a.pathname.replace(/^([^\/])/, '/$1')
-                , relative: (a.href.match(/tps?:\/\/[^\/]+(.+)/) || [, ''])[1]
-                , segments: a.pathname.replace(/^\//, '').split('/')
+                source: url,
+                protocol: a.protocol.replace(':', ''),
+                host: a.hostname,
+                port: a.port,
+                query: a.search,
+                file: (a.pathname.match(/([^\/?#]+)$/i) || [, ''])[1],
+                hash: a.hash.replace('#', ''),
+                path: a.pathname.replace(/^([^\/])/, '/$1'),
+                relative: (a.href.match(/tps?:\/\/[^\/]+(.+)/) || [, ''])[1],
+                segments: a.pathname.replace(/^\//, '').split('/')
             };
+        },
+        addCss: function (path) {
+            if (!path || path.length === 0) {
+                throw new Error('argument "path" is required !');
+            }
+            var head = document.getElementsByTagName('head')[0];
+            var link = document.createElement('link');
+            link.href = path;
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            head.appendChild(link);
+        },
+        addJs: function (path) {
+            if (!path || path.length === 0) {
+                throw new Error('argument "path" is required !');
+            }
+            var head = document.getElementsByTagName('head')[0];
+            var script = document.createElement('script');
+            script.src = path;
+            script.type = 'text/javascript';
+            head.appendChild(script);
         },
         open: function (url) {
             var linkObj = $("#open_instead_Link");
@@ -863,7 +1048,6 @@ window.JSF = $.JSFunction;
 
     window.JSF.url = $.url = url;
 }(jQuery);
-
 /*Jquery fn*/
 +function ($) {
     'use strict';
@@ -874,15 +1058,12 @@ window.JSF = $.JSFunction;
      */
     $.fn.getFormData = function () {
         var inputs = $(this).find("input,select,textarea");
-        var data = "", txt, type, name, read, i = 0;
+        var data = "",
+            txt, type, name, read, i = 0;
         for (; i < inputs.length; i++) {
             type = inputs[i].type;
             read = inputs[i].getAttribute("data-read");
-            if (type == "button"
-                        || type == "submit"
-                        || type == "image"
-                        || type == "reset"
-                        || read == "ignore")
+            if (type == "button" || type == "submit" || type == "image" || type == "reset" || read == "ignore")
                 continue;
             name = inputs[i].name;
             if (data != "" && data.substring(data.length - 1, data.length) != "&") {
@@ -896,14 +1077,13 @@ window.JSF = $.JSFunction;
                         cval = $("input:radio[name='" + name + "']:checked").val();
                         data += name + "=" + (cval ? encodeURIComponent(cval) : "");
                     } else {
-                        $("[name=" + name + "]:checked").each(function () {
+                        $("[name='" + name + "']:checked").each(function () {
                             cval += $(this).val() + ",";
                         });
                         data += name + "=" + (cval ? cval.substring(0, cval.length - 1) : "");
                     }
                 }
-            }
-            else {
+            } else {
                 data += name + "=" + encodeURIComponent(inputs[i].value);
             }
         }
@@ -911,23 +1091,30 @@ window.JSF = $.JSFunction;
     };
 
     /**
-    * 让ie支持placeholder
-    * $("input").placeholder();
-    */
+     * 让ie支持placeholder
+     * $("input").placeholder();
+     */
     $.fn.placeholder = function (options) {
         if ("placeholder" in document.createElement("input")) {
             return this; //如果原生支持placeholder属性，则返回对象本身
         } else {
             var _fun = function (placeholder, val) {
                 if (val)
-                    placeholder.css({ display: 'none' });
+                    placeholder.css({
+                        display: 'none'
+                    });
                 else
-                    placeholder.css({ display: 'inline' });
+                    placeholder.css({
+                        display: 'inline'
+                    });
             };
             return this.each(function () {
-                var input = $(this), text = input.attr('placeholder');
+                var input = $(this),
+                    text = input.attr('placeholder');
                 if (!text) return;
-                var pdl = 5, height = input.outerHeight(), width = input.outerWidth(),
+                var pdl = 5,
+                    height = input.outerHeight(),
+                    width = input.outerWidth(),
                     placeholder = $('<span class="jsf_placeholder">' + text + '</span>'),
                     pdlcss = input.css('padding-left');
                 if (pdlcss) {
