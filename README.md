@@ -1,6 +1,7 @@
 JSFunction
 ==========
 http://www.itbbb.com/jsfunction/jsfunction.html
+
 这是一个Javascript常用函数库,我正在努力完善它
 希望它对你能有所帮助
 相信代码是优雅的舞者--北北
