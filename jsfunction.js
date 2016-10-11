@@ -10,7 +10,7 @@
  * Email    : babyisun@qq.com
  *
  * create   : 2014/03/29
- * update   : 2016/05/08
+ * update   : 2016/10/10
  *
  * message  : 如果发现任何bug、需要完善的代码，请发邮件或通过微信联系我，我很高兴与大家一起整理优雅的代码.
  **/
@@ -296,6 +296,17 @@ window.JSF = $.JSFunction;
         }
     });
 
+    //获取周的7日数组
+    Date.fn("currentWeek", function () {
+        var now = this.getDay(), arr = [];
+        now = now == 0 ? 7 : now;
+        var sunday = this.addDays(-now);
+        for (var i = 1; i <= 7; i++) {
+            arr.add(new Date(sunday.addDays(1)));
+        }
+        return arr;
+    });
+
     //获取周岁
     Date.fn("getAge", function () {
         var Age = 0,
@@ -423,7 +434,7 @@ window.JSF = $.JSFunction;
 +function ($) {
     'use strict';
 
-    //替换所有
+    //替换所有 *当涉及到正则关键字的时候需要特殊处理，如替换“\\|”
     String.fn("replaceAll", function (s1, s2) {
         return this.replace(new RegExp(s1, "gm"), s2);
     });
@@ -465,6 +476,23 @@ window.JSF = $.JSFunction;
         var d1 = new Date(this.replace(/-/g, "\/")),
             d2 = new Date(v2.replace(/-/g, "\/"));
         return (d1 > d2);
+    });
+
+    //格式化数字字符串
+    String.fn("formatNumber", function () {
+        if (!isNaN(+this) && typeof +this == "number") {
+            var temp = this.split("."), len = temp[0].length,
+                num = temp[0].split("").reverse(), s1 = [];
+            for (var i = 0; i < len; i++) {
+                s1.push(num[i]);
+                if (i % 3 == 2 && i != len - 1)
+                    s1.push(",");
+            }
+            temp[0] = s1.reverse().join("");
+            return temp.join(".");
+        } else {
+            return this;
+        }
     });
 
     // HTML编码 
