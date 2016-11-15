@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -60,7 +60,7 @@
                     <a data-type="3" data-tmpl="220x150" data-tmplid="28" data-rd="2" data-style="2" data-border="1" href="#"></a>
                 </div>
             </div>
-            <div><a href="http://www.itbbb.com/jsfunction/jsfunction.rar" target="_blank" class="btn btn-warning">下载JSFunction</a></div>
+            <!-- <div><a href="http://www.itbbb.com/jsfunction/jsfunction.rar" target="_blank" class="btn btn-warning">下载JSFunction</a></div> -->
         </div>
     </div>
 
@@ -1585,12 +1585,90 @@ arr.insert(1,item);</code></pre>
                         <p>将数组中第一个元素出队</p>
                         <p>
                             <label>结果：</label>temp为"ZhangSan"
-                       
                         </p>
                     </div>
                     <div class="highlight">
                         <pre><code>var arr=["ZhangSan","LiSi"];
 var temp=arr.dequeue();</code></pre>
+                    </div>
+
+                    <h3 id="array-joinKey">joinKey</h3>
+                    <p>将数组对象中的某一个key组成一个新的一维数组</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Array.joinKey(key)</h4>
+                    </div>
+                     <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>key</code>
+                                    </td>
+                                    <td>String</td>
+                                    <td>传入数组对象中存在的一个键值,如:"id"</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>组合数组中的id成为新的数组</p>
+                        <p>
+                            <label>结果：</label>ids为[1,2,3]
+                        </p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>var arr=[{id:1,name:"zhangshan"},{id:2,name:"lisi"},{id:3,name:"wangwu"}];
+var ids=arr.joinKey("id");
+//结果:[1,2,3]</code></pre>
+                    </div>
+
+                    <h3 id="array-removeByKey">removeByKey</h3>
+                    <p>将数组对象中的某一个key作为删除的主键，删除传入的所有值对应的对象</p>
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Array.removeByKey(key,array)</h4>
+                    </div>
+                     <p>参数</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <colgroup>
+                                <col class="col-xs-1">
+                                <col class="col-xs-1">
+                                <col class="col-xs-7">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>key</code>
+                                    </td>
+                                    <td>String</td>
+                                    <td>传入数组对象中存在的一个键值,如:"id"</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>array</code>
+                                    </td>
+                                    <td>Array</td>
+                                    <td>传入键值所对应的待删除数据,如:[1,3]</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bs-example">
+                        <p>删除数组中的id成为1、3的对象</p>
+                        <p>
+                            <label>结果：</label>arr=[{id:2,name:"lisi"}]
+                        </p>
+                    </div>
+                    <div class="highlight">
+                        <pre><code>var arr=[{id:1,name:"zhangshan"},{id:2,name:"lisi"},{id:3,name:"wangwu"}];
+var ids=arr.removeByKey("id",[1,3]);
+//结果:[{id:2,name:"lisi"}]</code></pre>
                     </div>
 
                     <h3 id="array-remove">remove</h3>
@@ -2503,6 +2581,8 @@ $("input").placeholder({ "font-size": "18px", "color": "#ccc" });</code></pre>
                                 <li><a href="#array-indexOf">indexOf</a></li>
                                 <li><a href="#array-insert">insert</a></li>
                                 <li><a href="#array-dequeue">dequeue</a></li>
+                                <li><a href="#array-joinKey">joinKey</a></li>
+                                <li><a href="#array-removeByKey">removeByKey</a></li>
                                 <li><a href="#array-remove">remove</a></li>
                                 <li><a href="#array-removeAt">removeAt</a></li>
                                 <li><a href="#array-reverse">reverse</a></li>
