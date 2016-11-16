@@ -2,6 +2,18 @@ body {
     position: relative;
 }
 
+.content{
+    margin-top: 50px;
+}
+.content:target{
+    padding-top:100px;
+}
+
+.mobile-bar{
+    overflow: auto;
+    padding-bottom: 200px;
+    /*max-height: 500px;*/
+}
 .table code {
     font-size: 13px;
     font-weight: 400;
@@ -449,6 +461,12 @@ body {
     position: static;
 }
 
+@media (max-width:768px) {
+    .bs-docs-sidebar {
+        display: none;
+    }
+}
+
 @media (min-width:768px) {
     .bs-docs-sidebar {
         padding-left: 20px;
@@ -538,7 +556,7 @@ body {
 
     .bs-docs-sidebar.affix {
         position: fixed;
-        top: 20px;
+        top: 70px;
     }
 
     .bs-docs-sidebar.affix-bottom {
@@ -1537,4 +1555,37 @@ h1[id] {
 
 .css .o, .css .o + .nt, .css .nt + .nt {
     color: #999;
+}
+
+.gotop {
+    position: fixed;
+    cursor: pointer;
+    border-radius: 45px;
+    right: 15px;
+    bottom: 15px;
+    width: 30px;
+    height: 30px;
+    background-color: rgba(0, 0, 0, .25);
+    *background-color: gray;
+    text-align: center;
+    line-height: 28px;
+}
+.gotop:hover {
+    background-color: rgba(0, 0, 0, .5);
+    -moz-transition: all 0.5s linear;
+    -o-transition: all 0.5s linear;
+    -webkit-transition: all 0.5s linear;
+    transition: all 0.5s linear;
+    color: #fff;
+}
+.gotop span {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+}
+
+code{
+    white-space: normal; 
+    overflow: auto;
 }

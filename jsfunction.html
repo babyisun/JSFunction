@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta name="description" content="JSFunction是对Javascript常用函数的整理总结,它依赖于jQuery,其中包含了我们经常用到,但是jQuery又没有提供的方法。">
     <meta name="keywords" content="javascript常用函数库,JSFunction,$.cookie,$.browser,date扩展,string扩展,JS,JavaScript,bootstrap,frontend,web development">
     <meta name="author" content="北北(baby)">
@@ -11,7 +11,7 @@
     <title>JSFunction | ITbbb.com</title>
     <!--<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">-->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="doc/docs.min.css" rel="stylesheet" />
+    <link href="doc/docs.css" rel="stylesheet" />
     <link href="highlight/highlight.min.css" rel="stylesheet" />
     <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="http://itbbb.com/favicon.ico" />
@@ -20,12 +20,161 @@
 </head>
 <body>
     <!-- Docs master nav -->
-    <header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+    <header class="navbar navbar-static-top bs-docs-nav navbar-fixed-top" id="top" role="banner">
         <div class="container">
             <div class="navbar-header">
                 <a href="http://www.itbbb.com/jsfunction/jsfunction.html" class="navbar-brand">JSFunction</a>
+                 <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                    <span class="sr-only">导航</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                 </button>
             </div>
-            <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+             <nav class="collapse bs-navbar-collapse" role="navigation">
+             <!--<div class="navbar-collapse bs-example-js-navbar-collapse collapse in" aria-expanded="true">
+              <ul class="nav navbar-nav">
+                <li class="dropdown">
+                  <a id="drop1" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="https://twitter.com/fat">Action</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="https://twitter.com/fat">Another action</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="https://twitter.com/fat">Something else here</a></li>
+                    <li role="presentation" class="divider"></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="https://twitter.com/fat">Separated link</a></li>
+                  </ul>
+                </li>
+              </ul>
+             </div>-->
+                 <ul class="nav navbar-nav mobile-bar">
+                        <li>
+                            <a href="#overview" data-target="#" id="drop1" class="dropdown-toggle" data-toggle="dropdown">开始征程</a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                                <li><a href="#overview-download">下载</a></li>
+                                <li><a href="#overview-Reference">引用方法</a></li>
+                                <li><a href="#overview-Focus">关注更新</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#cookie" data-target="#" id="drop2" class="dropdown-toggle" data-toggle="dropdown">Cookie</a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="drop2">
+                                <li><a href="#cookie-set">set</a></li>
+                                <li><a href="#cookie-get">get</a></li>
+                                <li><a href="#cookie-remove">remove</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#localData" data-target="#" id="drop3" class="dropdown-toggle" data-toggle="dropdown">LocalData</a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
+                                <li><a href="#localData-set">set</a></li>
+                                <li><a href="#localData-get">get</a></li>
+                                <li><a href="#localData-remove">remove</a></li>
+                                <li><a href="#localData-removeAll">removeAll</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#browser" data-target="#" id="drop4" class="dropdown-toggle" data-toggle="dropdown">Browser</a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="drop4">
+                                <li><a href="#browser-browser">browser</a></li>
+                                <li><a href="#browser-version">version</a></li>
+                                <li><a href="#browser-mobile">mobile</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#date" data-target="#" id="drop5" class="dropdown-toggle" data-toggle="dropdown">Date</a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="drop5">
+                                <li><a href="#date-now">date</a></li>
+                                <li><a href="#date-format">format</a></li>
+                                <li><a href="#date-addMseconds">addMseconds</a></li>
+                                <li><a href="#date-addSeconds">addSeconds</a></li>
+                                <li><a href="#date-addMinutes">addMinutes</a></li>
+                                <li><a href="#date-addHours">addHours</a></li>
+                                <li><a href="#date-addDays">addDays</a></li>
+                                <li><a href="#date-addWeeks">addWeeks</a></li>
+                                <li><a href="#date-addMonths">addMonths</a></li>
+                                <li><a href="#date-addYears">addYears</a></li>
+                                <li><a href="#date-getWeek">getWeek</a></li>
+                                <li><a href="#date-getAge">getAge</a></li>
+                                <li><a href="#date-isLeapYear">isLeapYear</a></li>
+                                <li><a href="#date-daysInMonth">daysInMonth</a></li>
+                                <li><a href="#date-diffDate">diffDate</a></li>
+                                <li><a href="#date-countDown">countDown</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#string" data-target="#" id="drop6" class="dropdown-toggle" data-toggle="dropdown">String</a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="drop6">
+                                <li><a href="#string-replaceAll">replaceAll</a></li>
+                                <li><a href="#string-trim">trim</a></li>
+                                <li><a href="#string-left">left</a></li>
+                                <li><a href="#string-right">right</a></li>
+                                <li><a href="#string-toDate">toDate</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#array" data-target="#" id="drop7" class="dropdown-toggle" data-toggle="dropdown">Array</a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="drop7">
+                                <li><a href="#array-add">add</a></li>
+                                <li><a href="#array-addRange">addRange</a></li>
+                                <li><a href="#array-forEach">forEach</a></li>
+                                <li><a href="#array-clear">clear</a></li>
+                                <li><a href="#array-isEmpty">isEmpty</a></li>
+                                <li><a href="#array-contains">contains</a></li>
+                                <li><a href="#array-indexOf">indexOf</a></li>
+                                <li><a href="#array-insert">insert</a></li>
+                                <li><a href="#array-dequeue">dequeue</a></li>
+                                <li><a href="#array-joinKey">joinKey</a></li>
+                                <li><a href="#array-removeByKey">removeByKey</a></li>
+                                <li><a href="#array-remove">remove</a></li>
+                                <li><a href="#array-removeAt">removeAt</a></li>
+                                <li><a href="#array-reverse">reverse</a></li>
+                                <li><a href="#array-clone">clone</a></li>
+                                <li><a href="#array-skip">skip</a></li>
+                                <li><a href="#array-take">take</a></li>
+
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#arrayLinq" data-target="#" id="drop8" class="dropdown-toggle" data-toggle="dropdown">ArrayLinq</a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="drop8">
+                                <li><a href="#arrayLinq-clause">clause</a></li>
+                                <li><a href="#arrayLinq-where">where</a></li>
+                                <li><a href="#arrayLinq-first">first</a></li>
+                                <li><a href="#arrayLinq-last">last</a></li>
+                                <li><a href="#arrayLinq-any">any</a></li>
+                                <li><a href="#arrayLinq-all">all</a></li>
+                                <li><a href="#arrayLinq-count">count</a></li>
+                                <li><a href="#arrayLinq-orderBy">orderBy</a></li>
+                                <li><a href="#arrayLinq-orderByDescending">orderByDescending</a></li>
+                                <li><a href="#arrayLinq-max">max</a></li>
+                                <li><a href="#arrayLinq-min">min</a></li>
+                                <li><a href="#arrayLinq-sum">sum</a></li>
+                                <li><a href="#arrayLinq-distinct">distinct</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#url" data-target="#" id="drop9" class="dropdown-toggle" data-toggle="dropdown">Url</a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="drop9">
+                                <li><a href="#url-getArgs">getArgs</a></li>
+                                <li><a href="#url-addCss">addCss</a></li>
+                                <li><a href="#url-addJs">addJs</a></li>
+                                <!--<li><a href="#url-addFav">addFav</a></li>
+                                <li><a href="#url-open">open</a></li>-->
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#fn" data-target="#" id="drop10" class="dropdown-toggle" data-toggle="dropdown">$.fn</a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="drop10">
+                                <li><a href="#fn-getFormData">getFormData</a></li>
+                                <li><a href="#fn-placeholder">placeholder</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+            </nav>
+            <nav class="collapse navbar-collapse" role="navigation">
                 <ul class="nav navbar-nav">
                     <li>
                         <a href="http://www.itbbb.com" target="_blank">ITbbb.com</a>
@@ -47,7 +196,7 @@
             </nav>
         </div>
     </header>
-
+    <div class="content">
     <!-- Docs page layout -->
     <div class="bs-docs-header" id="content">
         <div class="container">
@@ -68,8 +217,7 @@
 
         <div class="row">
             <div class="col-md-9" role="main">
-                <!-- Global JSFunction settings
-================================================== -->
+                <!-- Global JSFunction settings================================================== -->
                 <div class="bs-docs-section">
                     <h1 id="overview" class="page-header">开始征程</h1>
 
@@ -2503,7 +2651,7 @@ $("input").placeholder({ "font-size": "18px", "color": "#ccc" });</code></pre>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="bs-docs-sidebar hidden-print" role="complementary">
+                <div class="bs-docs-sidebar hidden-print" role="complementary" data-offset-top="180">
                     <ul class="nav bs-docs-sidenav">
                         <li>
                             <a href="#overview">开始征程</a>
@@ -2633,8 +2781,7 @@ $("input").placeholder({ "font-size": "18px", "color": "#ccc" });</code></pre>
                                 <li><a href="#top"></a></li>
                             </ul>
                         </li>
-                        <!-- next待添加
-================================================== -->
+                        <!-- next待添加================================================== -->
                     </ul>
                     <!--<a class="back-to-top" href="#top">Back to top</a>-->
                 </div>
@@ -2662,6 +2809,7 @@ $("input").placeholder({ "font-size": "18px", "color": "#ccc" });</code></pre>
             </div>
         </div>
     </footer>
+    </div>
     <div id="gotop" class="gotop" style="display:none;">
         <span class="glyphicon glyphicon-chevron-up"></span>
     </div>
@@ -2676,7 +2824,7 @@ $("input").placeholder({ "font-size": "18px", "color": "#ccc" });</code></pre>
     <![endif]-->
     <script src="highlight/highlight.pack.js"></script>
     <script src="doc/docs.min.js"></script>
-    <script src="script/itbaby.js"></script>
+    <script src="script/itbaby.min.js"></script>
 
     <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1590067" charset="utf-8"></script>
     <div style="display: none;">

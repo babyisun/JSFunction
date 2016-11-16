@@ -67,6 +67,46 @@ $(function () {
         gotop.click(function () {
             $('html,body').animate({ scrollTop: 0 }, 500);
         });
+
+        var affixChanged = function(offsetTop){
+            if(location.hash){
+                 var target = $(location.hash),_offsetTop=50||offsetTop;
+                 if(target.length){
+                     var top = target.offset().top-_offsetTop;
+                     if(top > 0){
+                       $('html,body').animate({scrollTop:top}, 500);
+                     }
+                 }
+            }
+        }
+
+        var mobileBar=$(".mobile-bar");
+        mobileBar.height($(window).height()-100);
+        mobileBar.find("li li").click(function(){
+            $(".bs-navbar-collapse").collapse("hide");
+        });
+
+        //移动端下拉菜单
+        // if($.browser.mobile){
+        //     var mobileBar=$(".mobile-bar");
+        //     mobileBar.height($(window).height()-100);
+        //     mobileBar.find("li>ul>li>a").click(function(){
+        //         affixChanged();
+        //     });
+        //     mobileBar.find("li li").click(function(){
+        //         $(".bs-navbar-collapse").collapse("hide");
+        //     });
+        // }else{
+        //     var pcBar=$(".bs-docs-sidenav");
+        //     pcBar.find("li a").click(function(){
+        //         affixChanged();
+        //     });
+        // }
+
+        window.onhashchange = function (e) {
+            affixChanged();
+        };
+        
     };
 
     //执行哪些Demo
