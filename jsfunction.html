@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="description" content="JSFunction是对Javascript常用函数的整理总结,它依赖于jQuery,其中包含了我们经常用到,但是jQuery又没有提供的方法。">
     <meta name="keywords" content="javascript常用函数库,JSFunction,$.cookie,$.browser,date扩展,string扩展,JS,JavaScript,bootstrap,frontend,web development">
     <meta name="author" content="北北(baby)">
@@ -11,7 +13,7 @@
     <title>JSFunction | ITbbb.com</title>
     <!--<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">-->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="doc/docs.css" rel="stylesheet" />
+    <link href="doc/docs.min.css" rel="stylesheet" />
     <link href="highlight/highlight.min.css" rel="stylesheet" />
     <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="http://itbbb.com/favicon.ico" />
@@ -32,23 +34,6 @@
                  </button>
             </div>
              <nav class="collapse bs-navbar-collapse" role="navigation">
-             <!--<div class="navbar-collapse bs-example-js-navbar-collapse collapse in" aria-expanded="true">
-              <ul class="nav navbar-nav">
-                <li class="dropdown">
-                  <a id="drop1" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown
-                    <span class="caret"></span>
-                  </a>
-                  <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="https://twitter.com/fat">Action</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="https://twitter.com/fat">Another action</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="https://twitter.com/fat">Something else here</a></li>
-                    <li role="presentation" class="divider"></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="https://twitter.com/fat">Separated link</a></li>
-                  </ul>
-                </li>
-              </ul>
-             </div>-->
                  <ul class="nav navbar-nav mobile-bar">
                         <li>
                             <a href="#overview" data-target="#" id="drop1" class="dropdown-toggle" data-toggle="dropdown">开始征程</a>
@@ -172,7 +157,7 @@
                                 <li><a href="#fn-placeholder">placeholder</a></li>
                             </ul>
                         </li>
-                    </ul>
+                </ul>
             </nav>
             <nav class="collapse navbar-collapse" role="navigation">
                 <ul class="nav navbar-nav">
@@ -204,11 +189,12 @@
             <p>这是一个Javascript常用函数库,我正在努力完善它</p>
             <p>希望它对你能有所帮助</p>
             <p>相信代码是优雅的舞者--北北</p>
+            <!--
             <div id="carbonads-container">
                 <div class="carbonad">
                     <a data-type="3" data-tmpl="220x150" data-tmplid="28" data-rd="2" data-style="2" data-border="1" href="#"></a>
                 </div>
-            </div>
+            </div>-->
             <!-- <div><a href="http://www.itbbb.com/jsfunction/jsfunction.rar" target="_blank" class="btn btn-warning">下载JSFunction</a></div> -->
         </div>
     </div>
@@ -2833,7 +2819,7 @@ $("input").placeholder({ "font-size": "18px", "color": "#ccc" });</code></pre>
             document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F665ed821ce0c947e5ccb95d1dbed69a8' type='text/javascript'%3E%3C/script%3E"));
         </script>
         <script src="http://s23.cnzz.com/stat.php?id=5816290&web_id=5816290" language="JavaScript"></script>
-        <script type="text/javascript"> (function (win, doc) { var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0]; if (!win.alimamatk_show) { s.charset = "gbk"; s.async = true; s.src = "http://a.alimama.cn/tkapi.js"; h.insertBefore(s, h.firstChild); }; var o = { pid: "mm_41996866_5614231_21104132",/*推广单元ID,用于区分不同的推广渠道*/ appkey: "",/*通过TOP平台申请的appkey,设置后引导成交会关联appkey*/ unid: ""/*自定义统计字段*/ }; win.alimamatk_onload = win.alimamatk_onload || []; win.alimamatk_onload.push(o); })(window, document);</script>
+        <!--<script type="text/javascript"> (function (win, doc) { var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0]; if (!win.alimamatk_show) { s.charset = "gbk"; s.async = true; s.src = "http://a.alimama.cn/tkapi.js"; h.insertBefore(s, h.firstChild); }; var o = { pid: "mm_41996866_5614231_21104132",/*推广单元ID,用于区分不同的推广渠道*/ appkey: "",/*通过TOP平台申请的appkey,设置后引导成交会关联appkey*/ unid: ""/*自定义统计字段*/ }; win.alimamatk_onload = win.alimamatk_onload || []; win.alimamatk_onload.push(o); })(window, document);</script>-->
     </div>
 </body>
 </html>
