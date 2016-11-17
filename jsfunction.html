@@ -153,7 +153,7 @@
                         <li>
                             <a href="#fn" data-target="#" id="drop10" class="dropdown-toggle" data-toggle="dropdown">$.fn</a>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="drop10">
-                                <li><a href="#fn-getFormData">getFormData</a></li>
+                                <!-- <li><a href="#fn-getFormData">getFormData</a></li> -->
                                 <li><a href="#fn-placeholder">placeholder</a></li>
                             </ul>
                         </li>
@@ -1392,7 +1392,8 @@ djs.click(function () {
                     <p>
                         如:
                        
-                        <code>arr.add(item).add(item).addRange(range).insert(0, { Name: "itbbb.com" });</code>
+                        <code>arr.add(item).add(item).addRange(range)
+.insert(0, { Name: "itbbb.com" });</code>
                     </p>
                     <h3 id="array-add">add</h3>
                     <p>给数组添加一个元素，返回添加后的数组</p>
@@ -2361,7 +2362,7 @@ if(args.a && args.a==1){
                         <p>加载itbbb.css</p>
                     </div>
                     <div class="highlight">
-                        <pre><code>$.addCss("itbbb.css")</code></pre>
+                        <pre><code>$.url.addCss("http://www.itbbb.com/itbbb.css")</code></pre>
                     </div>
 
                     <h3 id="url-addJs">addJs</h3>
@@ -2377,13 +2378,6 @@ if(args.a && args.a==1){
                                 <col class="col-xs-1">
                                 <col class="col-xs-7">
                             </colgroup>
-                            <!--<thead>
-                                <tr>
-                                    <th>名称</th>
-                                    <th>类型</th>
-                                    <th>描述</th>
-                                </tr>
-                            </thead>-->
                             <tbody>
                                 <tr>
                                     <td>
@@ -2399,7 +2393,7 @@ if(args.a && args.a==1){
                         <p>加载itbbb.js</p>
                     </div>
                     <div class="highlight">
-                        <pre><code>$.addCss("itbbb.js")</code></pre>
+                        <pre><code>$.url.addJs("http://www.itbbb.com/itbbb.js")</code></pre>
                     </div>
                     <!--<h3 id="url-addFav">addFav</h3>
                     <p>将网页添加到收藏夹</p>
@@ -2449,8 +2443,7 @@ $.url.addFav("www.itbbb.com","IT北北报");</code></pre>
                     </div>-->
                 </div>
 
-                <!-- $.fn
-================================================== -->
+                <!-- $.fn================================================== -->
                 <div class="bs-docs-section">
                     <h1 id="fn" class="page-header">$.fn</h1>
                     <p class="lead">常用的Jquery扩展函数</p>
@@ -2480,6 +2473,7 @@ $.url.addFav("www.itbbb.com","IT北北报");</code></pre>
                             </tbody>
                         </table>
                     </div>
+                    <!--
                     <h3 id="fn-getFormData">getFormData</h3>
                     <p>把表单转换为data字符串对象,用于AJAX提交</p>
                     <div class="bs-callout bs-callout-info">
@@ -2560,7 +2554,7 @@ var formdata = $("#myform").getFormData();
 /*结果*/
 "name=JSFunction&count=1&domain=itbbb.com&site=www.itbbb.com&othername=ITbbb"</code></pre>
                     </div>
-
+-->
                     <h3 id="fn-placeholder">placeholder</h3>
                     <p>让IE支持placeholder,placeholder是text的水印文字,但是IE9以下的浏览器不支持这个属性</p>
                     <div class="bs-callout bs-callout-info">
@@ -2757,7 +2751,7 @@ $("input").placeholder({ "font-size": "18px", "color": "#ccc" });</code></pre>
                         <li>
                             <a href="#fn">$.fn</a>
                             <ul class="nav">
-                                <li><a href="#fn-getFormData">getFormData</a></li>
+                                <!--<li><a href="#fn-getFormData">getFormData</a></li>-->
                                 <li><a href="#fn-placeholder">placeholder</a></li>
                             </ul>
                         </li>
