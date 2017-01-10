@@ -10,7 +10,7 @@
  * Email    : babyisun@qq.com
  *
  * create   : 2014/03/29
- * update   : 2016/11/06
+ * update   : 2017/1/10
  *
  * message  : 如果发现任何bug、需要完善的代码，请发邮件或通过微信联系我，我很高兴与大家一起整理优雅的代码.
  **/
@@ -217,13 +217,13 @@ window.JSF = $.JSFunction;
     //Date.prototype.format = function (fmt) {
     Date.fn("format", function (fmt) {
         var o = {
-            "M+": this.getMonth() + 1, //月份 
-            "d+": this.getDate(), //日 
-            "h+": this.getHours(), //小时 
-            "m+": this.getMinutes(), //分 
-            "s+": this.getSeconds(), //秒 
-            "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
-            "S": this.getMilliseconds() //毫秒 
+            "M+": this.getMonth() + 1, //月份
+            "d+": this.getDate(), //日
+            "h+": this.getHours(), //小时
+            "m+": this.getMinutes(), //分
+            "s+": this.getSeconds(), //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds() //毫秒
         };
         if (/(y+)/.test(fmt))
             fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
@@ -294,6 +294,17 @@ window.JSF = $.JSFunction;
             var enshortname = ["Sun.", "Mon.", "Tues.", "Wed.", "Thurs.", "Fri.", "Sat."];
             return enshortname[i];
         }
+    });
+
+    //获取周的7日数组
+    Date.fn("currentWeek", function () {
+        var now = this.getDay(), arr = [];
+        now = now == 0 ? 7 : now;
+        var sunday = this.addDays(-now);
+        for (var i = 1; i <= 7; i++) {
+            arr.add(new Date(sunday.addDays(1)));
+        }
+        return arr;
     });
 
     //获取周岁
@@ -423,7 +434,7 @@ window.JSF = $.JSFunction;
 +function ($) {
     'use strict';
 
-    //替换所有
+    //替换所有 *当涉及到正则关键字的时候需要特殊处理，如替换“\\|”
     String.fn("replaceAll", function (s1, s2) {
         return this.replace(new RegExp(s1, "gm"), s2);
     });
@@ -433,11 +444,11 @@ window.JSF = $.JSFunction;
         return this.replace(/(^\s*)|(\s*$)/g, "");
     });
 
-    // 从左截取指定长度的字串 
+    // 从左截取指定长度的字串
     String.fn("left", function (n) {
         return this.slice(0, n);
     });
-    // 从右截取指定长度的字串 
+    // 从右截取指定长度的字串
     String.fn("right", function (n) {
         return this.slice(this.length - n);
     });
@@ -467,7 +478,24 @@ window.JSF = $.JSFunction;
         return (d1 > d2);
     });
 
-    // HTML编码 
+    //格式化数字字符串
+    String.fn("formatNumber", function () {
+        if (!isNaN(+this) && typeof +this == "number") {
+            var temp = this.split("."), len = temp[0].length,
+                num = temp[0].split("").reverse(), s1 = [];
+            for (var i = 0; i < len; i++) {
+                s1.push(num[i]);
+                if (i % 3 == 2 && i != len - 1)
+                    s1.push(",");
+            }
+            temp[0] = s1.reverse().join("");
+            return temp.join(".");
+        } else {
+            return this;
+        }
+    });
+
+    // HTML编码
     String.fn("htmlEncode", function () {
         var t = document.createElement("div");
         (t.textContent != null) ? (t.textContent = this) : (t.innerText = this);
@@ -1023,7 +1051,7 @@ window.JSF = $.JSFunction;
             link.type = 'text/css';
             head.appendChild(link);
         },
-        addJs: function (path) {
+        addJs: function (path, callback) {
             if (!path || path.length === 0) {
                 throw new Error('argument "path" is required !');
             }
@@ -1032,6 +1060,21 @@ window.JSF = $.JSFunction;
             script.src = path;
             script.type = 'text/javascript';
             head.appendChild(script);
+            if (!callback)
+                return;
+            if (!/*@cc_on!@*/0) { //if not IE
+                //Firefox2、Firefox3、Safari3.1+、Opera9.6+ support js.onload
+                script.onload = function () {
+                    callback();
+                }
+            } else {
+                //IE6、IE7 support js.onreadystatechange
+                script.onreadystatechange = function () {
+                    if (js.readyState == 'loaded' || js.readyState == 'complete') {
+                        callback();
+                    }
+                }
+            }
         },
         open: function (url) {
             var linkObj = $("#open_instead_Link");
