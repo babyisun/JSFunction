@@ -1,6 +1,6 @@
 ﻿/*
  * source   : jsfunction.js
- * Version  : beta 1.0
+ * Version  : 1.1.0
  * depends  : Jquery 1.4+
  * Download : http://www.itbbb.com/jsfunction/jsfunction.js
  *
@@ -10,7 +10,7 @@
  * Email    : babyisun@qq.com
  *
  * create   : 2014/03/29
- * update   : 2017/1/10
+ * update   : 2017/1/31
  *
  * message  : 如果发现任何bug、需要完善的代码，请发邮件或通过微信联系我，我很高兴与大家一起整理优雅的代码.
  **/
@@ -19,7 +19,7 @@ if (typeof jQuery === 'undefined') {
 }
 $.extend({
     JSFunction: {
-        version: 1.0,
+        version: "1.1.0",
         author: "baby"
     }
 });
@@ -32,7 +32,7 @@ window.JSF = $.JSFunction;
         }
         return this;
     }
-}(jQuery);
+} (jQuery);
 /*Cookie*/
 +function ($) {
     'use strict';
@@ -80,7 +80,7 @@ window.JSF = $.JSFunction;
 
     window.JSF.cookie = $.cookie = cookie;
 
-}(jQuery);
+} (jQuery);
 /*LocalData*/
 +function ($) {
     'use strict';
@@ -151,24 +151,24 @@ window.JSF = $.JSFunction;
     };
 
     window.JSF.localData = $.localData = localData;
-}(jQuery);
+} (jQuery);
 /*Browser*/
 +function ($) {
     'use strict';
 
     var browser = {
-            webkit: false,
+        webkit: false,
             /*opera: false,*/ msie: false,
-            firefox: false
-        },
+        firefox: false
+    },
         ua = window.navigator.userAgent.toLowerCase();
     if (!$.browser) {
         // Useragent RegExp
         var rwebkit = /(webkit)[ \/]([\w.]+)/,
-        /*ropera = /(opera)(?:.*version)?[ \/]([\w.]+)/,*/
+            /*ropera = /(opera)(?:.*version)?[ \/]([\w.]+)/,*/
             rmsie = /(msie) ([\w.]+)/,
             rfirefox = /(firefox)\/([\d.]+)/,
-        //rmozilla = /(mozilla)(?:.*? rv:([\w.]+))?/,
+            //rmozilla = /(mozilla)(?:.*? rv:([\w.]+))?/,
             ie11 = /(trident)(?:.*? rv:([\w.]+))?/,
             uaMatch = function () {
                 var match = rwebkit.exec(ua) ||
@@ -203,7 +203,7 @@ window.JSF = $.JSFunction;
     browser.mobile = ua.match(/ipad/i) == "ipad" || ua.match(/iphone os/i) == "iphone os" || ua.match(/midp/i) == "midp" || ua.match(/rv:1.2.3.4/i) == "rv:1.2.3.4" || ua.match(/ucweb/i) == "ucweb" || ua.match(/android/i) == "android" || ua.match(/windows ce/i) == "windows ce" || ua.match(/windows mobile/i) == "windows mobile";
 
     window.JSF.browser = $.browser = browser;
-}(jQuery);
+} (jQuery);
 /*Date*/
 +function ($) {
     'use strict';
@@ -373,23 +373,23 @@ window.JSF = $.JSFunction;
     //倒计时
     $.countDown = function (opt) { //# 倒计时
         var option = {
-                second: 0 //倒计时的秒数
-                ,
-                startTime: $.date() //当前时间, ，2013/02/01 18:30:30
-                ,
-                endTime: 0 //截止时间 ，2013/02/01 18:30:30
-                ,
-                interval: 1 //间隔回调时间，秒
-                ,
-                started: function () {
-                } //开始回调
-                ,
-                timed: function (times) {
-                } //每次回调
-                ,
-                finaled: function () {
-                } //完成后回调
-            },
+            second: 0 //倒计时的秒数
+            ,
+            startTime: $.date() //当前时间, ，2013/02/01 18:30:30
+            ,
+            endTime: 0 //截止时间 ，2013/02/01 18:30:30
+            ,
+            interval: 1 //间隔回调时间，秒
+            ,
+            started: function () {
+            } //开始回调
+            ,
+            timed: function (times) {
+            } //每次回调
+            ,
+            finaled: function () {
+            } //完成后回调
+        },
             opts = {},
             timer = null;
         opts = $.extend(option, opt);
@@ -429,7 +429,7 @@ window.JSF = $.JSFunction;
             }
         }
     }
-}(jQuery);
+} (jQuery);
 /*String*/
 +function ($) {
     'use strict';
@@ -441,7 +441,15 @@ window.JSF = $.JSFunction;
 
     //去除前后空格
     String.fn("trim", function () {
-        return this.replace(/(^\s*)|(\s*$)/g, "");
+        //return this.replace(/(^\s*)|(\s*$)/g, "");
+        var _txt = this.replace(/^\s*/, "");
+        for (var i = _txt.length - 1; i >= 0; i--) {
+            if (/\S/.test(_txt.charAt(i))) {
+                _txt = _txt.substring(0, i + 1);
+                break;
+            }
+        }
+        return _txt;
     });
 
     // 从左截取指定长度的字串
@@ -512,7 +520,7 @@ window.JSF = $.JSFunction;
         return o;
     });
 
-}(jQuery);
+} (jQuery);
 /*Array*/
 +function ($) {
     'use strict';
@@ -881,7 +889,7 @@ window.JSF = $.JSFunction;
     });
 
 
-}(jQuery);
+} (jQuery);
 
 
 //Valid
@@ -896,75 +904,75 @@ window.JSF = $.JSFunction;
                 regex: /^(0[0-9]{2,3}\-)?([2-9][0-9]{6,7})+(\-[0-9]{1,4})?$/,
                 tip: "请输入有效的电话号码，如：010-59862221"
             }, {
-                key: "mobile",
-                regex: /(^0?[1][34578][0-9]{9}$)/,
-                tip: "请输入有效的手机号码"
-            }, {
-                key: "email",
-                regex: /^[a-zA-Z0-9_\.\-]+\@([a-zA-Z0-9\-]+\.)+[a-zA-Z0-9]{2,4}$/,
-                tip: "请输入有效的邮件地址"
-            }, {
-                key: "mobileemail",
-                regex: /(^0?[1][3458][0-9]{9}$)|(^[a-zA-Z0-9_\.\-]+\@([a-zA-Z0-9\-]+\.)+[a-zA-Z0-9]{2,4}$)/,
-                tip: "请输入有效的手机或邮箱"
-            }, {
-                key: "date",
-                regex: /^((([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0?[13578]|1[02])-(0?[1-9]|[12][0-9]|3[01]))|((0?[469]|11)-(0?[1-9]|[12][0-9]|30))|(0?2-(0?[1-9]|[1][0-9]|2[0-8]))))|((([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00))-0?2-29))$/,
-                tip: "请输入一个有效日期，如：2008-08-08"
-            }, {
-                key: "ip",
-                regex: /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/,
-                tip: "请输入有效的IP"
-            }, {
-                key: "chinese",
-                regex: /^[\u4e00-\u9fa5]+$/,
-                tip: "请输入中文"
-            }, {
-                key: "url",
-                regex: "/^[a-zA-z]:\\/\\/[^s]$/",
-                tip: "请输入有效的网址"
-            }, {
-                key: "zipcode",
-                regex: /^\d{6}$/,
-                tip: "请输入有效的邮政编码"
-            }, {
-                key: "qq",
-                regex: /^[1-9]\d{4,11}$/,
-                tip: "请输入有效的QQ号码"
-            }, {
-                key: "idcard",
-                regex: /^(\d{18,18}|\d{15,15}|\d{17,17}x)$/,
-                tip: "请输入有效身份证"
-            }, {
-                key: "number",
-                regex: /^[0-9]+$/,
-                tip: "请输入数字"
-            }, {
-                key: "letter",
-                regex: /^[a-zA-Z]+$/,
-                tip: "请输入英文字母"
-            }, {
-                key: "word",
-                regex: /^[0-9a-zA-Z]+$/,
-                tip: "请输入英文字母和数字"
-            }, {
-                key: "required",
-                regex: {
-                    test: function (content, min, max) {
-                        if (content.length) {
-                            if (min)
-                                if (content.length < min)
-                                    return false;
-                            if (max)
-                                if (content.length > max)
-                                    return false;
-                        } else
-                            return false;
-                        return true;
-                    }
-                },
-                tip: "请输入内容"
-            });
+                    key: "mobile",
+                    regex: /(^0?[1][34578][0-9]{9}$)/,
+                    tip: "请输入有效的手机号码"
+                }, {
+                    key: "email",
+                    regex: /^[a-zA-Z0-9_\.\-]+\@([a-zA-Z0-9\-]+\.)+[a-zA-Z0-9]{2,4}$/,
+                    tip: "请输入有效的邮件地址"
+                }, {
+                    key: "mobileemail",
+                    regex: /(^0?[1][3458][0-9]{9}$)|(^[a-zA-Z0-9_\.\-]+\@([a-zA-Z0-9\-]+\.)+[a-zA-Z0-9]{2,4}$)/,
+                    tip: "请输入有效的手机或邮箱"
+                }, {
+                    key: "date",
+                    regex: /^((([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0?[13578]|1[02])-(0?[1-9]|[12][0-9]|3[01]))|((0?[469]|11)-(0?[1-9]|[12][0-9]|30))|(0?2-(0?[1-9]|[1][0-9]|2[0-8]))))|((([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00))-0?2-29))$/,
+                    tip: "请输入一个有效日期，如：2008-08-08"
+                }, {
+                    key: "ip",
+                    regex: /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/,
+                    tip: "请输入有效的IP"
+                }, {
+                    key: "chinese",
+                    regex: /^[\u4e00-\u9fa5]+$/,
+                    tip: "请输入中文"
+                }, {
+                    key: "url",
+                    regex: "/^[a-zA-z]:\\/\\/[^s]$/",
+                    tip: "请输入有效的网址"
+                }, {
+                    key: "zipcode",
+                    regex: /^\d{6}$/,
+                    tip: "请输入有效的邮政编码"
+                }, {
+                    key: "qq",
+                    regex: /^[1-9]\d{4,11}$/,
+                    tip: "请输入有效的QQ号码"
+                }, {
+                    key: "idcard",
+                    regex: /^(\d{18,18}|\d{15,15}|\d{17,17}x)$/,
+                    tip: "请输入有效身份证"
+                }, {
+                    key: "number",
+                    regex: /^[0-9]+$/,
+                    tip: "请输入数字"
+                }, {
+                    key: "letter",
+                    regex: /^[a-zA-Z]+$/,
+                    tip: "请输入英文字母"
+                }, {
+                    key: "word",
+                    regex: /^[0-9a-zA-Z]+$/,
+                    tip: "请输入英文字母和数字"
+                }, {
+                    key: "required",
+                    regex: {
+                        test: function (content, min, max) {
+                            if (content.length) {
+                                if (min)
+                                    if (content.length < min)
+                                        return false;
+                                if (max)
+                                    if (content.length > max)
+                                        return false;
+                            } else
+                                return false;
+                            return true;
+                        }
+                    },
+                    tip: "请输入内容"
+                });
         },
         _base: function (_args) {
             this.reg = _args.regex;
@@ -984,7 +992,7 @@ window.JSF = $.JSFunction;
     }
     regExp.init();
     $.regExp = regExp;
-}(jQuery);
+} (jQuery);
 
 
 /*Url*/
@@ -1090,7 +1098,7 @@ window.JSF = $.JSFunction;
     }
 
     window.JSF.url = $.url = url;
-}(jQuery);
+} (jQuery);
 /*Jquery fn*/
 +function ($) {
     'use strict';
@@ -1193,4 +1201,4 @@ window.JSF = $.JSFunction;
         }
     };
 
-}(jQuery);
+} (jQuery);
