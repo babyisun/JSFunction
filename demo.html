@@ -115,8 +115,6 @@
             $.date("2001/1/4").getAge() +
             "|" + $.diffDate($.date(), $.date("2013-1-1")) +
             "|" + $.diffDate("2013-1-2", "2013-2-2"));
-
-
         });
         var str = "  abcdefg,higklmn  ";
         $("#string").html("|" + str.left(5) +
@@ -221,6 +219,15 @@
         });
 
         //$.url.open("http://www.baidu.com");
+
+        var arr20170307 = [{project_name: "2016年东风日产腾讯NBA", begin_time: "2017-01-28", end_time: "2017-03-31", done: 0},
+            {project_name: "2017年战略采购", begin_time: "2017-01-01", end_time: "2017-06-30", done: 0},
+            {project_name: "2016年百度品专排期日产", begin_time: "2016-03-13", end_time: "2017-03-30", done: 0},
+            {project_name: "17年春节品牌", begin_time: "2017-01-16", end_time: "2017-02-28", done: 1},
+            {project_name: "2016年地区基金11-12月网络投放排期", begin_time: "2016-11-21", end_time: "2016-12-31", done: 1},
+            {project_name: "2016年CAP#3", begin_time: "2016-11-04", end_time: "2016-11-11", done: 1}];
+
+            console.log(arr20170307.min(function(item){return item.end_time;}))
 
     </script>
 

@@ -10,7 +10,7 @@
  * Email    : babyisun@qq.com
  *
  * create   : 2014/03/29
- * update   : 2017/1/31
+ * update   : 2017/3/7
  *
  * message  : 如果发现任何bug、需要完善的代码，请发邮件或通过微信联系我，我很高兴与大家一起整理优雅的代码.
  **/
@@ -783,7 +783,7 @@ window.JSF = $.JSFunction;
         for (var i = 1; i < len; i++) {
             var temp = clause(this[i], i);
             if (maxValue < temp) {
-                //maxValue = temp;
+                maxValue = temp;
                 item = this[i];
             }
         }
@@ -800,7 +800,7 @@ window.JSF = $.JSFunction;
         for (var i = 1; i < len; i++) {
             var temp = clause(this[i], i);
             if (minValue > temp) {
-                //maxValue = temp;
+                minValue = temp;
                 item = this[i];
             }
         }
