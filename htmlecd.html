@@ -1,15 +1,15 @@
-<html><head></head><body>&nbsp;
-&nbsp;&nbsp;<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-&nbsp;&nbsp;<title>HTMLת��</title>
-&nbsp;
-&nbsp;
-&nbsp;&nbsp;<form>
-&nbsp;&nbsp;&nbsp;&nbsp;<textarea style="width:500px;height:100px;" id="param"></textarea><br>
-&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="encodeHTML" onclick="javascript:var div = document.createElement('div');div.innerText = window.document.getElementById('param').value + '';window.document.getElementById('result').value = (div.innerHTML+'').replace(/(\&lt;br\&gt;)/g,'\n');" style="width:90;">
-&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="decodeHTML" onclick="javascript:var div = document.createElement('div');div.innerHTML = window.document.getElementById('param').value + '';window.document.getElementById('result').value = div.innerText;" style="width:90;"><br>
-&nbsp;&nbsp;&nbsp;<textarea style="width:500px;height:100px;" id="result"></textarea><br>
-&nbsp;&nbsp;</form>
-&nbsp;
+﻿<html><head></head><body>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>HTML编解码</title>
+
+
+<form>
+<textarea style="width:500px;height:100px;" id="param"></textarea><br>
+<input type="button" value="encodeHTML" onclick="javascript:var div = document.createElement('div');div.innerText = window.document.getElementById('param').value + '';window.document.getElementById('result').value = (div.innerHTML+'').replace(/(\&lt;br\&gt;)/g,'\n');" style="width:90;">
+<input type="button" value="decodeHTML" onclick="javascript:var div = document.createElement('div');div.innerHTML = window.document.getElementById('param').value + '';window.document.getElementById('result').value = div.innerText;" style="width:90;"><br>
+<textarea style="width:500px;height:100px;" id="result"></textarea><br>
+</form>
+
 
 
 </body></html>
