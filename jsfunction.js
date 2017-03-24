@@ -213,8 +213,7 @@ window.JSF = $.JSFunction;
         return !date ? new Date() : typeof date == "string" ? new Date(date.replace(/-/g, "\/")) : new Date(date);
     };
     //格式化日期
-    //$.date.Format("yyyy-MM-dd")
-    //Date.prototype.format = function (fmt) {
+    //$.date.format("yyyy-MM-dd")
     Date.fn("format", function (fmt) {
         var o = {
             "M+": this.getMonth() + 1, //月份
@@ -907,6 +906,7 @@ window.JSF = $.JSFunction;
 
 
 //Valid
+//$.regExp.qq.reg.test
 +function ($) {
     'use strict';
 
@@ -1028,22 +1028,6 @@ window.JSF = $.JSFunction;
                 args[argname] = value;
             }
             return args;
-        },
-        addFav: function (url, title, error) { //#加入收藏夹
-            if (!url)
-                url = window.location.href;
-            if (!title)
-                title = document.title;
-            try {
-                window.external.addFavorite(url, title);
-            } catch (e) {
-                try {
-                    window.sidebar.addPanel(title, url, '');
-                } catch (e) {
-                    if (error)
-                        error(e);
-                }
-            }
         },
         parse: function (url) { //# 解析URL
             var a = document.createElement('a');
