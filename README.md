@@ -6,6 +6,16 @@ JSFunction
 希望它对你能有所帮助
 相信代码是优雅的舞者--北北
 
+#主要包含的大类方法：
+Cookie
+LocalData
+Browser
+Date
+String
+Array
+ArrayLinq
+Url
+
 
  * source   : jsfunction.js
  * Version  : beta 1.1
