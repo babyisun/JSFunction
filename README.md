@@ -1,4 +1,4 @@
-JSFunction
+# JSFunction
 ==========
 [jsfunction](http://www.itbbb.com/jsfunction/jsfunction.html)
 
@@ -6,7 +6,7 @@ JSFunction
 希望它对你能有所帮助
 相信代码是优雅的舞者--北北
 
-#主要包含的大类方法：
+## 主要包含的大类方法：
 Cookie
 LocalData
 Browser
