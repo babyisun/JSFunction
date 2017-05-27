@@ -16,8 +16,8 @@ Array
 ArrayLinq
 Url
 
-
- * source   : jsfunction.js
+##来源
+ * source   : jsfunction.js
  * Version  : beta 1.1
  * depends  : Jquery 1.4+
  * Download : http://www.itbbb.com/jsfunction/jsfunction.js
