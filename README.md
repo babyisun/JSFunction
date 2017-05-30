@@ -1,5 +1,4 @@
 # JSFunction
-==========
 [jsfunction](http://www.itbbb.com/jsfunction/jsfunction.html)
 
 这是一个Javascript常用函数库,我正在努力完善它
