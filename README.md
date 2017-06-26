@@ -17,7 +17,7 @@ Url
 
 ## 来源
  * source   : jsfunction.js
- * Version  : beta 1.1
+ * Version  : beta 1.2
  * depends  : Jquery 1.4+
  * Download : http://www.itbbb.com/jsfunction/jsfunction.js
  *
