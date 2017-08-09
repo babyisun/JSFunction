@@ -19,5 +19,4 @@ Cookie,LocalData,Browser,Date,String,Array,ArrayLinq,Url
  * Wechat   : ITbeibei
  * Email    : babyisun@qq.com
  *
- *
  * message  : 如果发现任何bug、需要完善的代码，请发邮件或通过微信联系我，我很高兴与大家一起整理优雅的代码.
