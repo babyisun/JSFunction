@@ -35,15 +35,6 @@ $(function () {
         fn: function () {
             $("#jsf_placeholder").placeholder();
         }
-        //url: function () {
-        //    $("#demo_addfav").click(function () {
-        //        $.url.addFav();
-        //    });
-
-        //    $("#demo_additbbb").click(function () {
-        //        $.url.addFav("www.itbbb.com", "IT北北报", function () { alert("该浏览器需要手动添加到收藏夹");});
-        //    });
-        //}
     };
     var Event = function () {
         //调用hljs
