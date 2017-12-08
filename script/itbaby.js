@@ -33,7 +33,7 @@ $(function () {
             });
         },
         fn: function () {
-            $("#jsf_placeholder").placeholder();
+            //$("#jsf_placeholder").placeholder();
         }
     };
     var Event = function () {
