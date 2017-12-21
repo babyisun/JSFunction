@@ -17,6 +17,7 @@
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD.
+        //此处要注意自己的jquery是否引用正确
         define(['jquery'], function (jquery) {
             define(factory);
         });
