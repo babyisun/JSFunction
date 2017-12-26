@@ -1,8 +1,6 @@
 ﻿<html><head></head><body>
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <title>HTML编解码</title>
-
-
 <form>
 <textarea style="width:500px;height:100px;" id="param"></textarea><br>
 <input type="button" value="encodeHTML" onclick="javascript:var div = document.createElement('div');div.innerText = window.document.getElementById('param').value + '';window.document.getElementById('result').value = (div.innerHTML+'').replace(/(\&lt;br\&gt;)/g,'\n');" style="width:90;">
