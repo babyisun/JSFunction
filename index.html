@@ -1,17 +1,39 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>JSFunction Demo</title>
-    <script src="script/jquery.min.js"></script>
-    <script src="script/jsfunction.js"></script>
+    <script src="./script/jquery.min.js"></script>
+    <script src="./jsfunction.min.js"></script>
 </head>
+
 <body>
-    这是一个测试页面,github! push
+    这是一个教学页面
     <script>
-        $(function () {
-            
-        });
+        var numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        var people = ["wangbo", "rebert", "Johnson"];
+        var json = {
+            "code": 0,
+            "data": [{
+                "id": 1,
+                "name": "wangbo",
+                "age": 30,
+                "time": 1510320600000
+            }, {
+                "id": 2,
+                "name": "rebert",
+                "age": 35,
+                "time": 1510320600000
+            }, {
+                "id": 3,
+                "name": "Johnson",
+                "age": 40,
+                "time": 1510320600000
+            }]
+        }
+        var data = json.data;
     </script>
 </body>
+
 </html>
