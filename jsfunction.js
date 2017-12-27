@@ -1,6 +1,6 @@
 ﻿/*
  * source   : jsfunction.js
- * Version  : 1.1.0
+ * Version  : 1.2.1
  * depends  : Jquery 1.4+
  * Download : http://www.itbbb.com/jsfunction/jsfunction.js
  *
@@ -10,25 +10,25 @@
  * Email    : babyisun@qq.com
  *
  * create   : 2014/03/29
- * update   : 2017/3/21
+ * update   : 2017/12/21
  *
  * message  : 如果发现任何bug、需要完善的代码，请发邮件或通过微信联系我，我很高兴与大家一起整理优雅的代码.
  **/
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
-        // AMD.
-        //此处要注意自己的jquery是否引用正确
+        // AMD.此处要注意自己的jquery是否引用正确
         define(['jquery'], function (jquery) {
             define(factory);
         });
     } else if (typeof module === 'object' && module.exports) {
-        // Node
+        // Node 此处要注意自己的jquery是否可以正确require到
         var jQuery = (typeof window != 'undefined') ? window.jQuery : undefined;
         if (!jQuery) {
             jQuery = require('jquery');
         }
         module.exports = factory();
     } else {
+        //默认windows模式
         root.JSF = $.JSFunction = factory();
     }
 }(this, function () {
@@ -38,7 +38,7 @@
     }
     $.extend({
         JSFunction: {
-            version: "1.1.0",
+            version: "1.2.1",
             author: "baby"
         }
     });
