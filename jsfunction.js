@@ -42,10 +42,9 @@
             author: "baby"
         }
     });
-    window.JSF = $.JSFunction;
+
     /*Base*/
-    +
-    function ($) {
+    +function ($) {
         Function.prototype.fn = function (name, fun) {
             if (!this.prototype[name]) {
                 this.prototype[name] = fun;
@@ -54,8 +53,7 @@
         }
     }(jQuery);
     /*Cookie*/
-    +
-    function ($) {
+    +function ($) {
         'use strict';
 
         var cookie = {
@@ -99,12 +97,11 @@
             }
         };
 
-        window.JSF.cookie = $.cookie = cookie;
+        $.cookie = cookie;
 
     }(jQuery);
     /*LocalData*/
-    +
-    function ($) {
+    +function ($) {
         'use strict';
 
         var localData = {
@@ -172,11 +169,10 @@
             }
         };
 
-        window.JSF.localData = $.localData = localData;
+        $.localData = localData;
     }(jQuery);
     /*Browser*/
-    +
-    function ($) {
+    +function ($) {
         'use strict';
 
         var browser = {
@@ -225,11 +221,10 @@
         browser.ie6 = browser.msie && (browser.version == "6.0");
         browser.mobile = ua.match(/ipad/i) == "ipad" || ua.match(/iphone os/i) == "iphone os" || ua.match(/midp/i) == "midp" || ua.match(/rv:1.2.3.4/i) == "rv:1.2.3.4" || ua.match(/ucweb/i) == "ucweb" || ua.match(/android/i) == "android" || ua.match(/windows ce/i) == "windows ce" || ua.match(/windows mobile/i) == "windows mobile";
 
-        window.JSF.browser = $.browser = browser;
+        $.browser = browser;
     }(jQuery);
     /*Date*/
-    +
-    function ($) {
+    +function ($) {
         'use strict';
 
         //初始化时间
@@ -452,8 +447,7 @@
         }
     }(jQuery);
     /*String*/
-    +
-    function ($) {
+    +function ($) {
         'use strict';
 
         //替换所有 *当涉及到正则关键字的时候需要特殊处理，如替换“\\|”
@@ -562,8 +556,7 @@
 
     }(jQuery);
     /*Array*/
-    +
-    function ($) {
+    +function ($) {
         'use strict';
 
         //Add方法
@@ -935,8 +928,7 @@
 
     //Valid
     //$.regExp.qq.reg.test
-    +
-    function ($) {
+    +function ($) {
         'use strict';
 
         var regExp = {
@@ -1032,15 +1024,14 @@
                     this[arguments[i].key] = new this._base(arguments[i]);
                 }
             }
-        }
+        };
         regExp.init();
         $.regExp = regExp;
     }(jQuery);
 
 
     /*Url*/
-    +
-    function ($) {
+    +function ($) {
         'use strict';
 
         var url = {
@@ -1123,9 +1114,9 @@
                 //    linkObj.attr("action", url).submit();
                 //});
             }
-        }
+        };
 
-        window.JSF.url = $.url = url;
+        $.url = url;
     }(jQuery);
 
 
