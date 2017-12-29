@@ -1,7 +1,8 @@
-﻿
-$(function () {
+﻿$(function () {
     //加网
-    var jiathis_config = { data_track_clickback: 'true' };
+    var jiathis_config = {
+        data_track_clickback: 'true'
+    };
 
     //Demo
     var Demo = {
@@ -32,6 +33,18 @@ $(function () {
                 _fdjs();
             });
         },
+        local: function () {
+            var LOCALDATA_KEY = "LOCALDATA_KEY",
+                $setlocaldata = $("#demo-setlocaldata");
+            $setlocaldata.val($.localData.get(LOCALDATA_KEY));
+            $setlocaldata.keyup(function () {
+                $.localData.set(LOCALDATA_KEY, this.value);
+            });
+            $("#demo-clearlocaldata").click(function () {
+                $.localData.remove(LOCALDATA_KEY);
+                $setlocaldata.val("");
+            });
+        },
         fn: function () {
             //$("#jsf_placeholder").placeholder();
         }
@@ -40,40 +53,45 @@ $(function () {
         //调用hljs
         try {
             hljs.initHighlightingOnLoad();
-        }
-        catch (e) {
+        } catch (e) {
             //throw new TypeError("hljs need ie8+");
         }
 
         //返回顶部
         var gotop = $("#gotop");
-        
+
         $(window).bind("scroll", function () {
-            var _this = $(this), st = _this.scrollTop();
+            var _this = $(this),
+                st = _this.scrollTop();
             if (st > 500)
                 gotop.show();
             else
                 gotop.hide();
         });
         gotop.click(function () {
-            $('html,body').animate({ scrollTop: 0 }, 500);
+            $('html,body').animate({
+                scrollTop: 0
+            }, 500);
         });
 
-        var affixChanged = function(offsetTop){
-            if(location.hash){
-                 var target = $(location.hash),_offsetTop=50||offsetTop;
-                 if(target.length){
-                     var top = target.offset().top-_offsetTop;
-                     if(top > 0){
-                       $('html,body').animate({scrollTop:top}, 500);
-                     }
-                 }
+        var affixChanged = function (offsetTop) {
+            if (location.hash) {
+                var target = $(location.hash),
+                    _offsetTop = 50 || offsetTop;
+                if (target.length) {
+                    var top = target.offset().top - _offsetTop;
+                    if (top > 0) {
+                        $('html,body').animate({
+                            scrollTop: top
+                        }, 500);
+                    }
+                }
             }
         }
 
-        var mobileBar=$(".mobile-bar");
-        mobileBar.height($(window).height()-100);
-        mobileBar.find("li li").click(function(){
+        var mobileBar = $(".mobile-bar");
+        mobileBar.height($(window).height() - 100);
+        mobileBar.find("li li").click(function () {
             $(".bs-navbar-collapse").collapse("hide");
         });
 
@@ -97,7 +115,7 @@ $(function () {
         window.onhashchange = function (e) {
             affixChanged();
         };
-        
+
     };
 
     //执行哪些Demo
@@ -105,6 +123,7 @@ $(function () {
         Demo.date();
         Demo.fn();
         //Demo.url();
+        Demo.local();
     };
 
     DemoInit();
