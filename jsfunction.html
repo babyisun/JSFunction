@@ -615,14 +615,14 @@ $.browser.ie6;</code></pre>
                                     <td>
                                         <code>time</code>
                                     </td>
-                                    <td>String</td>
-                                    <td>可选参数,设置特定时间,可以传2014-1-1或2014/1/1,默认为当前时间</td>
+                                    <td>String/Timestamp</td>
+                                    <td>可选参数,设置特定时间,可以传2014-1-1或2014/1/1或时间戳1514736000000,默认为当前时间</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="bs-example">
-                        <p>返回当前时间.</p>
+                        <p>返回时间对象.</p>
                         <p>
                             <label>结果：</label>
                         </p>
@@ -630,7 +630,8 @@ $.browser.ie6;</code></pre>
                     </div>
                     <div class="highlight">
                         <pre><code>$.date();
-$.date("2014-1-1");</code></pre>
+$.date("2014-1-1");
+$.date(1514736000000);</code></pre>
                     </div>
 
                     <h2 id="date-format">format</h2>
