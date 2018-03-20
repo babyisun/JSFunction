@@ -4,7 +4,8 @@
 <form>
 <textarea style="width:500px;height:100px;" id="param"></textarea><br>
 <input type="button" value="encodeHTML" onclick="javascript:var div = document.createElement('div');div.innerText = window.document.getElementById('param').value + '';window.document.getElementById('result').value = (div.innerHTML+'').replace(/(\&lt;br\&gt;)/g,'\n');" style="width:90;">
-<input type="button" value="decodeHTML" onclick="javascript:var div = document.createElement('div');div.innerHTML = window.document.getElementById('param').value + '';window.document.getElementById('result').value = div.innerText;" style="width:90;"><br>
+<input type="button" value="decodeHTML" onclick="javascript:var div = document.createElement('div');div.innerHTML = window.document.getElementById('param').value + '';window.document.getElementById('result').value = div.innerText;" style="width:90;">
+<br>
 <textarea style="width:500px;height:100px;" id="result"></textarea>
 </form>
 </body>
